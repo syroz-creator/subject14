@@ -123,9 +123,6 @@ export default function Download() {
                     <span className="text-muted-foreground/50 uppercase text-[10px] tracking-widest">{t.download.storage}</span>
                     <span className="text-muted-foreground">15 GB available space</span>
                   </li>
-                  <li className="pt-2 text-[10px] text-primary/60 italic">
-                    * {t.download.notes}: Requires a 64-bit processor and operating system
-                  </li>
                 </ul>
               </div>
               <div className="p-8 bg-primary/5">
@@ -157,9 +154,6 @@ export default function Download() {
                   <li className="flex flex-col gap-1">
                     <span className="text-muted-foreground/50 uppercase text-[10px] tracking-widest">{t.download.storage}</span>
                     <span className="text-muted-foreground">15 GB available space</span>
-                  </li>
-                  <li className="pt-2 text-[10px] text-primary/60 italic">
-                    * {t.download.notes}: Requires a 64-bit processor and operating system
                   </li>
                 </ul>
               </div>
