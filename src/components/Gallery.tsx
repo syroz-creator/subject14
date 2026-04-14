@@ -1,47 +1,21 @@
 import { motion } from "motion/react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useLanguage } from "../context/LanguageContext";
+import { useSiteContent } from "../context/SiteContentContext";
 
 export default function Gallery() {
-  const { t } = useLanguage();
-
-  const images = [
-    {
-      url: "https://images.unsplash.com/photo-1505630285033-a0f83683a52b?q=80&w=2070&auto=format&fit=crop",
-      title: t.gallery.img1,
-    },
-    {
-      url: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=2070&auto=format&fit=crop",
-      title: t.gallery.img2,
-    },
-    {
-      url: "https://images.unsplash.com/photo-1519074063912-ad2d6d51dd2d?q=80&w=1974&auto=format&fit=crop",
-      title: t.gallery.img3,
-    },
-    {
-      url: "https://images.unsplash.com/photo-1534177714502-04416b5a3cde?q=80&w=2070&auto=format&fit=crop",
-      title: t.gallery.img4,
-    },
-    {
-      url: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=2070&auto=format&fit=crop",
-      title: t.gallery.img5,
-    },
-    {
-      url: "https://images.unsplash.com/photo-1501139083538-0139583c060f?q=80&w=2070&auto=format&fit=crop",
-      title: t.gallery.img6,
-    },
-  ];
+  const { siteContent } = useSiteContent();
 
   return (
-    <section id="gallery" className="py-24 bg-secondary/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="gallery" className="min-h-[calc(100vh-8rem)] py-24 bg-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.04] to-transparent pointer-events-none" />
+      <div className="max-w-[92rem] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{t.gallery.title}</h2>
-          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{t.gallery.subtitle}</p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{siteContent.gallery.title}</h2>
+          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{siteContent.gallery.subtitle}</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {images.map((image, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
+          {siteContent.gallery.items.map((image, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}

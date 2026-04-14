@@ -89,7 +89,7 @@ export const translations = {
     },
     footer: {
       rights: "ALL RIGHTS RESERVED.",
-      credits: "Developed by [Your Studio Name]",
+      credits: "Developed by Ahmad Uwaida",
     },
   },
   es: {
@@ -182,7 +182,7 @@ export const translations = {
     },
     footer: {
       rights: "TODOS LOS DERECHOS RESERVADOS.",
-      credits: "Desarrollado por [Nombre de tu Estudio]",
+      credits: "Desarrollado por Ahmad Uwaida",
     },
   },
   fr: {
@@ -275,7 +275,7 @@ export const translations = {
     },
     footer: {
       rights: "TOUS DROITS RÉSERVÉS.",
-      credits: "Développé par [Le Nom de votre Studio]",
+      credits: "Développé par Ahmad Uwaida",
     },
   },
   ar: {
@@ -461,7 +461,7 @@ export const translations = {
     },
     footer: {
       rights: "כל הזכויות שמורות.",
-      credits: "פותח על ידי [שם הסטודיו שלך]",
+      credits: "פותח על ידי Ahmad Uwaida",
     },
   },
 };

@@ -1,8 +1,8 @@
 import { motion } from "motion/react";
-import { useLanguage } from "../context/LanguageContext";
+import { useSiteContent } from "../context/SiteContentContext";
 
 export default function About() {
-  const { t } = useLanguage();
+  const { siteContent } = useSiteContent();
 
   return (
     <section id="about" className="py-24 bg-background relative overflow-hidden">
@@ -14,16 +14,16 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-heading mb-8 text-glow-red">{t.about.title}</h2>
+            <h2 className="text-4xl md:text-5xl font-heading mb-8 text-glow-red">{siteContent.about.title}</h2>
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed font-light">
               <p className="font-mono text-sm border-s-2 border-primary/20 ps-4 py-2 bg-primary/5">
-                [LOG_ENTRY_014]: {t.about.p1}
+                [LOG_ENTRY_014]: {siteContent.about.p1}
               </p>
               <p>
-                <span className="text-primary font-medium">Subject 14</span> {t.about.p2.split("Subject 14")[1]}
+                {siteContent.about.p2}
               </p>
               <p className="italic opacity-80">
-                {t.about.p3}
+                {siteContent.about.p3}
               </p>
             </div>
           </motion.div>
@@ -37,7 +37,7 @@ export default function About() {
           >
             <div className="aspect-[4/5] rounded-lg overflow-hidden border-horror">
               <img
-                src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1974&auto=format&fit=crop"
+                src={siteContent.about.imageUrl}
                 alt="Asylum Corridor"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                 referrerPolicy="no-referrer"
