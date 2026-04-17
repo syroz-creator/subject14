@@ -1,7 +1,9 @@
 import { motion } from "motion/react";
+import { useLanguage } from "../context/LanguageContext";
 import { useSiteContent } from "../context/SiteContentContext";
 
 export default function Story() {
+  const { t } = useLanguage();
   const { siteContent } = useSiteContent();
 
   return (
@@ -36,16 +38,14 @@ export default function Story() {
             transition={{ duration: 0.8 }}
             className="order-1 lg:order-2"
           >
-            <h2 className="text-4xl md:text-5xl font-heading mb-8 text-glow-red">{siteContent.story.title}</h2>
+            <h2 className="text-4xl md:text-5xl font-heading mb-8 text-glow-red">{t.story.title}</h2>
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed font-mono">
               <p className="border-s-2 border-primary/30 ps-6 italic">
-                {siteContent.story.p1}
+                {t.story.p1}
               </p>
-              <p>
-                {siteContent.story.p2}
-              </p>
+              <p>{t.story.p2}</p>
               <p className="text-primary/80">
-                {siteContent.story.p3}
+                {t.story.p3}
               </p>
             </div>
           </motion.div>

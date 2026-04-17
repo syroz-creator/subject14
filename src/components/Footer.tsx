@@ -1,8 +1,5 @@
-import { useEffect, useState, type FormEvent } from "react";
 import { Ghost } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
-import { useSiteContent } from "../context/SiteContentContext";
-import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import OperatorPanel from "./OperatorPanel";
 
@@ -47,81 +44,8 @@ const socialLinkClass =
 const footerLinkClass =
   "text-[11px] uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-primary";
 
-type SessionState = {
-  authenticated: boolean;
-  operator?: string;
-};
-
 export default function Footer() {
   const { t } = useLanguage();
-  const { siteContent } = useSiteContent();
-  const [session, setSession] = useState<SessionState>({ authenticated: false });
-  const [username, setUsername] = useState("");
-  const [passcode, setPasscode] = useState("");
-  const [gmail, setGmail] = useState("");
-  const [loginMessage, setLoginMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    const loadSession = async () => {
-      try {
-        const response = await fetch("/api/operator/session", {
-          credentials: "include",
-        });
-        if (!response.ok) {
-          return;
-        }
-        const data = (await response.json()) as SessionState;
-        setSession(data);
-      } catch {
-        // Keep footer usable even if the auth server is unavailable.
-      }
-    };
-
-    void loadSession();
-  }, []);
-
-  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-    setLoginMessage("");
-
-    try {
-      const response = await fetch("/api/operator/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ username, passcode, gmail }),
-      });
-
-      const data = (await response.json()) as SessionState & { message?: string };
-      if (!response.ok) {
-        setSession({ authenticated: false });
-        setLoginMessage(data.message || "Login failed.");
-        return;
-      }
-
-      setSession({ authenticated: true, operator: data.operator });
-      setLoginMessage("");
-      setPasscode("");
-    } catch {
-      setLoginMessage("Operator server unavailable. Start the app with `npm run dev`.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await fetch("/api/operator/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-    } finally {
-      setSession({ authenticated: false });
-      setLoginMessage("");
-    }
-  };
 
   return (
     <footer className="mt-auto border-t border-white/5 bg-background py-12">
@@ -189,66 +113,31 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">Operator</p>
+            <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">Edit Mode</p>
             <Dialog>
               <DialogTrigger render={<button type="button" className={footerLinkClass} />}>
-                Operator Login
+                Local Edit Mode
               </DialogTrigger>
               <DialogContent className="max-w-4xl border-horror bg-background/95 p-6 backdrop-blur-md">
                 <DialogTitle className="text-sm uppercase tracking-[0.25em] text-glow-red">
-                  {session.authenticated ? "Operator Panel" : "Operator Login"}
+                  Local Edit Mode
                 </DialogTitle>
                 <div className="mt-4">
-                  {session.authenticated ? (
-                    <OperatorPanel onLogout={handleLogout} />
-                  ) : (
-                    <form className="space-y-4" onSubmit={handleLogin}>
-                      <Field label="Username" value={username} onChange={setUsername} />
-                      <Field label="Passcode" value={passcode} onChange={setPasscode} type="password" />
-                      <Field label="Gmail" value={gmail} onChange={setGmail} type="email" />
-                      {loginMessage ? <p className="text-sm text-primary">{loginMessage}</p> : null}
-                      <Button type="submit" disabled={isSubmitting} className="w-full bg-primary text-white hover:bg-primary/80">
-                        {isSubmitting ? "Verifying..." : "Enter Operator Panel"}
-                      </Button>
-                    </form>
-                  )}
+                  <div className="mb-4 rounded-2xl border border-primary/15 bg-primary/8 px-4 py-3 text-sm text-muted-foreground">
+                    This edit mode is browser-only. Changes save on this device in local storage and do not securely protect access or update the deployed site for everyone.
+                  </div>
+                  <OperatorPanel />
                 </div>
               </DialogContent>
             </Dialog>
 
             <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 text-xs uppercase tracking-widest text-muted-foreground">
               <p>© 2024 SUBJECT 14. {t.footer.rights}</p>
-              <p className="mt-2 text-[10px] opacity-60">{siteContent.footer.credits}</p>
+              <p className="mt-2 text-[10px] opacity-60">{t.footer.credits}</p>
             </div>
           </div>
         </div>
       </div>
     </footer>
-  );
-}
-
-function Field({
-  label,
-  value,
-  onChange,
-  type = "text",
-}: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  type?: string;
-}) {
-  return (
-    <label className="block text-left">
-      <span className="mb-2 block text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
-        {label}
-      </span>
-      <input
-        type={type}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-primary/40"
-      />
-    </label>
   );
 }

@@ -1,9 +1,11 @@
 import { motion } from "motion/react";
 import { Play } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useLanguage } from "../context/LanguageContext";
 import { useSiteContent } from "../context/SiteContentContext";
 
 export default function Trailer() {
+  const { t } = useLanguage();
   const { siteContent } = useSiteContent();
 
   const handleTrailerClick = () => {
@@ -17,8 +19,8 @@ export default function Trailer() {
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/[0.05] to-transparent pointer-events-none" />
       <div className="max-w-[92rem] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{siteContent.trailer.title}</h2>
-          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{siteContent.trailer.subtitle}</p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{t.trailer.title}</h2>
+          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{t.trailer.subtitle}</p>
         </div>
 
         <motion.div

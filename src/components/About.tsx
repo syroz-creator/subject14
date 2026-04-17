@@ -1,7 +1,9 @@
 import { motion } from "motion/react";
+import { useLanguage } from "../context/LanguageContext";
 import { useSiteContent } from "../context/SiteContentContext";
 
 export default function About() {
+  const { t } = useLanguage();
   const { siteContent } = useSiteContent();
 
   return (
@@ -14,16 +16,14 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-heading mb-8 text-glow-red">{siteContent.about.title}</h2>
+            <h2 className="text-4xl md:text-5xl font-heading mb-8 text-glow-red">{t.about.title}</h2>
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed font-light">
               <p className="font-mono text-sm border-s-2 border-primary/20 ps-4 py-2 bg-primary/5">
-                [LOG_ENTRY_014]: {siteContent.about.p1}
+                [LOG_ENTRY_014]: {t.about.p1}
               </p>
-              <p>
-                {siteContent.about.p2}
-              </p>
+              <p>{t.about.p2}</p>
               <p className="italic opacity-80">
-                {siteContent.about.p3}
+                {t.about.p3}
               </p>
             </div>
           </motion.div>

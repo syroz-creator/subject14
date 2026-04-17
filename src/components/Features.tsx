@@ -1,41 +1,41 @@
 import { motion } from "motion/react";
 import { Eye, Zap, BookOpen, Map, Volume2, Skull } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useSiteContent } from "../context/SiteContentContext";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Features() {
-  const { siteContent } = useSiteContent();
+  const { t } = useLanguage();
 
   const features = [
     {
       icon: Eye,
-      title: siteContent.features.items[0]?.title ?? "",
-      description: siteContent.features.items[0]?.description ?? "",
+      title: t.features.f1.title,
+      description: t.features.f1.desc,
     },
     {
       icon: Zap,
-      title: siteContent.features.items[1]?.title ?? "",
-      description: siteContent.features.items[1]?.description ?? "",
+      title: t.features.f2.title,
+      description: t.features.f2.desc,
     },
     {
       icon: BookOpen,
-      title: siteContent.features.items[2]?.title ?? "",
-      description: siteContent.features.items[2]?.description ?? "",
+      title: t.features.f3.title,
+      description: t.features.f3.desc,
     },
     {
       icon: Map,
-      title: siteContent.features.items[3]?.title ?? "",
-      description: siteContent.features.items[3]?.description ?? "",
+      title: t.features.f4.title,
+      description: t.features.f4.desc,
     },
     {
       icon: Volume2,
-      title: siteContent.features.items[4]?.title ?? "",
-      description: siteContent.features.items[4]?.description ?? "",
+      title: t.features.f5.title,
+      description: t.features.f5.desc,
     },
     {
       icon: Skull,
-      title: siteContent.features.items[5]?.title ?? "",
-      description: siteContent.features.items[5]?.description ?? "",
+      title: t.features.f6.title,
+      description: t.features.f6.desc,
     },
   ];
 
@@ -44,8 +44,8 @@ export default function Features() {
       <div className="absolute inset-0 bg-gradient-to-t from-transparent via-primary/[0.04] to-transparent pointer-events-none" />
       <div className="max-w-[92rem] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{siteContent.features.title}</h2>
-          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{siteContent.features.subtitle}</p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{t.features.title}</h2>
+          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{t.features.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 xl:gap-10">

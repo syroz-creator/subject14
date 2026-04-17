@@ -1,17 +1,20 @@
 import { motion } from "motion/react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { useLanguage } from "../context/LanguageContext";
 import { useSiteContent } from "../context/SiteContentContext";
 
 export default function Gallery() {
+  const { t } = useLanguage();
   const { siteContent } = useSiteContent();
+  const galleryTitles = [t.gallery.img1, t.gallery.img2, t.gallery.img3, t.gallery.img4, t.gallery.img5, t.gallery.img6];
 
   return (
     <section id="gallery" className="min-h-[calc(100vh-8rem)] py-24 bg-background relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.04] to-transparent pointer-events-none" />
       <div className="max-w-[92rem] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{siteContent.gallery.title}</h2>
-          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{siteContent.gallery.subtitle}</p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{t.gallery.title}</h2>
+          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{t.gallery.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
@@ -28,19 +31,19 @@ export default function Gallery() {
                   <div className="group relative aspect-video overflow-hidden rounded-lg cursor-pointer border-horror">
                     <img
                       src={image.url}
-                      alt={image.title}
+                      alt={galleryTitles[index] ?? image.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <span className="text-white font-heading tracking-widest uppercase text-sm">{image.title}</span>
+                      <span className="text-white font-heading tracking-widest uppercase text-sm">{galleryTitles[index] ?? image.title}</span>
                     </div>
                   </div>
                 </DialogTrigger>
                 <DialogContent className="max-w-5xl bg-transparent border-none p-0">
                   <img
                     src={image.url}
-                    alt={image.title}
+                    alt={galleryTitles[index] ?? image.title}
                     className="w-full h-auto rounded-lg shadow-2xl"
                     referrerPolicy="no-referrer"
                   />

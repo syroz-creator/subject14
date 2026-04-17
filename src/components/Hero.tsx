@@ -39,10 +39,10 @@ export default function Hero({ onNavigate }: HeroProps) {
             {siteContent.hero.title}
           </h1>
           <p className="text-lg md:text-xl text-primary/80 mb-2 font-mono tracking-[0.5em] uppercase">
-            {siteContent.hero.tagline}
+            {t.hero.tagline}
           </p>
           <p className="text-muted-foreground mb-10 font-light max-w-2xl mx-auto leading-relaxed">
-            {siteContent.hero.description}
+            {t.hero.description}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

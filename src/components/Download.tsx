@@ -57,9 +57,9 @@ export default function Download() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-6xl font-heading mb-6 text-glow-red">{siteContent.download.title}</h2>
+            <h2 className="text-4xl md:text-6xl font-heading mb-6 text-glow-red">{t.download.title}</h2>
             <p className="text-xl text-muted-foreground mb-10 font-light max-w-2xl mx-auto">
-              {siteContent.download.subtitle}
+              {t.download.subtitle}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
