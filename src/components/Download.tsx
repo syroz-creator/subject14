@@ -5,33 +5,78 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "../context/LanguageContext";
 import { useSiteContent } from "../context/SiteContentContext";
 
+type DeviceSupport =
+  | { kind: "windows" }
+  | { kind: "unsupported"; label: string; message: string };
+
+function detectDeviceSupport(): DeviceSupport {
+  if (typeof navigator === "undefined") {
+    return { kind: "unsupported", label: "this device", message: "Unable to detect your device. Please use a Windows PC to install the demo." };
+  }
+
+  const userAgent = navigator.userAgent.toLowerCase();
+  const platform = navigator.platform.toLowerCase();
+  const maxTouchPoints = navigator.maxTouchPoints ?? 0;
+
+  const isIPhone = /iphone/.test(userAgent);
+  const isIPad = /ipad/.test(userAgent) || (platform === "macintel" && maxTouchPoints > 1);
+  const isIPod = /ipod/.test(userAgent);
+  const isSamsung = /samsung|sm-|galaxy/.test(userAgent);
+  const isAndroid = /android/.test(userAgent);
+  const isMac = /macintosh|mac os x/.test(userAgent) && !isIPhone && !isIPad && !isIPod;
+  const isWindows = /windows/.test(userAgent);
+  const isLinux = /linux|x11/.test(userAgent) && !isAndroid;
+  const isChromebook = /cros/.test(userAgent);
+
+  if (isWindows) {
+    return { kind: "windows" };
+  }
+
+  if (isIPhone) {
+    return { kind: "unsupported", label: "iPhone", message: "This demo is not available on iPhone. Open this page on a Windows PC to install it." };
+  }
+
+  if (isIPad) {
+    return { kind: "unsupported", label: "iPad", message: "This demo is not available on iPad. Open this page on a Windows PC to install it." };
+  }
+
+  if (isIPod) {
+    return { kind: "unsupported", label: "iPod", message: "This demo is not available on iPod. Open this page on a Windows PC to install it." };
+  }
+
+  if (isSamsung) {
+    return { kind: "unsupported", label: "Samsung device", message: "This demo is not available on Samsung phones or tablets. Open this page on a Windows PC to install it." };
+  }
+
+  if (isAndroid) {
+    return { kind: "unsupported", label: "Android device", message: "This demo is not available on Android devices. Open this page on a Windows PC to install it." };
+  }
+
+  if (isMac) {
+    return { kind: "unsupported", label: "Mac", message: "This demo is not available on macOS. Please use a Windows PC to install it." };
+  }
+
+  if (isChromebook) {
+    return { kind: "unsupported", label: "Chromebook", message: "This demo is not available on Chromebook. Please use a Windows PC to install it." };
+  }
+
+  if (isLinux) {
+    return { kind: "unsupported", label: "Linux device", message: "This demo is not available on Linux right now. Please use a Windows PC to install it." };
+  }
+
+  return { kind: "unsupported", label: "this device", message: "This game currently supports Windows PCs only." };
+}
+
 export default function Download() {
   const { t } = useLanguage();
   const { siteContent } = useSiteContent();
   const [deviceMessage, setDeviceMessage] = useState("");
 
   const handleDemoDownload = () => {
-    if (typeof navigator === "undefined") {
-      return;
-    }
+    const device = detectDeviceSupport();
 
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isMobile = /android|iphone|ipad|ipod|mobile/.test(userAgent);
-    const isMac = /macintosh|mac os x/.test(userAgent) && !/iphone|ipad|ipod/.test(userAgent);
-    const isWindows = /windows/.test(userAgent);
-
-    if (isMobile) {
-      setDeviceMessage("This build is for Windows PCs only. Open this page on a PC to install the demo.");
-      return;
-    }
-
-    if (isMac) {
-      setDeviceMessage("This demo is not available on macOS. Please use a Windows PC to install it.");
-      return;
-    }
-
-    if (!isWindows) {
-      setDeviceMessage("This game currently supports Windows PCs only.");
+    if (device.kind !== "windows") {
+      setDeviceMessage(device.message);
       return;
     }
 
