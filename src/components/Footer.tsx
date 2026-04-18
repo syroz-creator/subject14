@@ -132,7 +132,7 @@ export default function Footer() {
             </Dialog>
 
             <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 text-xs uppercase tracking-widest text-muted-foreground">
-              <p>© 2024 SUBJECT 14. {t.footer.rights}</p>
+              <p>© 2026 SUBJECT 14. {t.footer.rights}</p>
               <p className="mt-2 text-[10px] opacity-60">{t.footer.credits}</p>
             </div>
           </div>
