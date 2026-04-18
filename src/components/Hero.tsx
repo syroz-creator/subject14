@@ -20,11 +20,11 @@ export default function Hero({ onNavigate }: HeroProps) {
         <img
           src={siteContent.hero.backgroundUrl}
           alt="Horror Background"
-          className="h-full w-full object-cover object-center opacity-45 scale-105"
+          className="h-full w-full object-cover object-center opacity-62 scale-105"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_48%,rgba(179,32,32,0.28),transparent_20%),linear-gradient(90deg,rgba(2,4,8,0.9)_0%,rgba(2,4,8,0.72)_42%,rgba(0,0,0,0.82)_100%)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/85" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_48%,rgba(179,32,32,0.18),transparent_22%),linear-gradient(90deg,rgba(2,4,8,0.76)_0%,rgba(2,4,8,0.56)_42%,rgba(0,0,0,0.68)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/72" />
         <div className="absolute inset-0 bg-noise pointer-events-none" />
       </div>
 
