@@ -26,8 +26,6 @@ export default function Hero({ onNavigate }: HeroProps) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_48%,rgba(179,32,32,0.28),transparent_20%),linear-gradient(90deg,rgba(2,4,8,0.9)_0%,rgba(2,4,8,0.72)_42%,rgba(0,0,0,0.82)_100%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/85" />
         <div className="absolute inset-0 bg-noise pointer-events-none" />
-        <div className="absolute inset-y-0 left-[5%] hidden w-px bg-white/8 lg:block" />
-        <div className="absolute inset-y-0 right-[14%] hidden w-px bg-white/6 lg:block" />
       </div>
 
       <div className="section-frame relative z-10 flex w-full items-center justify-center pt-24 lg:min-h-screen lg:pt-0">
@@ -37,10 +35,6 @@ export default function Hero({ onNavigate }: HeroProps) {
           transition={{ duration: 0.9 }}
           className="flex w-full max-w-[58rem] flex-col items-center py-12 text-center sm:py-16 lg:py-0"
         >
-          <p className="mb-5 font-mono text-sm uppercase tracking-[0.42em] text-white/60 sm:text-[0.95rem]">
-            Scroll To Survive
-          </p>
-
           <div className="mb-6 w-full leading-none uppercase">
             <h1 className="text-glow-red font-heading text-[4.5rem] tracking-[0.03em] text-white sm:text-[6.4rem] md:text-[8rem] lg:text-[8.8rem] xl:text-[9.8rem]">
               {titleTop}

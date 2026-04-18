@@ -3,21 +3,21 @@
     "title": "SUBJECT 14",
     "tagline": "The darkness remembers what you forgot.",
     "description": "A first-person psychological horror experience set in a decaying experimental facility. Survive the entity that hunts you and uncover the truth behind the failed experiments.",
-    "backgroundUrl": "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=2070&auto=format&fit=crop"
+    "backgroundUrl": "/site-images/01-hero.jpg"
   },
   "about": {
     "title": "The Facility Awaits",
     "p1": "You wake up in a cold, sterile room with no memory of how you arrived. The air is thick with the smell of ozone and decay. Something went wrong here-terribly wrong.",
     "p2": "Subject 14 is a realistic, story-driven horror game built in Unreal Engine 5. Explore a decent-sized environment with multiple rooms and connected sections, each holding a piece of a disturbing puzzle.",
     "p3": "This isn't just a game of hide and seek. You must restore power, unlock doors, and solve intricate puzzles while being stalked by an AI-driven villain that adapts to your every move.",
-    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1974&auto=format&fit=crop"
+    "imageUrl": "/site-images/02-about.jpg"
   },
   "story": {
     "title": "A Legacy of Pain",
     "p1": "The halls of the facility whisper with the voices of those who came before. Blood-stained walls and abandoned experiments tell a story of ambition turned into madness.",
     "p2": "Confusion and fear are your only companions as you navigate through flickering lights and locked sections. Every clue you find brings you closer to the truth-and closer to the inhuman presence hunting you.",
     "p3": "Escape is your only goal, but the facility doesn't want to let you go. Will you uncover the secret of Subject 14, or become just another failed experiment?",
-    "imageUrl": "https://images.unsplash.com/photo-1519074063912-ad2d6d51dd2d?q=80&w=1974&auto=format&fit=crop"
+    "imageUrl": "/site-images/03-story.jpg"
   },
   "gallery": {
     "title": "Visual Nightmares",
@@ -25,27 +25,27 @@
     "items": [
       {
         "title": "The Observation Room",
-        "url": "https://images.unsplash.com/photo-1505630285033-a0f83683a52b?q=80&w=2070&auto=format&fit=crop"
+        "url": "/site-images/05-gallery-1.jpg"
       },
       {
         "title": "Failed Prototype",
-        "url": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=2070&auto=format&fit=crop"
+        "url": "/site-images/06-gallery-2.jpg"
       },
       {
         "title": "The Long Corridor",
-        "url": "https://images.unsplash.com/photo-1519074063912-ad2d6d51dd2d?q=80&w=1974&auto=format&fit=crop"
+        "url": "/site-images/07-gallery-3.jpg"
       },
       {
         "title": "Experimental Chamber",
-        "url": "https://images.unsplash.com/photo-1534177714502-04416b5a3cde?q=80&w=2070&auto=format&fit=crop"
+        "url": "/site-images/08-gallery-4.jpg"
       },
       {
         "title": "Signs of Struggle",
-        "url": "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=2070&auto=format&fit=crop"
+        "url": "/site-images/09-gallery-5.jpg"
       },
       {
         "title": "The Final Door",
-        "url": "https://images.unsplash.com/photo-1501139083538-0139583c060f?q=80&w=2070&auto=format&fit=crop"
+        "url": "/site-images/10-gallery-6.jpg"
       }
     ]
   },
