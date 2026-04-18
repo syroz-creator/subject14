@@ -41,13 +41,15 @@ export default function Gallery() {
                     </div>
                   </div>
                 </DialogTrigger>
-                <DialogContent className="max-w-5xl border-none bg-transparent p-0">
-                  <img
-                    src={image.url}
-                    alt={galleryTitles[index] ?? image.title}
-                    className="w-full h-auto rounded-[1.35rem] shadow-2xl"
-                    referrerPolicy="no-referrer"
-                  />
+                <DialogContent className="max-w-[calc(100vw-1.5rem)] gap-0 border-none bg-transparent p-0 ring-0 shadow-none sm:max-w-[calc(100vw-3rem)]">
+                  <div className="flex max-h-[92vh] min-h-[70vh] items-center justify-center">
+                    <img
+                      src={image.url}
+                      alt={galleryTitles[index] ?? image.title}
+                      className="max-h-[92vh] w-auto max-w-full rounded-[1.35rem] object-contain shadow-2xl"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
                 </DialogContent>
               </Dialog>
             </motion.div>

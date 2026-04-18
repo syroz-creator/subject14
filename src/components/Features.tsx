@@ -58,9 +58,9 @@ export default function Features() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="panel-film border-horror h-full rounded-[1.35rem] bg-card/35 transition-colors duration-300 group hover:bg-card/50">
+              <Card className="panel-film border-horror h-full rounded-[1.35rem] bg-card/35">
                 <CardHeader>
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                     <feature.icon className="w-6 h-6 text-primary" />
                   </div>
                   <CardTitle className="font-heading text-lg uppercase tracking-[0.08em]">{feature.title}</CardTitle>
