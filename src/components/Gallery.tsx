@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useLanguage } from "../context/LanguageContext";
 import { useSiteContent } from "../context/SiteContentContext";
 
@@ -41,12 +41,21 @@ export default function Gallery() {
                     </div>
                   </div>
                 </DialogTrigger>
-                <DialogContent className="max-w-[calc(100vw-1.5rem)] gap-0 border-none bg-transparent p-0 ring-0 shadow-none sm:max-w-[calc(100vw-3rem)]">
-                  <div className="flex max-h-[92vh] min-h-[70vh] items-center justify-center">
+                <DialogContent
+                  showCloseButton={false}
+                  className="h-screen max-w-none gap-0 border-none bg-black/92 p-0 ring-0 shadow-none sm:max-w-none"
+                >
+                  <DialogClose
+                    aria-label="Close gallery image"
+                    className="absolute top-4 right-4 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-black/55 text-3xl text-white/90 transition-colors hover:bg-black/75"
+                  >
+                    ×
+                  </DialogClose>
+                  <div className="flex h-screen w-screen items-center justify-center p-4 sm:p-8">
                     <img
                       src={image.url}
                       alt={galleryTitles[index] ?? image.title}
-                      className="max-h-[92vh] w-auto max-w-full rounded-[1.35rem] object-contain shadow-2xl"
+                      className="max-h-full w-auto max-w-full object-contain shadow-2xl"
                       referrerPolicy="no-referrer"
                     />
                   </div>
