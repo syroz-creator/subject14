@@ -64,9 +64,11 @@ export default function App() {
   return (
     <LanguageProvider>
       <SiteContentProvider>
-        <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground">
+        <div className="site-shell min-h-screen flex flex-col text-foreground selection:bg-primary/30 selection:text-primary-foreground">
+          <div className="pointer-events-none fixed inset-0 z-0 bg-noise" />
+          <div className="pointer-events-none fixed inset-0 z-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02)_0,rgba(255,255,255,0.00)_120px)]" />
           <Navbar activeSection={activeSection} onNavigate={navigateToSection} />
-          <main className="flex-1">
+          <main className="relative z-10 flex-1">
             {activeSection === "home" && <Hero onNavigate={navigateToSection} />}
             {activeSection === "about" && <About />}
             {activeSection === "story" && <Story />}
@@ -75,7 +77,9 @@ export default function App() {
             {activeSection === "features" && <Features />}
             {activeSection === "download" && <Download />}
           </main>
-          <Footer />
+          <div className="relative z-10">
+            <Footer />
+          </div>
         </div>
       </SiteContentProvider>
     </LanguageProvider>

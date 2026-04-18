@@ -40,12 +40,13 @@ export default function Features() {
   ];
 
   return (
-    <section id="features" className="min-h-[calc(100vh-8rem)] py-24 bg-background relative overflow-hidden">
+    <section id="features" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-24 sm:py-28">
       <div className="absolute inset-0 bg-gradient-to-t from-transparent via-primary/[0.04] to-transparent pointer-events-none" />
-      <div className="max-w-[92rem] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{t.features.title}</h2>
-          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{t.features.subtitle}</p>
+      <div className="section-frame relative z-10">
+        <div className="mb-16 text-center">
+          <p className="section-copy-kicker mb-4">Core Features</p>
+          <h2 className="section-heading mb-4">{t.features.title}</h2>
+          <p className="font-mono text-sm uppercase tracking-[0.3em] text-muted-foreground">{t.features.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 xl:gap-10">
@@ -57,15 +58,15 @@ export default function Features() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="h-full bg-card/35 border-horror hover:bg-card/50 transition-colors duration-300 group">
+              <Card className="panel-film border-horror h-full rounded-[1.35rem] bg-card/35 transition-colors duration-300 group hover:bg-card/50">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
                     <feature.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <CardTitle className="font-heading tracking-widest text-lg uppercase">{feature.title}</CardTitle>
+                  <CardTitle className="font-heading text-lg uppercase tracking-[0.08em]">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground font-light">{feature.description}</p>
+                  <p className="font-light text-white/68">{feature.description}</p>
                 </CardContent>
               </Card>
             </motion.div>

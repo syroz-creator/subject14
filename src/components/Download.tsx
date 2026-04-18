@@ -90,28 +90,26 @@ export default function Download() {
   };
 
   return (
-    <section id="download" className="min-h-[calc(100vh-8rem)] py-24 bg-background relative overflow-hidden">
-      {/* Background Glow */}
+    <section id="download" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-24 sm:py-28">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-[92rem] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="max-w-6xl mx-auto bg-card/25 border-horror rounded-3xl p-8 sm:p-10 lg:p-12 text-center backdrop-blur-sm">
+      <div className="section-frame relative z-10">
+        <div className="panel-film border-horror mx-auto max-w-6xl rounded-[2rem] p-8 text-center backdrop-blur-sm sm:p-10 lg:p-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-6xl font-heading mb-6 text-glow-red">{t.download.title}</h2>
-            <p className="text-xl text-muted-foreground mb-10 font-light max-w-2xl mx-auto">
-              {t.download.subtitle}
-            </p>
+            <p className="section-copy-kicker mb-4">Deployment Access</p>
+            <h2 className="section-heading mb-6">{t.download.title}</h2>
+            <p className="mx-auto mb-10 max-w-2xl text-xl font-light text-white/68">{t.download.subtitle}</p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
               <Button
                 size="lg"
                 onClick={handleDemoDownload}
-                className="bg-primary hover:bg-primary/80 text-white px-10 py-8 text-xl uppercase tracking-widest h-auto w-full sm:w-auto"
+                className="min-h-18 h-auto w-full rounded-[1rem] bg-primary px-10 py-8 text-xl uppercase tracking-[0.08em] text-white hover:bg-primary/80 sm:w-auto"
               >
                 <DownloadIcon className="mr-3 w-6 h-6" />
                 {t.download.demo}
@@ -124,7 +122,7 @@ export default function Download() {
                     window.open(siteContent.download.steamUrl, "_blank", "noopener,noreferrer");
                   }
                 }}
-                className="border-white/20 hover:bg-white/10 text-white px-10 py-8 text-xl uppercase tracking-widest h-auto w-full sm:w-auto"
+                className="min-h-18 h-auto w-full rounded-[1rem] border-white/20 px-10 py-8 text-xl uppercase tracking-[0.08em] text-white hover:bg-white/10 sm:w-auto"
               >
                 <ShoppingCart className="mr-3 w-6 h-6" />
                 {t.download.steam}
@@ -137,13 +135,13 @@ export default function Download() {
               </p>
             ) : null}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-0 text-start border border-white/10 rounded-xl overflow-hidden bg-black/40">
-              <div className="p-8 border-b md:border-b-0 md:border-e border-white/10">
-                <h3 className="text-sm font-heading uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
-                  <div className="w-1 h-4 bg-primary" />
+            <div className="grid grid-cols-1 overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/40 text-start md:grid-cols-2">
+              <div className="border-b border-white/10 p-8 md:border-b-0 md:border-e">
+                <h3 className="mb-6 flex items-center gap-2 font-heading text-sm uppercase tracking-[0.2em] text-primary">
+                  <div className="h-4 w-1 bg-primary" />
                   {t.download.minReq}
                 </h3>
-                <ul className="text-xs space-y-4 font-mono">
+                <ul className="space-y-4 font-mono text-xs">
                   <li className="flex flex-col gap-1">
                     <span className="text-muted-foreground/50 uppercase text-[10px] tracking-widest">{t.download.os}</span>
                     <span className="text-muted-foreground">Windows 10 64-bit</span>
@@ -171,11 +169,11 @@ export default function Download() {
                 </ul>
               </div>
               <div className="p-8 bg-primary/5">
-                <h3 className="text-sm font-heading uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
-                  <div className="w-1 h-4 bg-primary" />
+                <h3 className="mb-6 flex items-center gap-2 font-heading text-sm uppercase tracking-[0.2em] text-primary">
+                  <div className="h-4 w-1 bg-primary" />
                   {t.download.recReq}
                 </h3>
-                <ul className="text-xs space-y-4 font-mono">
+                <ul className="space-y-4 font-mono text-xs">
                   <li className="flex flex-col gap-1">
                     <span className="text-muted-foreground/50 uppercase text-[10px] tracking-widest">{t.download.os}</span>
                     <span className="text-muted-foreground">Windows 10/11 64-bit</span>

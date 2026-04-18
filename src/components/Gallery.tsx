@@ -9,12 +9,13 @@ export default function Gallery() {
   const galleryTitles = [t.gallery.img1, t.gallery.img2, t.gallery.img3, t.gallery.img4, t.gallery.img5, t.gallery.img6];
 
   return (
-    <section id="gallery" className="min-h-[calc(100vh-8rem)] py-24 bg-background relative overflow-hidden">
+    <section id="gallery" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-24 sm:py-28">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.04] to-transparent pointer-events-none" />
-      <div className="max-w-[92rem] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{t.gallery.title}</h2>
-          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{t.gallery.subtitle}</p>
+      <div className="section-frame relative z-10">
+        <div className="mb-16 text-center">
+          <p className="section-copy-kicker mb-4">Media Archive</p>
+          <h2 className="section-heading mb-4">{t.gallery.title}</h2>
+          <p className="font-mono text-sm uppercase tracking-[0.3em] text-muted-foreground">{t.gallery.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
@@ -28,23 +29,23 @@ export default function Gallery() {
             >
               <Dialog>
                 <DialogTrigger asChild>
-                  <div className="group relative aspect-video overflow-hidden rounded-lg cursor-pointer border-horror">
+                  <div className="panel-film border-horror group relative aspect-video cursor-pointer overflow-hidden rounded-[1.35rem]">
                     <img
                       src={image.url}
                       alt={galleryTitles[index] ?? image.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <span className="text-white font-heading tracking-widest uppercase text-sm">{galleryTitles[index] ?? image.title}</span>
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <span className="font-mono text-sm uppercase tracking-[0.3em] text-white">{galleryTitles[index] ?? image.title}</span>
                     </div>
                   </div>
                 </DialogTrigger>
-                <DialogContent className="max-w-5xl bg-transparent border-none p-0">
+                <DialogContent className="max-w-5xl border-none bg-transparent p-0">
                   <img
                     src={image.url}
                     alt={galleryTitles[index] ?? image.title}
-                    className="w-full h-auto rounded-lg shadow-2xl"
+                    className="w-full h-auto rounded-[1.35rem] shadow-2xl"
                     referrerPolicy="no-referrer"
                   />
                 </DialogContent>

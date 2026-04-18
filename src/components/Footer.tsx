@@ -42,20 +42,20 @@ const socialLinkClass =
   "flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary";
 
 const footerLinkClass =
-  "text-[11px] uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-primary";
+  "text-[11px] uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-white";
 
 export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="mt-auto border-t border-white/5 bg-background py-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <footer className="mt-auto border-t border-white/5 bg-black/55 py-12 backdrop-blur-sm">
+      <div className="section-frame">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr_1fr] lg:items-start">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <Ghost className="h-6 w-6 text-primary" />
               <div>
-                <p className="font-heading text-lg tracking-tighter text-glow-red">SUBJECT 14</p>
+                <p className="font-heading text-lg tracking-[0.08em] text-white">SUBJECT 14</p>
                 <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">
                   Horror Landing Experience
                 </p>
@@ -85,7 +85,7 @@ export default function Footer() {
                   Privacy Policy
                 </DialogTrigger>
                 <DialogContent className="max-w-2xl border-horror bg-background/95 p-6 backdrop-blur-md">
-                  <DialogTitle className="text-sm uppercase tracking-[0.25em] text-glow-red">Privacy Policy</DialogTitle>
+                  <DialogTitle className="text-sm uppercase tracking-[0.25em] text-primary">Privacy Policy</DialogTitle>
                   <div className="mt-4 max-h-[60vh] space-y-4 overflow-y-auto text-sm leading-relaxed text-muted-foreground">
                     <p>Subject 14 collects only the minimum information required to operate this website, respond to messages, and secure operator-only access. We do not sell visitor data.</p>
                     <p>If analytics, contact forms, or platform integrations are added later, they should be used only to improve performance, security, and player communication.</p>
@@ -100,7 +100,7 @@ export default function Footer() {
                   Terms of Service
                 </DialogTrigger>
                 <DialogContent className="max-w-2xl border-horror bg-background/95 p-6 backdrop-blur-md">
-                  <DialogTitle className="text-sm uppercase tracking-[0.25em] text-glow-red">Terms of Service</DialogTitle>
+                  <DialogTitle className="text-sm uppercase tracking-[0.25em] text-primary">Terms of Service</DialogTitle>
                   <div className="mt-4 max-h-[60vh] space-y-4 overflow-y-auto text-sm leading-relaxed text-muted-foreground">
                     <p>Subject 14 and all associated branding, media, and site content are provided for informational and promotional use unless otherwise stated.</p>
                     <p>Visitors may not misuse the site, attempt unauthorized access, interfere with operator-only features, or copy proprietary materials for resale or impersonation.</p>
@@ -119,7 +119,7 @@ export default function Footer() {
                 Local Edit Mode
               </DialogTrigger>
               <DialogContent className="max-w-4xl border-horror bg-background/95 p-6 backdrop-blur-md">
-                <DialogTitle className="text-sm uppercase tracking-[0.25em] text-glow-red">
+                <DialogTitle className="text-sm uppercase tracking-[0.25em] text-primary">
                   Local Edit Mode
                 </DialogTitle>
                 <div className="mt-4">

@@ -15,12 +15,13 @@ export default function Trailer() {
   };
 
   return (
-    <section id="trailer" className="min-h-[calc(100vh-8rem)] py-24 bg-background relative overflow-hidden">
+    <section id="trailer" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-24 sm:py-28">
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/[0.05] to-transparent pointer-events-none" />
-      <div className="max-w-[92rem] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4 text-glow-red">{t.trailer.title}</h2>
-          <p className="text-muted-foreground uppercase tracking-[0.3em] text-sm">{t.trailer.subtitle}</p>
+      <div className="section-frame relative z-10">
+        <div className="mb-16 text-center">
+          <p className="section-copy-kicker mb-4">Official Footage</p>
+          <h2 className="section-heading mb-4">{t.trailer.title}</h2>
+          <p className="font-mono text-sm uppercase tracking-[0.3em] text-muted-foreground">{t.trailer.subtitle}</p>
         </div>
 
         <motion.div
@@ -28,11 +29,10 @@ export default function Trailer() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative group max-w-6xl mx-auto border-horror rounded-xl overflow-hidden shadow-[0_0_50px_rgba(139,0,0,0.2)]"
+          className="panel-film border-horror group relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] shadow-[0_0_50px_rgba(139,0,0,0.16)]"
         >
           <AspectRatio ratio={16 / 9}>
-            <div className="absolute inset-0 bg-black flex items-center justify-center">
-              {/* Placeholder for video */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black">
               <img
                 src={siteContent.trailer.thumbnailUrl}
                 alt="Trailer Thumbnail"
@@ -43,14 +43,13 @@ export default function Trailer() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={handleTrailerClick}
-                className="relative z-10 w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white shadow-lg shadow-primary/40 group-hover:shadow-primary/60 transition-all"
+                className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/40 transition-all group-hover:shadow-primary/60"
               >
                 <Play className="w-8 h-8 fill-current ml-1" />
               </motion.button>
             </div>
           </AspectRatio>
           
-          {/* Cinematic Frame Overlay */}
           <div className="absolute inset-0 pointer-events-none border-[20px] border-black/40" />
         </motion.div>
       </div>
