@@ -124,7 +124,7 @@ export default function Footer() {
                 </DialogTitle>
                 <div className="mt-4">
                   <div className="mb-4 rounded-2xl border border-primary/15 bg-primary/8 px-4 py-3 text-sm text-muted-foreground">
-                    This edit mode is browser-only. Changes save on this device in local storage and do not securely protect access or update the deployed site for everyone.
+                    Operator access now requires the correct operator ID and passcode. When the API is available, changes save to the live site; otherwise they still work in this browser on the published page.
                   </div>
                   <OperatorPanel />
                 </div>
