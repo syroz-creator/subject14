@@ -71,7 +71,7 @@ export default function Footer() {
               <a href="https://www.tiktok.com/@syr0z_" target="_blank" rel="noreferrer" aria-label="TikTok" className={socialLinkClass}>
                 <TikTokIcon className="h-5 w-5" />
               </a>
-              <a href="https://discord.com/channels/@me" target="_blank" rel="noreferrer" aria-label="Discord" className={socialLinkClass}>
+              <a href="https://discord.gg/pTxQhqGX" target="_blank" rel="noreferrer" aria-label="Discord" className={socialLinkClass}>
                 <DiscordIcon className="h-5 w-5" />
               </a>
             </div>
