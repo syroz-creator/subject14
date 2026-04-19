@@ -40,12 +40,14 @@ function DiscordIcon({ className }: { className?: string }) {
 
 function LinktreeIcon({ className }: { className?: string }) {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M12 3v10.5" />
-      <path d="m7.5 7.5 4.5-4.5 4.5 4.5" />
-      <path d="m6 11 6 6 6-6" />
-      <path d="M12 17v4" />
-      <path d="M9 21h6" />
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <rect x="10.7" y="2.2" width="2.6" height="8.1" rx="1.3" />
+      <rect x="5.28" y="4.33" width="2.6" height="8.1" rx="1.3" transform="rotate(-45 5.28 4.33)" />
+      <rect x="16.12" y="2.49" width="2.6" height="8.1" rx="1.3" transform="rotate(45 16.12 2.49)" />
+      <rect x="4.1" y="10.7" width="8.1" height="2.6" rx="1.3" />
+      <rect x="11.8" y="10.7" width="8.1" height="2.6" rx="1.3" />
+      <rect x="10.7" y="12.2" width="2.6" height="7.2" rx="1.3" />
+      <rect x="8.25" y="18.4" width="7.5" height="2.9" rx="1.45" />
     </svg>
   );
 }
