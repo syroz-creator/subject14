@@ -38,6 +38,18 @@ function DiscordIcon({ className }: { className?: string }) {
   );
 }
 
+function LinktreeIcon({ className }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M12 3v10.5" />
+      <path d="m7.5 7.5 4.5-4.5 4.5 4.5" />
+      <path d="m6 11 6 6 6-6" />
+      <path d="M12 17v4" />
+      <path d="M9 21h6" />
+    </svg>
+  );
+}
+
 const socialLinkClass =
   "flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary";
 
@@ -65,6 +77,9 @@ export default function Footer() {
               Atmospheric first-person horror, haunting visuals, and a facility that remembers every visitor.
             </p>
             <div className="flex items-center gap-4">
+              <a href="https://linktr.ee/Syrozz" target="_blank" rel="noreferrer" aria-label="Linktree" className={socialLinkClass}>
+                <LinktreeIcon className="h-5 w-5" />
+              </a>
               <a href="https://www.instagram.com/ahmad_uwaida/" target="_blank" rel="noreferrer" aria-label="Instagram" className={socialLinkClass}>
                 <InstagramIcon className="h-5 w-5" />
               </a>
