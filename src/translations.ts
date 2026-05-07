@@ -75,7 +75,7 @@ export const translations = {
     download: {
       title: "Face the Unknown",
       subtitle: "The facility is waiting. Experience the first 60 minutes of the nightmare that everyone is talking about.",
-      demo: "Download Demo",
+      demo: "Play Now",
       steam: "Wishlist on Steam",
       minReq: "Minimum System Requirements",
       recReq: "Recommended System Requirements",
@@ -167,7 +167,7 @@ export const translations = {
     download: {
       title: "Enfréntate a lo Desconocido",
       subtitle: "La instalación está esperando. Vive los primeros 60 minutos de la pesadilla de la que todos hablan.",
-      demo: "Descargar Demo",
+      demo: "Jugar Ahora",
       steam: "Lista de deseos en Steam",
       minReq: "Requisitos Mínimos del Sistema",
       recReq: "Requisitos Recomendados del Sistema",
@@ -259,7 +259,7 @@ export const translations = {
     download: {
       title: "Affrontez l'Inconnu",
       subtitle: "L'installation attend. Vivez les 60 premières minutes du cauchemar dont tout le monde parle.",
-      demo: "Télécharger la démo",
+      demo: "Jouer Maintenant",
       steam: "Liste de souhaits sur Steam",
       minReq: "Configuration Minimale",
       recReq: "Configuration Recommandee",
@@ -351,7 +351,7 @@ export const translations = {
     download: {
       title: "واجه المجهول",
       subtitle: "المنشأة تنتظر. عش أول 60 دقيقة من الكابوس الذي يتحدث عنه الجميع.",
-      demo: "تحميل الديمو",
+      demo: "العب الآن",
       steam: "أضف للرغبات على Steam",
       minReq: "الحد الادنى لمتطلبات التشغيل",
       recReq: "متطلبات التشغيل الموصى بها",
@@ -443,7 +443,7 @@ export const translations = {
     download: {
       title: "התמודד עם הלא נודע",
       subtitle: "המתקן מחכה. חווה את 60 הדקות הראשונות של הסיוט שכולם מדברים עליו.",
-      demo: "הורד דמו",
+      demo: "שחק עכשיו",
       steam: "הוסף לרשימת המשאלות ב-Steam",
       minReq: "דרישות מערכת מינימליות",
       recReq: "דרישות מערכת מומלצות",
