@@ -5,6 +5,15 @@ import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 import express from "express";
 import { defaultSiteContent, type SiteContent } from "./src/site-content.ts";
+import {
+  REVIEW_MESSAGE_MAX_LENGTH,
+  REVIEW_MESSAGE_MIN_LENGTH,
+  REVIEW_NAME_MAX_LENGTH,
+  REVIEW_STORAGE_LIMIT,
+  BLOCKED_REVIEW_WARNING,
+  findBlockedReviewWord,
+  type PlayerReview,
+} from "./src/reviews.ts";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config();
@@ -16,6 +25,7 @@ const PORT = Number(process.env.PORT || 3001);
 const SESSION_COOKIE = "subject14_operator_session";
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
 const SITE_CONTENT_PATH = path.resolve(__dirname, "data/site-content.json");
+const REVIEWS_PATH = path.resolve(__dirname, "data/reviews.json");
 
 app.use(express.json());
 
@@ -134,6 +144,49 @@ function writeSiteContent(content: SiteContent) {
   fs.writeFileSync(SITE_CONTENT_PATH, JSON.stringify(content, null, 2));
 }
 
+function normalizeStoredReview(value: unknown): PlayerReview | null {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const review = value as Partial<PlayerReview>;
+  const rating = Number(review.rating);
+  const message = String(review.message ?? "").trim();
+  const createdAt = String(review.createdAt ?? "");
+
+  if (!Number.isFinite(rating) || rating < 1 || rating > 5 || !message || !createdAt) {
+    return null;
+  }
+
+  return {
+    id: String(review.id ?? crypto.randomUUID()),
+    rating: Math.min(5, Math.max(1, Math.round(rating))),
+    name: String(review.name ?? "").trim().slice(0, REVIEW_NAME_MAX_LENGTH),
+    message: message.slice(0, REVIEW_MESSAGE_MAX_LENGTH),
+    createdAt,
+  };
+}
+
+function readReviews(): PlayerReview[] {
+  try {
+    const file = fs.readFileSync(REVIEWS_PATH, "utf8");
+    const data = JSON.parse(file) as unknown;
+
+    if (!Array.isArray(data)) {
+      return [];
+    }
+
+    return data.map(normalizeStoredReview).filter(Boolean).slice(0, REVIEW_STORAGE_LIMIT) as PlayerReview[];
+  } catch {
+    return [];
+  }
+}
+
+function writeReviews(reviews: PlayerReview[]) {
+  fs.mkdirSync(path.dirname(REVIEWS_PATH), { recursive: true });
+  fs.writeFileSync(REVIEWS_PATH, JSON.stringify(reviews.slice(0, REVIEW_STORAGE_LIMIT), null, 2));
+}
+
 function requireOperator(
   req: express.Request,
   res: express.Response,
@@ -149,6 +202,40 @@ function requireOperator(
 
 app.get("/api/site-content", (_req, res) => {
   return res.status(200).json(readSiteContent());
+});
+
+app.get("/api/reviews", (_req, res) => {
+  return res.status(200).json(readReviews());
+});
+
+app.post("/api/reviews", (req, res) => {
+  const rating = Number(req.body?.rating);
+  const name = String(req.body?.name ?? "").trim().slice(0, REVIEW_NAME_MAX_LENGTH);
+  const message = String(req.body?.message ?? "").trim().slice(0, REVIEW_MESSAGE_MAX_LENGTH);
+
+  if (!Number.isFinite(rating) || rating < 1 || rating > 5) {
+    return res.status(400).json({ message: "Choose a rating from 1 to 5 stars." });
+  }
+
+  if (message.length < REVIEW_MESSAGE_MIN_LENGTH) {
+    return res.status(400).json({ message: "Write at least 8 characters before sending." });
+  }
+
+  if (findBlockedReviewWord(`${name} ${message}`)) {
+    return res.status(400).json({ message: BLOCKED_REVIEW_WARNING });
+  }
+
+  const review: PlayerReview = {
+    id: crypto.randomUUID(),
+    rating: Math.round(rating),
+    name,
+    message,
+    createdAt: new Date().toISOString(),
+  };
+  const reviews = [review, ...readReviews()].slice(0, REVIEW_STORAGE_LIMIT);
+
+  writeReviews(reviews);
+  return res.status(201).json({ review, reviews });
 });
 
 app.get("/api/operator/session", (req, res) => {

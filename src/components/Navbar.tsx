@@ -23,6 +23,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
     { name: t.nav.gallery, section: "gallery" },
     { name: t.nav.trailer, section: "trailer" },
     { name: t.nav.features, section: "features" },
+    { name: t.nav.reviews, section: "reviews" },
     { name: t.nav.download, section: "download" },
   ] satisfies { name: string; section: SectionId }[];
 
@@ -45,7 +46,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
       className="fixed top-0 left-0 right-0 z-50 border-b border-white/6 bg-black/72 backdrop-blur-xl"
     >
       <div className="mx-auto max-w-[120rem] px-4 sm:px-6 lg:px-10">
-        <div className="flex h-20 items-center justify-between gap-4 lg:grid lg:h-24 lg:grid-cols-[minmax(220px,1fr)_auto_minmax(220px,1fr)] lg:justify-normal">
+        <div className="flex h-20 items-center justify-between gap-4 xl:grid xl:h-24 xl:grid-cols-[minmax(220px,1fr)_auto_minmax(220px,1fr)] xl:justify-normal">
           <button
             type="button"
             onClick={() => navigate("home")}
@@ -57,8 +58,8 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
             </span>
           </button>
 
-          <div className="hidden justify-self-center lg:block">
-            <div className="flex items-center gap-8 xl:gap-10">
+          <div className="hidden justify-self-center xl:block">
+            <div className="flex items-center gap-6 2xl:gap-9">
               {navItems.map((item) => (
                 <button
                   key={item.name}
@@ -73,7 +74,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4 lg:justify-self-center">
-            <div className="hidden items-center text-white/65 lg:flex">
+            <div className="hidden items-center text-white/65 xl:flex">
               <LanguageSwitcher />
             </div>
             <Button
@@ -90,14 +91,14 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                   <Button
                     variant="ghost"
                     size="icon-sm"
-                    className="lg:hidden text-foreground hover:bg-white/10"
+                    className="xl:hidden text-foreground hover:bg-white/10"
                     aria-label="Open navigation menu"
                   />
                 }
               >
                 <Menu className="w-5 h-5" />
               </DialogTrigger>
-              <DialogContent className="lg:hidden border-horror bg-black/95 p-6 backdrop-blur-md">
+              <DialogContent className="xl:hidden border-horror bg-black/95 p-6 backdrop-blur-md">
                 <DialogTitle className="text-xs uppercase tracking-[0.3em] text-primary">
                   Navigate
                 </DialogTitle>
