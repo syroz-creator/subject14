@@ -9,12 +9,12 @@ import {
   REVIEW_NAME_MAX_LENGTH,
   REVIEW_STORAGE_LIMIT,
   BLOCKED_REVIEW_WARNING,
+  REVIEWS_BACKEND_UNAVAILABLE,
   findBlockedReviewWord,
   type PlayerReview,
 } from "../reviews";
 
 const REVIEWS_API_ENDPOINT = "/api/reviews";
-const REVIEWS_STORAGE_KEY = "subject14-player-reviews";
 
 function createBrowserReviewId() {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
@@ -57,40 +57,6 @@ function normalizeReview(value: unknown): PlayerReview | null {
   };
 }
 
-function readStoredReviews() {
-  if (typeof window === "undefined") {
-    return [];
-  }
-
-  try {
-    const stored = window.localStorage.getItem(REVIEWS_STORAGE_KEY);
-    if (!stored) {
-      return [];
-    }
-
-    const parsed = JSON.parse(stored) as unknown;
-    if (!Array.isArray(parsed)) {
-      return [];
-    }
-
-    return parsed.map(normalizeReview).filter(Boolean).slice(0, REVIEW_STORAGE_LIMIT) as PlayerReview[];
-  } catch {
-    return [];
-  }
-}
-
-function persistReviews(reviews: PlayerReview[]) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  try {
-    window.localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(reviews.slice(0, REVIEW_STORAGE_LIMIT)));
-  } catch {
-    // Keep the in-memory list usable even if browser storage is unavailable.
-  }
-}
-
 function formatReviewDate(value: string) {
   const date = new Date(value);
 
@@ -121,7 +87,7 @@ function Stars({ rating, size = "sm" }: { rating: number; size?: "sm" | "md" }) 
 
 export default function Reviews() {
   const { t } = useLanguage();
-  const [reviews, setReviews] = useState<PlayerReview[]>(readStoredReviews);
+  const [reviews, setReviews] = useState<PlayerReview[]>([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(5);
@@ -157,10 +123,11 @@ export default function Reviews() {
 
         if (mounted) {
           setReviews(nextReviews);
-          persistReviews(nextReviews);
         }
       } catch {
-        // Static deployments use the browser-stored list.
+        if (mounted) {
+          setNotice({ type: "error", text: REVIEWS_BACKEND_UNAVAILABLE });
+        }
       }
     }
 
@@ -214,7 +181,6 @@ export default function Reviews() {
           : [review, ...reviews].slice(0, REVIEW_STORAGE_LIMIT);
 
         setReviews(serverReviews);
-        persistReviews(serverReviews);
         setName("");
         setMessage("");
         setRating(5);
@@ -228,18 +194,13 @@ export default function Reviews() {
         return;
       }
     } catch {
-      // If the API is not available, fall through to browser storage below.
+      setNotice({ type: "error", text: REVIEWS_BACKEND_UNAVAILABLE });
+      return;
     } finally {
       setSubmitting(false);
     }
 
-    const nextReviews = [review, ...reviews].slice(0, REVIEW_STORAGE_LIMIT);
-    setReviews(nextReviews);
-    persistReviews(nextReviews);
-    setName("");
-    setMessage("");
-    setRating(5);
-    setNotice({ type: "success", text: t.reviews.success });
+    setNotice({ type: "error", text: REVIEWS_BACKEND_UNAVAILABLE });
   };
 
   return (

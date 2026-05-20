@@ -12,6 +12,8 @@ export const REVIEW_MESSAGE_MAX_LENGTH = 520;
 export const REVIEW_STORAGE_LIMIT = 80;
 export const BLOCKED_REVIEW_WARNING =
   "Your review contains offensive or inappropriate words. Please keep your review respectful.";
+export const REVIEWS_BACKEND_UNAVAILABLE =
+  "Reviews are not connected to the server right now, so this review was not saved. Deploy the backend to enable public reviews.";
 
 export const BLOCKED_REVIEW_WORDS: string[] = [
   "fuck",

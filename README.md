@@ -18,3 +18,9 @@ View your app in AI Studio: https://ai.studio/apps/bf9aeb25-ecbe-422d-b68f-f366f
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+## Reviews Backend
+
+Player reviews use the Express backend in `server.ts` and a SQLite database at `data/reviews.sqlite` by default. Static hosting by itself will not save reviews for other computers.
+
+For public reviews, deploy the Node backend with persistent disk storage and run `npm run start`. You can set `REVIEWS_DATABASE_PATH` if your host gives you a persistent volume path.
