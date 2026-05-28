@@ -58,15 +58,22 @@ export default function Features() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="panel-film border-horror h-full rounded-[1.35rem] bg-card/35">
-                <CardHeader>
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <feature.icon className="w-6 h-6 text-primary" />
+              <Card
+                tabIndex={0}
+                className="panel-film border-horror h-full min-h-56 rounded-[1.35rem] bg-card/35 transition-all duration-300 hover:-translate-y-1 hover:border-primary/35 hover:bg-card/55 focus-visible:-translate-y-1 focus-visible:border-primary/35 focus-visible:ring-2 focus-visible:ring-primary/50"
+              >
+                <CardHeader className="relative z-10">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover/card:bg-primary/18 group-focus-visible/card:bg-primary/18">
+                    <feature.icon className="w-6 h-6 text-primary transition-transform duration-300 group-hover/card:scale-110 group-focus-visible/card:scale-110" />
                   </div>
                   <CardTitle className="font-heading text-lg uppercase tracking-[0.08em]">{feature.title}</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="font-light text-white/68">{feature.description}</p>
+                <CardContent className="relative z-10 mt-auto">
+                  <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-out group-hover/card:grid-rows-[1fr] group-hover/card:opacity-100 group-focus-visible/card:grid-rows-[1fr] group-focus-visible/card:opacity-100">
+                    <div className="overflow-hidden">
+                      <p className="border-t border-white/10 pt-4 font-light text-white/68">{feature.description}</p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>

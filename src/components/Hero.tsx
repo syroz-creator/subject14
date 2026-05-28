@@ -35,7 +35,7 @@ export default function Hero({ onNavigate }: HeroProps) {
           transition={{ duration: 0.9 }}
           className="flex w-full max-w-[58rem] flex-col items-center py-12 text-center sm:py-16 lg:py-0"
         >
-          <div className="mb-6 w-full leading-none uppercase">
+          <div className="animate-flicker mb-6 w-full leading-none uppercase">
             <h1 className="text-glow-red font-heading text-[4.5rem] tracking-[0.03em] text-white sm:text-[6.4rem] md:text-[8rem] lg:text-[8.8rem] xl:text-[9.8rem]">
               {titleTop}
             </h1>
