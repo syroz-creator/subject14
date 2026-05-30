@@ -76,7 +76,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground;
+    @apply bg-background text-[0.94rem] font-medium text-foreground selection:bg-primary/30 selection:text-primary-foreground;
     background-image:
       radial-gradient(circle at top left, oklch(0.18 0.04 250 / 0.28), transparent 35%),
       radial-gradient(circle at 50% 20%, oklch(0.3 0.11 27 / 0.2), transparent 30%),
@@ -121,14 +121,33 @@
   .site-shell {
     @apply relative overflow-hidden bg-transparent;
   }
+  .site-shell p,
+  .site-shell li,
+  .site-shell label,
+  .site-shell input,
+  .site-shell textarea,
+  .site-shell button {
+    font-weight: 600;
+  }
+  .site-shell .font-light {
+    font-weight: 500;
+  }
+  .site-shell .text-lg {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .site-shell .text-xl {
+    font-size: 1.08rem;
+    line-height: 1.5;
+  }
   .section-frame {
     @apply relative mx-auto max-w-[92rem] px-4 sm:px-6 lg:px-10;
   }
   .section-copy-kicker {
-    @apply font-mono text-[0.72rem] uppercase tracking-[0.45em] text-muted-foreground;
+    @apply font-mono text-[0.68rem] font-semibold uppercase tracking-[0.42em] text-muted-foreground;
   }
   .section-heading {
-    @apply text-4xl font-heading uppercase tracking-[0.08em] text-white sm:text-5xl md:text-6xl;
+    @apply text-3xl font-heading uppercase tracking-[0.08em] text-white sm:text-4xl md:text-5xl;
   }
   .panel-film {
     background:
@@ -136,12 +155,24 @@
       linear-gradient(135deg, oklch(1 0 0 / 0.04), transparent 40%);
   }
   .hero-button-solid {
-    @apply inline-flex min-h-16 items-center justify-center gap-3 bg-primary px-7 text-lg font-semibold uppercase tracking-[0.08em] text-primary-foreground transition-all duration-300 hover:translate-y-[-2px] hover:bg-primary/90;
-    clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
-    box-shadow: 0 20px 40px oklch(0.58 0.22 27 / 0.28);
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-[0.82rem] font-bold uppercase tracking-[0.1em] text-primary-foreground transition-all duration-300 hover:translate-y-[-1px] hover:bg-primary/90;
+    flex: 0 1 13.5rem;
+    box-shadow: 0 14px 26px oklch(0.58 0.22 27 / 0.22);
   }
   .hero-button-ghost {
-    @apply inline-flex min-h-16 items-center justify-center gap-3 border border-white/18 bg-black/25 px-7 text-lg font-semibold uppercase tracking-[0.08em] text-white transition-all duration-300 hover:translate-y-[-2px] hover:border-white/32 hover:bg-white/8;
-    clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/18 bg-black/35 px-5 py-3 text-[0.82rem] font-bold uppercase tracking-[0.1em] text-white transition-all duration-300 hover:translate-y-[-1px] hover:border-white/32 hover:bg-white/8;
+    flex: 0 1 13.5rem;
+  }
+  .hero-button-solid svg,
+  .hero-button-ghost svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  @media (min-width: 640px) {
+    .hero-button-solid,
+    .hero-button-ghost {
+      width: auto;
+      max-width: 13.5rem;
+    }
   }
 }

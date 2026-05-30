@@ -23,14 +23,13 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
     { name: t.nav.gallery, section: "gallery" },
     { name: t.nav.trailer, section: "trailer" },
     { name: t.nav.features, section: "features" },
-    { name: t.nav.reviews, section: "reviews" },
     { name: t.nav.download, section: "download" },
   ] satisfies { name: string; section: SectionId }[];
 
   const isActive = (section: SectionId) => activeSection === section;
 
   const navLinkClass = (section: SectionId) =>
-    `text-[0.82rem] font-semibold transition-colors duration-300 tracking-[0.18em] uppercase ${
+    `text-[0.72rem] font-bold transition-colors duration-300 tracking-[0.16em] uppercase ${
       isActive(section) ? "text-primary" : "text-white/65 hover:text-white"
     }`;
 
@@ -108,7 +107,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                       key={item.name}
                       type="button"
                       onClick={() => navigate(item.section)}
-                      className={`rounded-lg border px-4 py-3 text-left text-sm uppercase tracking-[0.3em] transition-colors ${
+                      className={`rounded-lg border px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.24em] transition-colors ${
                         isActive(item.section)
                           ? "border-primary/50 bg-primary/12 text-white"
                           : "border-white/10 bg-white/5 text-white/70 hover:border-primary/30 hover:text-white"

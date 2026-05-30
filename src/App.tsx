@@ -8,7 +8,6 @@ import Gallery from "./components/Gallery";
 import Trailer from "./components/Trailer";
 import Features from "./components/Features";
 import Download from "./components/Download";
-import Reviews from "./components/Reviews";
 import Footer from "./components/Footer";
 import { SiteContentProvider } from "./context/SiteContentContext";
 
@@ -19,7 +18,6 @@ export type SectionId =
   | "gallery"
   | "trailer"
   | "features"
-  | "reviews"
   | "download";
 
 const validSections: SectionId[] = [
@@ -29,7 +27,6 @@ const validSections: SectionId[] = [
   "gallery",
   "trailer",
   "features",
-  "reviews",
   "download",
 ];
 
@@ -78,7 +75,6 @@ export default function App() {
             {activeSection === "gallery" && <Gallery />}
             {activeSection === "trailer" && <Trailer />}
             {activeSection === "features" && <Features />}
-            {activeSection === "reviews" && <Reviews />}
             {activeSection === "download" && <Download />}
           </main>
           <div className="relative z-10">
