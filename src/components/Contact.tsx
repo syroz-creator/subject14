@@ -22,6 +22,22 @@ const inputClass =
 
 const labelClass = "font-mono text-[0.7rem] font-bold uppercase tracking-[0.24em] text-primary";
 
+function CornerAccent({ position }: { position: "top-left" | "top-right" | "bottom-left" | "bottom-right" }) {
+  const positionClass = {
+    "top-left": "left-3 top-3 border-l-2 border-t-2",
+    "top-right": "right-3 top-3 border-r-2 border-t-2",
+    "bottom-left": "bottom-3 left-3 border-b-2 border-l-2",
+    "bottom-right": "bottom-3 right-3 border-b-2 border-r-2",
+  }[position];
+
+  return (
+    <span
+      aria-hidden="true"
+      className={`pointer-events-none absolute z-20 h-8 w-8 border-primary/95 shadow-[0_0_16px_rgba(179,32,32,0.28)] ${positionClass}`}
+    />
+  );
+}
+
 function saveFallbackMessage(payload: ContactPayload) {
   const storageKey = "subject14-contact-messages";
   const current = JSON.parse(window.localStorage.getItem(storageKey) || "[]") as ContactPayload[];
@@ -123,14 +139,16 @@ export default function Contact() {
           initial={{ opacity: 0, y: 34 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.7 }}
-          className="panel-film border-horror relative w-full max-w-xl overflow-hidden rounded-[1.15rem] border-t border-t-primary/45 p-6 sm:p-8"
+          className="panel-film border-horror relative w-full max-w-xl overflow-hidden rounded-[1.15rem] border border-primary/20 border-t-primary/55 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.58),0_0_46px_rgba(179,32,32,0.12)] sm:p-9"
         >
-          <div className="absolute left-0 top-0 h-5 w-5 border-l-2 border-t-2 border-primary" />
-          <div className="absolute right-0 top-0 h-5 w-5 border-r-2 border-t-2 border-primary" />
-          <div className="absolute bottom-0 left-0 h-5 w-5 border-b-2 border-l-2 border-primary" />
-          <div className="absolute bottom-0 right-0 h-5 w-5 border-b-2 border-r-2 border-primary" />
+          <div className="pointer-events-none absolute inset-3 z-10 rounded-[0.75rem] border border-white/8" />
+          <div className="pointer-events-none absolute inset-x-3 top-3 z-10 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent" />
+          <CornerAccent position="top-left" />
+          <CornerAccent position="top-right" />
+          <CornerAccent position="bottom-left" />
+          <CornerAccent position="bottom-right" />
 
-          <form className="relative z-10 space-y-5" onSubmit={handleSubmit}>
+          <form className="relative z-30 space-y-5" onSubmit={handleSubmit}>
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="space-y-2">
                 <span className={labelClass}>Survivor Name</span>

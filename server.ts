@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 import express from "express";
+import nodemailer from "nodemailer";
 import { defaultSiteContent, type SiteContent } from "./src/site-content.ts";
 
 dotenv.config({ path: ".env.local" });
@@ -17,6 +18,11 @@ const SESSION_COOKIE = "subject14_operator_session";
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
 const SITE_CONTENT_PATH = path.resolve(__dirname, "data/site-content.json");
 const CONTACT_MESSAGES_PATH = path.resolve(__dirname, "data/contact-messages.json");
+const CONTACT_EMAIL_ENABLED =
+  Boolean(process.env.SMTP_HOST) &&
+  Boolean(process.env.SMTP_USER) &&
+  Boolean(process.env.SMTP_PASS) &&
+  Boolean(process.env.CONTACT_TO_EMAIL);
 
 app.use(express.json());
 
@@ -33,6 +39,16 @@ type ContactMessage = {
   sector: string;
   message: string;
   createdAt: string;
+};
+
+type SmtpSettings = {
+  host: string;
+  port: number;
+  secure: boolean;
+  user: string;
+  pass: string;
+  from: string;
+  to: string;
 };
 
 function requiredEnv(name: string): string {
@@ -162,6 +178,99 @@ function normalizeContactField(value: unknown, maxLength: number): string {
   return String(value ?? "").trim().slice(0, maxLength);
 }
 
+function optionalEnv(name: string): string | undefined {
+  const value = process.env[name]?.trim();
+  return value ? value : undefined;
+}
+
+function getSmtpSettings(): SmtpSettings | null {
+  const host = optionalEnv("SMTP_HOST");
+  const user = optionalEnv("SMTP_USER");
+  const pass = optionalEnv("SMTP_PASS");
+  const to = optionalEnv("CONTACT_TO_EMAIL");
+
+  if (!host || !user || !pass || !to) {
+    return null;
+  }
+
+  const port = Number(process.env.SMTP_PORT || 587);
+  const secure = String(process.env.SMTP_SECURE || "false").toLowerCase() === "true";
+
+  return {
+    host,
+    port,
+    secure,
+    user,
+    pass,
+    from: optionalEnv("CONTACT_FROM_EMAIL") || user,
+    to,
+  };
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+async function sendContactEmail(contactMessage: ContactMessage) {
+  const settings = getSmtpSettings();
+  if (!settings) {
+    return { sent: false, reason: "smtp_not_configured" };
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: settings.host,
+    port: settings.port,
+    secure: settings.secure,
+    auth: {
+      user: settings.user,
+      pass: settings.pass,
+    },
+  });
+
+  const subject = `[Subject 14 Support] ${contactMessage.sector} - ${contactMessage.name}`;
+  const text = [
+    "New Subject 14 contact transmission",
+    "",
+    `Name: ${contactMessage.name}`,
+    `Email: ${contactMessage.email}`,
+    `Sector: ${contactMessage.sector}`,
+    `Created: ${contactMessage.createdAt}`,
+    "",
+    "Message:",
+    contactMessage.message,
+  ].join("\n");
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; background: #090909; color: #f5f5f5; padding: 24px;">
+      <div style="max-width: 640px; border: 1px solid rgba(179,32,32,0.45); padding: 20px;">
+        <p style="margin: 0 0 12px; color: #b32020; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;">Subject 14 Contact Transmission</p>
+        <h1 style="margin: 0 0 20px; font-size: 24px;">${escapeHtml(contactMessage.sector)}</h1>
+        <p><strong>Name:</strong> ${escapeHtml(contactMessage.name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(contactMessage.email)}</p>
+        <p><strong>Created:</strong> ${escapeHtml(contactMessage.createdAt)}</p>
+        <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 20px 0;" />
+        <p style="white-space: pre-wrap; line-height: 1.6;">${escapeHtml(contactMessage.message)}</p>
+      </div>
+    </div>
+  `;
+
+  await transporter.sendMail({
+    from: `"Subject 14 Support" <${settings.from}>`,
+    to: settings.to,
+    replyTo: contactMessage.email,
+    subject,
+    text,
+    html,
+  });
+
+  return { sent: true };
+}
+
 function requireOperator(
   req: express.Request,
   res: express.Response,
@@ -179,7 +288,7 @@ app.get("/api/site-content", (_req, res) => {
   return res.status(200).json(readSiteContent());
 });
 
-app.post("/api/contact", (req, res) => {
+app.post("/api/contact", async (req, res) => {
   const name = normalizeContactField(req.body?.name, 80);
   const email = normalizeContactField(req.body?.email, 120);
   const sector = normalizeContactField(req.body?.sector, 80);
@@ -202,7 +311,17 @@ app.post("/api/contact", (req, res) => {
   messages.unshift(nextMessage);
   writeContactMessages(messages.slice(0, 250));
 
-  return res.status(201).json({ ok: true, message: nextMessage });
+  try {
+    const emailResult = await sendContactEmail(nextMessage);
+    return res.status(201).json({ ok: true, message: nextMessage, email: emailResult });
+  } catch (error) {
+    console.error("Unable to send contact email", error);
+    return res.status(201).json({
+      ok: true,
+      message: nextMessage,
+      email: { sent: false, reason: "smtp_send_failed" },
+    });
+  }
 });
 
 app.get("/api/operator/session", (req, res) => {
@@ -279,4 +398,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(PORT, () => {
   console.log(`Subject 14 operator server running on http://127.0.0.1:${PORT}`);
+  if (!CONTACT_EMAIL_ENABLED) {
+    console.log("Contact email delivery is disabled until SMTP env vars are configured.");
+  }
 });
