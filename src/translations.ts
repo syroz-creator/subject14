@@ -9,6 +9,7 @@ export const translations = {
       features: "Features",
       reviews: "Reviews",
       download: "Download",
+      contact: "Contact",
       wishlist: "Wishlist Now",
     },
     hero: {
@@ -129,6 +130,7 @@ export const translations = {
       features: "Características",
       reviews: "Reseñas",
       download: "Descargar",
+      contact: "Contacto",
       wishlist: "Agregar a Deseados",
     },
     hero: {
@@ -249,6 +251,7 @@ export const translations = {
       features: "Caractéristiques",
       reviews: "Avis",
       download: "Télécharger",
+      contact: "Contact",
       wishlist: "Ajouter a la liste",
     },
     hero: {
@@ -369,6 +372,7 @@ export const translations = {
       features: "المميزات",
       reviews: "التقييمات",
       download: "تحميل",
+      contact: "اتصال",
       wishlist: "أضف إلى قائمة الرغبات",
     },
     hero: {
@@ -489,6 +493,7 @@ export const translations = {
       features: "מאפיינים",
       reviews: "ביקורות",
       download: "הורדה",
+      contact: "צור קשר",
       wishlist: "הוסף לרשימת המשאלות עכשיו",
     },
     hero: {

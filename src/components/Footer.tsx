@@ -126,6 +126,10 @@ export default function Footer() {
                   </div>
                 </DialogContent>
               </Dialog>
+
+              <a href="#contact" className={footerLinkClass}>
+                Contact Command
+              </a>
             </div>
           </div>
 

@@ -24,6 +24,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
     { name: t.nav.trailer, section: "trailer" },
     { name: t.nav.features, section: "features" },
     { name: t.nav.download, section: "download" },
+    { name: t.nav.contact, section: "contact" },
   ] satisfies { name: string; section: SectionId }[];
 
   const isActive = (section: SectionId) => activeSection === section;

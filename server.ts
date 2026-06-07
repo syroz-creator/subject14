@@ -16,6 +16,7 @@ const PORT = Number(process.env.PORT || 3001);
 const SESSION_COOKIE = "subject14_operator_session";
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
 const SITE_CONTENT_PATH = path.resolve(__dirname, "data/site-content.json");
+const CONTACT_MESSAGES_PATH = path.resolve(__dirname, "data/contact-messages.json");
 
 app.use(express.json());
 
@@ -23,6 +24,15 @@ type SessionPayload = {
   username: string;
   gmail: string;
   exp: number;
+};
+
+type ContactMessage = {
+  id: string;
+  name: string;
+  email: string;
+  sector: string;
+  message: string;
+  createdAt: string;
 };
 
 function requiredEnv(name: string): string {
@@ -134,6 +144,24 @@ function writeSiteContent(content: SiteContent) {
   fs.writeFileSync(SITE_CONTENT_PATH, JSON.stringify(content, null, 2));
 }
 
+function readContactMessages(): ContactMessage[] {
+  try {
+    const file = fs.readFileSync(CONTACT_MESSAGES_PATH, "utf8");
+    return JSON.parse(file) as ContactMessage[];
+  } catch {
+    return [];
+  }
+}
+
+function writeContactMessages(messages: ContactMessage[]) {
+  fs.mkdirSync(path.dirname(CONTACT_MESSAGES_PATH), { recursive: true });
+  fs.writeFileSync(CONTACT_MESSAGES_PATH, JSON.stringify(messages, null, 2));
+}
+
+function normalizeContactField(value: unknown, maxLength: number): string {
+  return String(value ?? "").trim().slice(0, maxLength);
+}
+
 function requireOperator(
   req: express.Request,
   res: express.Response,
@@ -149,6 +177,32 @@ function requireOperator(
 
 app.get("/api/site-content", (_req, res) => {
   return res.status(200).json(readSiteContent());
+});
+
+app.post("/api/contact", (req, res) => {
+  const name = normalizeContactField(req.body?.name, 80);
+  const email = normalizeContactField(req.body?.email, 120);
+  const sector = normalizeContactField(req.body?.sector, 80);
+  const message = normalizeContactField(req.body?.message, 2000);
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: "Name, email, and message are required." });
+  }
+
+  const nextMessage: ContactMessage = {
+    id: crypto.randomUUID(),
+    name,
+    email,
+    sector: sector || "GENERAL TRANSMISSION",
+    message,
+    createdAt: new Date().toISOString(),
+  };
+
+  const messages = readContactMessages();
+  messages.unshift(nextMessage);
+  writeContactMessages(messages.slice(0, 250));
+
+  return res.status(201).json({ ok: true, message: nextMessage });
 });
 
 app.get("/api/operator/session", (req, res) => {
