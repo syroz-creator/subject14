@@ -29,7 +29,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
   const isActive = (section: SectionId) => activeSection === section;
 
   const navLinkClass = (section: SectionId) =>
-    `text-[0.72rem] font-bold transition-colors duration-300 tracking-[0.16em] uppercase ${
+    `nav-link text-[0.72rem] font-bold transition-colors duration-300 tracking-[0.16em] uppercase ${
       isActive(section) ? "text-primary" : "text-white/65 hover:text-white"
     }`;
 
@@ -44,7 +44,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
       animate={{ y: 0 }}
       className="fixed top-0 left-0 right-0 z-50 border-b border-white/6 bg-black/72 backdrop-blur-xl"
     >
-      <div className="mx-auto max-w-[120rem] px-4 sm:px-6 lg:px-10">
+      <div className="nav-frame mx-auto max-w-[120rem] px-4 sm:px-6 lg:px-10">
         <div className="flex h-20 items-center justify-between gap-4 xl:grid xl:h-24 xl:grid-cols-[minmax(220px,1fr)_auto_minmax(220px,1fr)] xl:justify-normal">
           <button
             type="button"
@@ -52,7 +52,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
             className="group text-left transition-colors duration-300 lg:justify-self-center"
             aria-label="Go to home"
           >
-            <span className="block font-heading text-[1.55rem] uppercase tracking-[0.12em] text-white transition-opacity duration-300 group-hover:opacity-80 sm:text-[1.8rem] lg:text-[1.95rem]">
+            <span className="nav-brand block font-heading text-[1.55rem] uppercase tracking-[0.12em] text-white transition-opacity duration-300 group-hover:opacity-80 sm:text-[1.8rem] lg:text-[1.95rem]">
               SUBJECT 14
             </span>
           </button>

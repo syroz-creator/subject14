@@ -175,4 +175,146 @@
       max-width: 13.5rem;
     }
   }
+  @media (min-width: 1800px) {
+    body {
+      font-size: 1rem;
+    }
+    .section-frame {
+      max-width: 118rem;
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+    .section-heading {
+      font-size: 4rem;
+      line-height: 1.05;
+    }
+    .section-copy-kicker {
+      font-size: 0.78rem;
+    }
+    .site-shell .text-lg {
+      font-size: 1.12rem;
+      line-height: 1.75;
+    }
+    .site-shell .text-xl {
+      font-size: 1.24rem;
+      line-height: 1.6;
+    }
+    .nav-frame {
+      max-width: 132rem;
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+    .nav-brand {
+      font-size: 2.35rem;
+    }
+    .nav-link {
+      font-size: 0.82rem;
+    }
+    .hero-content {
+      max-width: 72rem;
+    }
+    #home .section-frame > div {
+      max-width: 72rem;
+    }
+    .hero-title {
+      font-size: 12.8rem;
+      line-height: 0.9;
+    }
+    #home h1 {
+      font-size: 12.8rem;
+      line-height: 0.9;
+    }
+    .hero-kicker {
+      max-width: 56rem;
+      font-size: 1.15rem;
+    }
+    #home .section-frame > div > p:first-of-type {
+      max-width: 56rem;
+      font-size: 1.15rem;
+    }
+    .hero-copy {
+      max-width: 62rem;
+      font-size: 1.18rem;
+      line-height: 1.85;
+    }
+    #home .section-frame > div > p:nth-of-type(2) {
+      max-width: 62rem;
+      font-size: 1.18rem;
+      line-height: 1.85;
+    }
+    .hero-actions {
+      max-width: 52rem;
+    }
+    #home .section-frame > div > div:last-of-type {
+      max-width: 52rem;
+    }
+    .hero-button-solid,
+    .hero-button-ghost {
+      min-height: 3.6rem;
+      max-width: 16rem;
+      padding: 1rem 1.8rem;
+      font-size: 0.92rem;
+    }
+    .wide-media-panel,
+    .wide-cta-panel {
+      max-width: 82rem;
+    }
+    .contact-shell {
+      max-width: 74rem;
+    }
+    .contact-panel {
+      max-width: 42rem;
+    }
+  }
+  @media (min-width: 2400px) {
+    .section-frame {
+      max-width: 136rem;
+      padding-left: 5.5rem;
+      padding-right: 5.5rem;
+    }
+    .section-heading {
+      font-size: 4.6rem;
+    }
+    .nav-frame {
+      max-width: 150rem;
+      padding-left: 5.5rem;
+      padding-right: 5.5rem;
+    }
+    .hero-content {
+      max-width: 82rem;
+    }
+    #home .section-frame > div {
+      max-width: 82rem;
+    }
+    .hero-title {
+      font-size: 15rem;
+    }
+    #home h1 {
+      font-size: 15rem;
+    }
+    .hero-kicker {
+      font-size: 1.25rem;
+    }
+    #home .section-frame > div > p:first-of-type {
+      font-size: 1.25rem;
+    }
+    .hero-copy {
+      max-width: 70rem;
+      font-size: 1.28rem;
+    }
+    #home .section-frame > div > p:nth-of-type(2) {
+      max-width: 70rem;
+      font-size: 1.28rem;
+    }
+    .wide-media-panel,
+    .wide-cta-panel {
+      max-width: 96rem;
+    }
+    .contact-shell {
+      max-width: 86rem;
+    }
+    .contact-panel {
+      max-width: 48rem;
+    }
+  }
 }

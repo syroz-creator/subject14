@@ -129,7 +129,7 @@ export default function Contact() {
         <div className="absolute inset-0 bg-noise" />
       </div>
 
-      <div className="mx-auto flex w-full max-w-5xl flex-col items-center">
+      <div className="contact-shell mx-auto flex w-full max-w-5xl flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -153,7 +153,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 34 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.7 }}
-          className="panel-film border-horror relative w-full max-w-xl overflow-hidden rounded-[1.15rem] border border-primary/20 border-t-primary/55 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.58),0_0_46px_rgba(179,32,32,0.12)] sm:p-9"
+          className="contact-panel panel-film border-horror relative w-full max-w-xl overflow-hidden rounded-[1.15rem] border border-primary/20 border-t-primary/55 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.58),0_0_46px_rgba(179,32,32,0.12)] sm:p-9"
         >
           <div className="pointer-events-none absolute inset-3 z-10 rounded-[0.75rem] border border-white/8" />
           <div className="pointer-events-none absolute inset-x-3 top-3 z-10 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent" />

@@ -94,7 +94,7 @@ export default function Download() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="section-frame relative z-10">
-        <div className="panel-film border-horror mx-auto max-w-6xl rounded-[2rem] p-8 text-center backdrop-blur-sm sm:p-10 lg:p-12">
+        <div className="wide-cta-panel panel-film border-horror mx-auto max-w-6xl rounded-[2rem] p-8 text-center backdrop-blur-sm sm:p-10 lg:p-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}

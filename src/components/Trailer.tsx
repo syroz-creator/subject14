@@ -29,7 +29,7 @@ export default function Trailer() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="panel-film border-horror group relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] shadow-[0_0_50px_rgba(139,0,0,0.16)]"
+          className="wide-media-panel panel-film border-horror group relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] shadow-[0_0_50px_rgba(139,0,0,0.16)]"
         >
           <AspectRatio ratio={16 / 9}>
             <div className="absolute inset-0 flex items-center justify-center bg-black">
