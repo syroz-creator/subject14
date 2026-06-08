@@ -9,6 +9,13 @@ type ContactPayload = {
   message: string;
 };
 
+type ContactResponse = {
+  email?: {
+    sent?: boolean;
+    reason?: string;
+  };
+};
+
 const sectors = [
   "SECTOR-01: RESEARCH",
   "SECTOR-04: CONTAINMENT",
@@ -82,7 +89,14 @@ export default function Contact() {
         throw new Error("Contact endpoint unavailable.");
       }
 
-      setStatus("Transmission received. Command has logged your report.");
+      const result = (await response.json()) as ContactResponse;
+      if (result.email?.sent) {
+        setStatus("Transmission received. Command has logged and emailed your report.");
+      } else if (result.email?.reason === "smtp_not_configured") {
+        setStatus("Transmission logged. Email delivery is not configured on the server yet.");
+      } else {
+        setStatus("Transmission logged. Email delivery failed, so check the SMTP settings.");
+      }
     } catch {
       try {
         saveFallbackMessage(payload);
