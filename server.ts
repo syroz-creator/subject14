@@ -178,6 +178,10 @@ function normalizeContactField(value: unknown, maxLength: number): string {
   return String(value ?? "").trim().slice(0, maxLength);
 }
 
+function isValidContactEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 function optionalEnv(name: string): string | undefined {
   const value = process.env[name]?.trim();
   return value ? value : undefined;
@@ -268,7 +272,46 @@ async function sendContactEmail(contactMessage: ContactMessage) {
     html,
   });
 
-  return { sent: true };
+  try {
+    await transporter.sendMail({
+      from: `"Subject 14 Support" <${settings.from}>`,
+      to: contactMessage.email,
+      replyTo: settings.to,
+      subject: "Subject 14 Support // Transmission Received",
+      text: [
+        `Hi ${contactMessage.name},`,
+        "",
+        "You reached Subject 14 Support.",
+        "Your transmission has been received and logged. Stand by while our team reviews your report.",
+        "If a response is needed, we will contact you through this email address.",
+        "",
+        "Logged transmission:",
+        contactMessage.message,
+        "",
+        "Subject 14 Support // Command Channel",
+      ].join("\n"),
+      html: `
+        <div style="font-family: Arial, sans-serif; background: #090909; color: #f5f5f5; padding: 24px;">
+          <div style="max-width: 640px; border: 1px solid rgba(179,32,32,0.45); padding: 20px;">
+            <p style="margin: 0 0 12px; color: #b32020; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;">Subject 14 Support</p>
+            <h1 style="margin: 0 0 16px; font-size: 24px;">Transmission Received</h1>
+            <p>Hi ${escapeHtml(contactMessage.name)},</p>
+            <p>You reached <strong>Subject 14 Support</strong>. Your transmission has been received and logged. Stand by while our team reviews your report.</p>
+            <p>If a response is needed, we will contact you through this email address.</p>
+            <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 20px 0;" />
+            <p style="margin-bottom: 8px;"><strong>Logged transmission:</strong></p>
+            <p style="white-space: pre-wrap; line-height: 1.6;">${escapeHtml(contactMessage.message)}</p>
+            <p style="margin-top: 20px; color: #b32020; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">Subject 14 Support // Command Channel</p>
+          </div>
+        </div>
+      `,
+    });
+
+    return { sent: true, autoReply: { sent: true } };
+  } catch (error) {
+    console.error("Unable to send contact auto-reply", error);
+    return { sent: true, autoReply: { sent: false, reason: "auto_reply_failed" } };
+  }
 }
 
 function requireOperator(
@@ -296,6 +339,10 @@ app.post("/api/contact", async (req, res) => {
 
   if (!name || !email || !message) {
     return res.status(400).json({ message: "Name, email, and message are required." });
+  }
+
+  if (!isValidContactEmail(email)) {
+    return res.status(400).json({ message: "Enter a valid email address." });
   }
 
   const nextMessage: ContactMessage = {

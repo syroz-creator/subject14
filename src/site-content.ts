@@ -62,49 +62,61 @@ export const defaultSiteContent: SiteContent = {
     tagline: "The darkness remembers what you forgot.",
     description:
       "A first-person psychological horror experience set in a decaying experimental facility. Survive the entity that hunts you and uncover the truth behind the failed experiments.",
-    backgroundUrl: "/site-images/01-hero.jpg",
+    backgroundUrl: "/site-images/LabPic1.png",
   },
   about: {
     title: "The Facility Awaits",
     p1: "You wake up in a cold, sterile room with no memory of how you arrived. The air is thick with the smell of ozone and decay. Something went wrong here-terribly wrong.",
     p2: "Subject 14 is a realistic, story-driven horror game built in Unreal Engine 5. Explore a decent-sized environment with multiple rooms and connected sections, each holding a piece of a disturbing puzzle.",
     p3: "This isn't just a game of hide and seek. You must restore power, unlock doors, and solve intricate puzzles while being stalked by an AI-driven villain that adapts to your every move.",
-    imageUrl: "/site-images/02-about.jpg",
+    imageUrl: "/site-images/LABpic2.png",
   },
   story: {
     title: "A Legacy of Pain",
     p1: "The halls of the facility whisper with the voices of those who came before. Blood-stained walls and abandoned experiments tell a story of ambition turned into madness.",
     p2: "Confusion and fear are your only companions as you navigate through flickering lights and locked sections. Every clue you find brings you closer to the truth-and closer to the inhuman presence hunting you.",
     p3: "Escape is your only goal, but the facility doesn't want to let you go. Will you uncover the secret of Subject 14, or become just another failed experiment?",
-    imageUrl: "/site-images/03-story.jpg",
+    imageUrl: "/site-images/labpic3.png",
   },
   gallery: {
     title: "Visual Nightmares",
     subtitle: "Captured from the abyss",
     items: [
       {
-        title: "The Observation Room",
-        url: "/site-images/05-gallery-1.jpg",
+        title: "New Map Corridor",
+        url: "/site-images/labpic4.png",
       },
       {
-        title: "Failed Prototype",
-        url: "/site-images/06-gallery-2.jpg",
+        title: "Containment Hall",
+        url: "/site-images/labpic5.png",
       },
       {
-        title: "The Long Corridor",
-        url: "/site-images/07-gallery-3.jpg",
+        title: "Laboratory Access",
+        url: "/site-images/labpic6.png",
       },
       {
-        title: "Experimental Chamber",
-        url: "/site-images/08-gallery-4.jpg",
+        title: "Research Wing",
+        url: "/site-images/labpic7.png",
       },
       {
-        title: "Signs of Struggle",
-        url: "/site-images/09-gallery-5.jpg",
+        title: "Facility Depths",
+        url: "/site-images/labpic8.png",
       },
       {
-        title: "The Final Door",
-        url: "/site-images/10-gallery-6.jpg",
+        title: "Emergency Sector",
+        url: "/site-images/LabPic9.png",
+      },
+      {
+        title: "Silent Passage",
+        url: "/site-images/labpic10.png",
+      },
+      {
+        title: "Observation Route",
+        url: "/site-images/labpic11.png",
+      },
+      {
+        title: "Final Threshold",
+        url: "/site-images/Labpic12.png",
       },
     ],
   },

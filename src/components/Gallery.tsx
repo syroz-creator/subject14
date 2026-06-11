@@ -6,7 +6,6 @@ import { useSiteContent } from "../context/SiteContentContext";
 export default function Gallery() {
   const { t } = useLanguage();
   const { siteContent } = useSiteContent();
-  const galleryTitles = [t.gallery.img1, t.gallery.img2, t.gallery.img3, t.gallery.img4, t.gallery.img5, t.gallery.img6];
 
   return (
     <section id="gallery" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-24 sm:py-28">
@@ -32,12 +31,12 @@ export default function Gallery() {
                   <div className="panel-film border-horror group relative aspect-video cursor-pointer overflow-hidden rounded-[1.35rem]">
                     <img
                       src={image.url}
-                      alt={galleryTitles[index] ?? image.title}
+                      alt={image.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <span className="font-mono text-sm uppercase tracking-[0.3em] text-white">{galleryTitles[index] ?? image.title}</span>
+                      <span className="font-mono text-sm uppercase tracking-[0.3em] text-white">{image.title}</span>
                     </div>
                   </div>
                 </DialogTrigger>
@@ -54,7 +53,7 @@ export default function Gallery() {
                   <div className="flex h-screen w-screen items-center justify-center p-4 sm:p-8">
                     <img
                       src={image.url}
-                      alt={galleryTitles[index] ?? image.title}
+                      alt={image.title}
                       className="max-h-full w-auto max-w-full object-contain shadow-2xl"
                       referrerPolicy="no-referrer"
                     />

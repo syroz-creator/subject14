@@ -13,6 +13,10 @@ type ContactResponse = {
   email?: {
     sent?: boolean;
     reason?: string;
+    autoReply?: {
+      sent?: boolean;
+      reason?: string;
+    };
   };
 };
 
@@ -90,8 +94,10 @@ export default function Contact() {
       }
 
       const result = (await response.json()) as ContactResponse;
-      if (result.email?.sent) {
-        setStatus("Transmission received. Command has logged and emailed your report.");
+      if (result.email?.sent && result.email.autoReply?.sent) {
+        setStatus(`Transmission received. Confirmation sent to ${payload.email}.`);
+      } else if (result.email?.sent) {
+        setStatus("Transmission received. Command has logged your report, but confirmation email could not be sent.");
       } else if (result.email?.reason === "smtp_not_configured") {
         setStatus("Transmission logged. Email delivery is not configured on the server yet.");
       } else {

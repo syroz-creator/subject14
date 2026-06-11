@@ -1,31 +1,40 @@
-Put your images in this folder with these exact filenames:
+Current new-map image wiring:
 
-1. `01-hero.jpg`
+1. `LabPic1.png`
    Used for the home hero background
 
-2. `02-about.jpg`
+2. `LABpic2.png`
    Used for the About section image
 
-3. `03-story.jpg`
+3. `labpic3.png`
    Used for the Story section image
 
-4. `05-gallery-1.jpg`
+4. `labpic4.png`
    Used for Gallery image 1
 
-5. `06-gallery-2.jpg`
+5. `labpic5.png`
    Used for Gallery image 2
 
-6. `07-gallery-3.jpg`
+6. `labpic6.png`
    Used for Gallery image 3
 
-7. `08-gallery-4.jpg`
+7. `labpic7.png`
    Used for Gallery image 4
 
-8. `09-gallery-5.jpg`
+8. `labpic8.png`
    Used for Gallery image 5
 
-9. `10-gallery-6.jpg`
+9. `LabPic9.png`
    Used for Gallery image 6
+
+10. `labpic10.png`
+    Used for Gallery image 7
+
+11. `labpic11.png`
+    Used for Gallery image 8
+
+12. `Labpic12.png`
+    Used for Gallery image 9
 
 Notes:
 - The trailer thumbnail is still using the existing placeholder image for now.
