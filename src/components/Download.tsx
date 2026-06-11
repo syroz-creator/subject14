@@ -105,13 +105,13 @@ export default function Download() {
             <h2 className="section-heading mb-6">{t.download.title}</h2>
             <p className="mx-auto mb-10 max-w-2xl text-xl font-light text-white/68">{t.download.subtitle}</p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
+            <div className="mb-10 flex flex-col items-center justify-center gap-3 sm:mb-12 sm:flex-row sm:gap-6">
               <Button
                 size="lg"
                 onClick={handleDemoDownload}
-                className="min-h-18 h-auto w-full rounded-[1rem] bg-primary px-10 py-8 text-xl uppercase tracking-[0.08em] text-white hover:bg-primary/80 sm:w-auto"
+                className="h-auto min-h-12 w-full rounded-[0.8rem] bg-primary px-5 py-3 text-sm uppercase tracking-[0.08em] text-white hover:bg-primary/80 sm:min-h-18 sm:w-auto sm:rounded-[1rem] sm:px-10 sm:py-8 sm:text-xl"
               >
-                <DownloadIcon className="mr-3 w-6 h-6" />
+                <DownloadIcon className="mr-2 h-4 w-4 sm:mr-3 sm:h-6 sm:w-6" />
                 {t.download.demo}
               </Button>
               <Button
@@ -122,9 +122,9 @@ export default function Download() {
                     window.open(siteContent.download.steamUrl, "_blank", "noopener,noreferrer");
                   }
                 }}
-                className="min-h-18 h-auto w-full rounded-[1rem] border-white/20 px-10 py-8 text-xl uppercase tracking-[0.08em] text-white hover:bg-white/10 sm:w-auto"
+                className="h-auto min-h-12 w-full rounded-[0.8rem] border-white/20 px-5 py-3 text-sm uppercase tracking-[0.08em] text-white hover:bg-white/10 sm:min-h-18 sm:w-auto sm:rounded-[1rem] sm:px-10 sm:py-8 sm:text-xl"
               >
-                <ShoppingCart className="mr-3 w-6 h-6" />
+                <ShoppingCart className="mr-2 h-4 w-4 sm:mr-3 sm:h-6 sm:w-6" />
                 {t.download.steam}
               </Button>
             </div>

@@ -235,17 +235,17 @@ export default function Contact() {
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-md bg-primary px-6 py-4 font-heading text-xl uppercase tracking-[0.12em] text-white transition-all duration-300 hover:bg-primary/85 hover:shadow-[0_0_28px_rgba(179,32,32,0.38)] disabled:cursor-not-allowed disabled:opacity-65"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 font-heading text-base uppercase tracking-[0.1em] text-white transition-all duration-300 hover:bg-primary/85 hover:shadow-[0_0_28px_rgba(179,32,32,0.38)] disabled:cursor-not-allowed disabled:opacity-65 sm:min-h-14 sm:gap-3 sm:px-6 sm:py-4 sm:text-xl sm:tracking-[0.12em]"
             >
               {submitting ? (
                 <>
-                  <RadioTower className="h-5 w-5 animate-pulse" />
+                  <RadioTower className="h-4 w-4 animate-pulse sm:h-5 sm:w-5" />
                   Uploading
                 </>
               ) : (
                 <>
                   Initiate Transmission
-                  <Send className="h-5 w-5" />
+                  <Send className="h-4 w-4 sm:h-5 sm:w-5" />
                 </>
               )}
             </button>

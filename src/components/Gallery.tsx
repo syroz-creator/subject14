@@ -46,7 +46,7 @@ export default function Gallery() {
                 >
                   <DialogClose
                     aria-label="Close gallery image"
-                    className="absolute top-4 right-4 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-black/55 text-3xl text-white/90 transition-colors hover:bg-black/75"
+                    className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/55 text-2xl text-white/90 transition-colors hover:bg-black/75 sm:h-12 sm:w-12 sm:text-3xl"
                   >
                     ×
                   </DialogClose>

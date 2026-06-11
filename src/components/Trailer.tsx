@@ -43,14 +43,14 @@ export default function Trailer() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={handleTrailerClick}
-                className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/40 transition-all group-hover:shadow-primary/60"
+                className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/40 transition-all group-hover:shadow-primary/60 sm:h-20 sm:w-20"
               >
-                <Play className="w-8 h-8 fill-current ml-1" />
+                <Play className="ml-1 h-6 w-6 fill-current sm:h-8 sm:w-8" />
               </motion.button>
             </div>
           </AspectRatio>
           
-          <div className="absolute inset-0 pointer-events-none border-[20px] border-black/40" />
+          <div className="pointer-events-none absolute inset-0 border-[10px] border-black/40 sm:border-[20px]" />
         </motion.div>
       </div>
     </section>

@@ -97,17 +97,17 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
               >
                 <Menu className="w-5 h-5" />
               </DialogTrigger>
-              <DialogContent className="xl:hidden border-horror bg-black/95 p-6 backdrop-blur-md">
+              <DialogContent className="xl:hidden border-horror bg-black/95 p-5 backdrop-blur-md sm:p-6">
                 <DialogTitle className="text-xs uppercase tracking-[0.3em] text-primary">
                   Navigate
                 </DialogTitle>
-                <div className="mt-4 flex flex-col gap-3">
+                <div className="mt-4 flex flex-col gap-2.5 sm:gap-3">
                   {navItems.map((item) => (
                     <button
                       key={item.name}
                       type="button"
                       onClick={() => navigate(item.section)}
-                      className={`rounded-lg border px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.24em] transition-colors ${
+                      className={`rounded-lg border px-3.5 py-2.5 text-left text-[0.7rem] font-bold uppercase tracking-[0.2em] transition-colors sm:px-4 sm:py-3 sm:text-xs sm:tracking-[0.24em] ${
                         isActive(item.section)
                           ? "border-primary/50 bg-primary/12 text-white"
                           : "border-white/10 bg-white/5 text-white/70 hover:border-primary/30 hover:text-white"
@@ -123,9 +123,9 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                   <Button
                     variant="ghost"
                     onClick={() => navigate("download")}
-                    className="mt-2 min-h-12 rounded-[0.85rem] bg-primary text-xs uppercase tracking-[0.12em] text-white hover:bg-primary/90"
+                    className="mt-2 min-h-10 rounded-[0.75rem] bg-primary text-[0.7rem] uppercase tracking-[0.1em] text-white hover:bg-primary/90 sm:min-h-12 sm:rounded-[0.85rem] sm:text-xs sm:tracking-[0.12em]"
                   >
-                    <Download className="mr-2 h-4 w-4" />
+                    <Download className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     Play Now
                   </Button>
                 </div>

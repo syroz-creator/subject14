@@ -155,24 +155,40 @@
       linear-gradient(135deg, oklch(1 0 0 / 0.04), transparent 40%);
   }
   .hero-button-solid {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-[0.82rem] font-bold uppercase tracking-[0.1em] text-primary-foreground transition-all duration-300 hover:translate-y-[-1px] hover:bg-primary/90;
-    flex: 0 1 13.5rem;
-    box-shadow: 0 14px 26px oklch(0.58 0.22 27 / 0.22);
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-[0.74rem] font-bold uppercase tracking-[0.09em] text-primary-foreground transition-all duration-300 hover:translate-y-[-1px] hover:bg-primary/90;
+    flex: 0 1 12rem;
+    box-shadow: 0 10px 20px oklch(0.58 0.22 27 / 0.18);
   }
   .hero-button-ghost {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/18 bg-black/35 px-5 py-3 text-[0.82rem] font-bold uppercase tracking-[0.1em] text-white transition-all duration-300 hover:translate-y-[-1px] hover:border-white/32 hover:bg-white/8;
-    flex: 0 1 13.5rem;
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-white/18 bg-black/35 px-4 py-2.5 text-[0.74rem] font-bold uppercase tracking-[0.09em] text-white transition-all duration-300 hover:translate-y-[-1px] hover:border-white/32 hover:bg-white/8;
+    flex: 0 1 12rem;
   }
   .hero-button-solid svg,
   .hero-button-ghost svg {
-    width: 1rem;
-    height: 1rem;
+    width: 0.9rem;
+    height: 0.9rem;
   }
   @media (min-width: 640px) {
     .hero-button-solid,
     .hero-button-ghost {
       width: auto;
+      min-height: 2.75rem;
       max-width: 13.5rem;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+    }
+    .hero-button-solid {
+      flex-basis: 13.5rem;
+      box-shadow: 0 14px 26px oklch(0.58 0.22 27 / 0.22);
+    }
+    .hero-button-ghost {
+      flex-basis: 13.5rem;
+    }
+    .hero-button-solid svg,
+    .hero-button-ghost svg {
+      width: 1rem;
+      height: 1rem;
     }
   }
   @media (min-width: 1800px) {
