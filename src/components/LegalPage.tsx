@@ -15,7 +15,7 @@ const privacySections: LegalSection[] = [
     body: [
       "Subject 14 collects only the information needed to operate the website, respond to messages, and keep owner-only tools secure.",
       "If you submit the contact form, we collect the name, email address, selected subject, and message you provide.",
-      "Basic technical information such as browser type, device details, request time, and error logs may be processed for security and stability.",
+      "Basic technical information such as IP address, browser type, device details, request time, and error logs may be processed for security and stability.",
     ],
   },
   {

@@ -341,6 +341,21 @@ app.get("/api/site-content", (_req, res) => {
   return res.status(200).json(readSiteContent());
 });
 
+app.post("/api/visitor-log", (req, res) => {
+  const ip = normalizeRequestIp(req) || "unknown";
+  const pathName = normalizeContactField(req.body?.path, 160) || "/";
+  const screen = normalizeContactField(req.body?.screen, 60) || "unknown";
+  const viewport = normalizeContactField(req.body?.viewport, 60) || "unknown";
+  const referrer = normalizeContactField(req.body?.referrer, 220) || "direct";
+  const userAgent = normalizeContactField(req.headers["user-agent"], 220) || "unknown";
+
+  console.info(
+    `[visitor] ${new Date().toISOString()} ip=${ip} path=${pathName} viewport=${viewport} screen=${screen} referrer=${referrer} ua="${userAgent}"`
+  );
+
+  return res.status(204).send();
+});
+
 app.get("/api/public-ip", (req, res) => {
   const ip = normalizeRequestIp(req);
   return res.status(200).json({ ip: ip || "unknown" });

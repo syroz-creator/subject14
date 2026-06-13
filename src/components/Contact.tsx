@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
-import { LocateFixed, RadioTower, Send, ShieldAlert, Signal, Terminal } from "lucide-react";
+import { RadioTower, Send, ShieldAlert, Signal, Terminal } from "lucide-react";
 
 type ContactPayload = {
   name: string;
@@ -62,35 +62,7 @@ export default function Contact() {
   const [sector, setSector] = useState(sectors[0]);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
-  const [publicIp, setPublicIp] = useState("");
-  const [ipStatus, setIpStatus] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [loadingIp, setLoadingIp] = useState(false);
-
-  const handleShowPublicIp = async () => {
-    setLoadingIp(true);
-    setIpStatus("");
-
-    try {
-      const response = await fetch("/api/public-ip");
-      if (!response.ok) {
-        throw new Error("Unable to read public IP.");
-      }
-
-      const data = (await response.json()) as { ip?: string };
-      if (!data.ip) {
-        throw new Error("Missing public IP.");
-      }
-
-      setPublicIp(data.ip);
-      setIpStatus(`Public IP detected: ${data.ip}`);
-    } catch {
-      setPublicIp("");
-      setIpStatus("Unable to detect public IP right now.");
-    } finally {
-      setLoadingIp(false);
-    }
-  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -252,36 +224,6 @@ export default function Contact() {
                 <Signal className="h-3.5 w-3.5 text-primary" />
                 Uplink: 88%
               </span>
-            </div>
-
-            <div className="rounded-md border border-white/10 bg-black/35 p-3">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-primary">
-                    Network Diagnostic
-                  </p>
-                  <p className="mt-1 text-xs text-white/48">
-                    Optional: show the public IP your browser reports.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleShowPublicIp}
-                  disabled={loadingIp}
-                  className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-white/12 bg-white/[0.04] px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/70 transition-colors hover:border-primary/35 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  <LocateFixed className="h-3.5 w-3.5 text-primary" />
-                  {loadingIp ? "Scanning" : "Show Public IP"}
-                </button>
-              </div>
-              {ipStatus ? (
-                <p className="mt-3 rounded border border-primary/20 bg-primary/8 px-3 py-2 font-mono text-xs text-primary" aria-live="polite">
-                  {ipStatus}
-                </p>
-              ) : null}
-              {publicIp ? (
-                <input type="hidden" name="publicIp" value={publicIp} readOnly />
-              ) : null}
             </div>
 
             {status ? (

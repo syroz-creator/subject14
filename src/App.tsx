@@ -38,6 +38,8 @@ const validSections: SectionId[] = [
   "terms",
 ];
 
+let visitorEntryLogged = false;
+
 function getSectionFromHash(): SectionId {
   if (typeof window === "undefined") {
     return "home";
@@ -47,8 +49,34 @@ function getSectionFromHash(): SectionId {
   return validSections.includes(hash as SectionId) ? (hash as SectionId) : "home";
 }
 
+function logVisitorEntry() {
+  if (visitorEntryLogged || typeof window === "undefined") {
+    return;
+  }
+
+  visitorEntryLogged = true;
+
+  void fetch("/api/visitor-log", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    keepalive: true,
+    body: JSON.stringify({
+      path: `${window.location.pathname}${window.location.hash || ""}`,
+      referrer: document.referrer,
+      screen: `${window.screen.width}x${window.screen.height}`,
+      viewport: `${window.innerWidth}x${window.innerHeight}`,
+    }),
+  }).catch(() => {
+    visitorEntryLogged = false;
+  });
+}
+
 export default function App() {
   const [activeSection, setActiveSection] = useState<SectionId>(getSectionFromHash);
+
+  useEffect(() => {
+    logVisitorEntry();
+  }, []);
 
   useEffect(() => {
     const syncSectionFromHash = () => {
