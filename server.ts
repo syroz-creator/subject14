@@ -24,6 +24,7 @@ const CONTACT_EMAIL_ENABLED =
   Boolean(process.env.SMTP_PASS) &&
   Boolean(process.env.CONTACT_TO_EMAIL);
 
+app.set("trust proxy", true);
 app.use(express.json());
 
 type SessionPayload = {
@@ -80,6 +81,15 @@ function normalizeEmail(value: string): string {
 
 function normalizePasscode(value: string): string {
   return value.trim();
+}
+
+function normalizeRequestIp(req: express.Request): string {
+  const forwardedFor = String(req.headers["x-forwarded-for"] ?? "")
+    .split(",")[0]
+    .trim();
+  const rawIp = forwardedFor || req.ip || req.socket.remoteAddress || "";
+
+  return rawIp.replace(/^::ffff:/, "");
 }
 
 function sign(value: string): string {
@@ -329,6 +339,11 @@ function requireOperator(
 
 app.get("/api/site-content", (_req, res) => {
   return res.status(200).json(readSiteContent());
+});
+
+app.get("/api/public-ip", (req, res) => {
+  const ip = normalizeRequestIp(req);
+  return res.status(200).json({ ip: ip || "unknown" });
 });
 
 app.post("/api/contact", async (req, res) => {

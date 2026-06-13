@@ -9,6 +9,7 @@ import Trailer from "./components/Trailer";
 import Features from "./components/Features";
 import Download from "./components/Download";
 import Contact from "./components/Contact";
+import LegalPage from "./components/LegalPage";
 import Footer from "./components/Footer";
 import { SiteContentProvider } from "./context/SiteContentContext";
 
@@ -20,7 +21,9 @@ export type SectionId =
   | "trailer"
   | "features"
   | "download"
-  | "contact";
+  | "contact"
+  | "privacy"
+  | "terms";
 
 const validSections: SectionId[] = [
   "home",
@@ -31,6 +34,8 @@ const validSections: SectionId[] = [
   "features",
   "download",
   "contact",
+  "privacy",
+  "terms",
 ];
 
 function getSectionFromHash(): SectionId {
@@ -80,6 +85,8 @@ export default function App() {
             {activeSection === "features" && <Features />}
             {activeSection === "download" && <Download />}
             {activeSection === "contact" && <Contact />}
+            {activeSection === "privacy" && <LegalPage type="privacy" />}
+            {activeSection === "terms" && <LegalPage type="terms" />}
           </main>
           <div className="relative z-10">
             <Footer />

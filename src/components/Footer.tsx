@@ -97,35 +97,13 @@ export default function Footer() {
           <div className="space-y-4">
             <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">Links</p>
             <div className="flex flex-col items-start gap-3">
-              <Dialog>
-                <DialogTrigger render={<button type="button" className={footerLinkClass} />}>
-                  Privacy Policy
-                </DialogTrigger>
-                <DialogContent className="max-w-2xl border-horror bg-background/95 p-6 backdrop-blur-md">
-                  <DialogTitle className="text-sm uppercase tracking-[0.25em] text-primary">Privacy Policy</DialogTitle>
-                  <div className="mt-4 max-h-[60vh] space-y-4 overflow-y-auto text-sm leading-relaxed text-muted-foreground">
-                    <p>Subject 14 collects only the minimum information required to operate this website, respond to messages, and secure operator-only access. We do not sell visitor data.</p>
-                    <p>If analytics, contact forms, or platform integrations are added later, they should be used only to improve performance, security, and player communication.</p>
-                    <p>Operator login information is checked server-side and is not exposed in the client bundle. Session cookies are used only to maintain authenticated operator access.</p>
-                    <p>By continuing to use the site, visitors agree that routine technical information such as browser type, device details, and request logs may be processed for stability and security.</p>
-                  </div>
-                </DialogContent>
-              </Dialog>
+              <a href="#privacy" className={footerLinkClass}>
+                Privacy Policy
+              </a>
 
-              <Dialog>
-                <DialogTrigger render={<button type="button" className={footerLinkClass} />}>
-                  Terms of Service
-                </DialogTrigger>
-                <DialogContent className="max-w-2xl border-horror bg-background/95 p-6 backdrop-blur-md">
-                  <DialogTitle className="text-sm uppercase tracking-[0.25em] text-primary">Terms of Service</DialogTitle>
-                  <div className="mt-4 max-h-[60vh] space-y-4 overflow-y-auto text-sm leading-relaxed text-muted-foreground">
-                    <p>Subject 14 and all associated branding, media, and site content are provided for informational and promotional use unless otherwise stated.</p>
-                    <p>Visitors may not misuse the site, attempt unauthorized access, interfere with operator-only features, or copy proprietary materials for resale or impersonation.</p>
-                    <p>Demo availability, platform support, and release details may change over time. Use of any downloadable build is at the player&apos;s own discretion.</p>
-                    <p>Operator-restricted tools are reserved exclusively for the site owner. Any attempt to bypass access controls is prohibited.</p>
-                  </div>
-                </DialogContent>
-              </Dialog>
+              <a href="#terms" className={footerLinkClass}>
+                Terms of Service
+              </a>
 
               <a href="#contact" className={footerLinkClass}>
                 Contact Command
