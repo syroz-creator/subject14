@@ -10,6 +10,8 @@ type ContactPayload = {
 };
 
 type ContactResponse = {
+  code?: string;
+  message?: string;
   email?: {
     sent?: boolean;
     reason?: string;
@@ -82,6 +84,8 @@ export default function Contact() {
       return;
     }
 
+    let shouldResetForm = false;
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -89,11 +93,17 @@ export default function Contact() {
         body: JSON.stringify(payload),
       });
 
+      const result = (await response.json()) as ContactResponse;
       if (!response.ok) {
-        throw new Error("Contact endpoint unavailable.");
+        if (result.code === "blocked_language") {
+          setStatus(result.message || "Message blocked. Slurs, harassment, and bad words are not allowed.");
+          return;
+        }
+
+        setStatus(result.message || "Unable to transmit. Check the form and try again.");
+        return;
       }
 
-      const result = (await response.json()) as ContactResponse;
       if (result.email?.sent && result.email.autoReply?.sent) {
         setStatus(`Transmission received. Confirmation sent to ${payload.email}.`);
       } else if (result.email?.sent) {
@@ -103,19 +113,23 @@ export default function Contact() {
       } else {
         setStatus("Transmission logged. Email delivery failed, so check the SMTP settings.");
       }
+      shouldResetForm = true;
     } catch {
       try {
         saveFallbackMessage(payload);
         setStatus("Transmission stored in this browser. Server uplink is currently offline.");
+        shouldResetForm = true;
       } catch {
         setStatus("Unable to transmit. Try again when the uplink stabilizes.");
       }
     } finally {
       setSubmitting(false);
-      setName("");
-      setEmail("");
-      setSector(sectors[0]);
-      setMessage("");
+      if (shouldResetForm) {
+        setName("");
+        setEmail("");
+        setSector(sectors[0]);
+        setMessage("");
+      }
     }
   };
 
@@ -214,6 +228,16 @@ export default function Contact() {
                 rows={5}
               />
             </label>
+
+            <div className="rounded-md border border-primary/30 bg-primary/10 px-4 py-3">
+              <p className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.18em] text-primary">
+                Language Warning
+              </p>
+              <p className="mt-2 text-sm leading-6 text-white/68">
+                Slurs, harassment, and bad words are not allowed. Messages that contain blocked language will not be
+                sent.
+              </p>
+            </div>
 
             <div className="flex flex-col gap-3 border-t border-white/10 pt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-white/42 sm:flex-row sm:items-center sm:justify-between">
               <span className="flex items-center gap-2">

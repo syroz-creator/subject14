@@ -18,6 +18,7 @@ const SESSION_COOKIE = "subject14_operator_session";
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
 const SITE_CONTENT_PATH = path.resolve(__dirname, "data/site-content.json");
 const CONTACT_MESSAGES_PATH = path.resolve(__dirname, "data/contact-messages.json");
+const BLOCKED_WORDS_PATH = path.resolve(__dirname, "data/blocked-words.json");
 const CONTACT_EMAIL_ENABLED =
   Boolean(process.env.SMTP_HOST) &&
   Boolean(process.env.SMTP_USER) &&
@@ -184,8 +185,38 @@ function writeContactMessages(messages: ContactMessage[]) {
   fs.writeFileSync(CONTACT_MESSAGES_PATH, JSON.stringify(messages, null, 2));
 }
 
+function readBlockedWords(): string[] {
+  try {
+    const file = fs.readFileSync(BLOCKED_WORDS_PATH, "utf8");
+    const words = JSON.parse(file) as unknown;
+    if (!Array.isArray(words)) {
+      return [];
+    }
+
+    return words
+      .map((word) => String(word).trim().toLowerCase())
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
 function normalizeContactField(value: unknown, maxLength: number): string {
   return String(value ?? "").trim().slice(0, maxLength);
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function createBlockedWordPattern(word: string): RegExp {
+  const escapedWord = escapeRegExp(word).replace(/\s+/g, "\\s+");
+  return new RegExp(`(^|[^a-z0-9])${escapedWord}($|[^a-z0-9])`, "i");
+}
+
+function findBlockedWord(value: string): string | null {
+  const blockedWord = readBlockedWords().find((word) => createBlockedWordPattern(word).test(value));
+  return blockedWord || null;
 }
 
 function isValidContactEmail(value: string): boolean {
@@ -373,6 +404,17 @@ app.post("/api/contact", async (req, res) => {
 
   if (!isValidContactEmail(email)) {
     return res.status(400).json({ message: "Enter a valid email address." });
+  }
+
+  const blockedWord = findBlockedWord(message);
+  if (blockedWord) {
+    console.warn(
+      `[contact-blocked] ${new Date().toISOString()} ip=${normalizeRequestIp(req) || "unknown"} word="${blockedWord}"`
+    );
+    return res.status(400).json({
+      code: "blocked_language",
+      message: "Message blocked. Slurs, harassment, and bad words are not allowed.",
+    });
   }
 
   const nextMessage: ContactMessage = {
