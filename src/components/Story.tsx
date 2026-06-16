@@ -7,46 +7,48 @@ export default function Story() {
   const { siteContent } = useSiteContent();
 
   return (
-    <section id="story" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-24 sm:py-28">
-      <div className="absolute inset-0 bg-noise pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.08] via-transparent to-transparent pointer-events-none" />
-      
-      <div className="section-frame relative z-10">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 xl:gap-24">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="order-2 lg:order-1"
-          >
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-transparent blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
-              <img
-                src={siteContent.story.imageUrl}
-                alt="Story Atmosphere"
-                className="panel-film border-horror relative rounded-[1.6rem] grayscale transition-all duration-700 hover:grayscale-0"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          </motion.div>
+    <section
+      id="story"
+      className="relative flex min-h-[calc(100vh-5rem)] items-end overflow-hidden py-20 sm:py-24 lg:items-center"
+    >
+      <div className="absolute inset-0 -z-10">
+        <img
+          src={siteContent.story.imageUrl}
+          alt="Story Atmosphere"
+          className="h-full w-full scale-105 object-cover object-center grayscale"
+          referrerPolicy="no-referrer"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(0,0,0,0.88),rgba(0,0,0,0.60)_50%,rgba(0,0,0,0.38)),linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.90))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_38%,rgba(179,32,32,0.24),transparent_28%)]" />
+        <div className="absolute inset-0 bg-noise" />
+      </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="order-1 lg:order-2"
-          >
-            <p className="section-copy-kicker mb-4">Case File</p>
-            <h2 className="section-heading mb-8 max-w-xl">{t.story.title}</h2>
-            <div className="space-y-6 text-lg leading-relaxed text-white/68">
-              <p className="border-l-2 border-primary/30 pl-6 font-mono text-white/84 italic">{t.story.p1}</p>
-              <p>{t.story.p2}</p>
-              <p className="text-primary/80">{t.story.p3}</p>
-            </div>
-          </motion.div>
-        </div>
+      <div className="section-frame w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="ml-auto max-w-3xl lg:text-right"
+        >
+          <p className="section-copy-kicker mb-4 text-primary/85">Case File</p>
+          <h2 className="text-glow-red mb-7 font-heading text-4xl uppercase leading-[0.98] tracking-[0.08em] text-white sm:text-6xl lg:text-7xl">
+            {t.story.title}
+          </h2>
+          <div className="ml-auto space-y-5 text-base leading-7 text-white/76 sm:text-lg sm:leading-8">
+            <p className="ml-auto max-w-2xl border-l-2 border-primary/70 bg-black/45 px-5 py-4 font-mono text-sm uppercase tracking-[0.08em] text-white/90 shadow-[0_18px_50px_rgba(0,0,0,0.32)] backdrop-blur-sm sm:text-base lg:border-l-0 lg:border-r-2">
+              {t.story.p1}
+            </p>
+            <p className="ml-auto max-w-2xl">{t.story.p2}</p>
+            <p className="ml-auto max-w-2xl text-primary/82">{t.story.p3}</p>
+          </div>
+
+          <div className="mt-8 grid max-w-2xl grid-cols-1 gap-3 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/68 sm:grid-cols-3 lg:ml-auto">
+            <span className="border border-white/12 bg-black/35 px-4 py-3 backdrop-blur-sm">Blood Trail</span>
+            <span className="border border-white/12 bg-black/35 px-4 py-3 backdrop-blur-sm">Locked Wings</span>
+            <span className="border border-white/12 bg-black/35 px-4 py-3 backdrop-blur-sm">Failed Subject</span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

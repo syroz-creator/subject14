@@ -23,6 +23,22 @@ export default defineConfig(({mode}) => {
         '/api': {
           target: 'http://127.0.0.1:3001',
           changeOrigin: true,
+          configure: (proxy) => {
+            proxy.on('proxyReq', (proxyReq, req) => {
+              const remoteAddress = req.socket.remoteAddress?.replace(/^::ffff:/, '');
+              const existingForwardedFor = req.headers['x-forwarded-for'];
+              const forwardedFor = Array.isArray(existingForwardedFor)
+                ? existingForwardedFor.join(', ')
+                : existingForwardedFor;
+
+              if (remoteAddress) {
+                proxyReq.setHeader(
+                  'x-forwarded-for',
+                  forwardedFor ? `${forwardedFor}, ${remoteAddress}` : remoteAddress,
+                );
+              }
+            });
+          },
         },
       },
     },

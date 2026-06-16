@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { RadioTower, Send, ShieldAlert, Signal, Terminal } from "lucide-react";
+import { findBlockedLanguage } from "../lib/blockedLanguage";
 
 type ContactPayload = {
   name: string;
@@ -80,6 +81,12 @@ export default function Contact() {
 
     if (!payload.name || !payload.email || !payload.message) {
       setStatus("Complete name, comm ID, and situation report before transmitting.");
+      setSubmitting(false);
+      return;
+    }
+
+    if (findBlockedLanguage(payload.message)) {
+      setStatus("Message blocked. Slurs, harassment, and bad words are not allowed.");
       setSubmitting(false);
       return;
     }
