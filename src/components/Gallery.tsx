@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { Maximize2 } from "lucide-react";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useLanguage } from "../context/LanguageContext";
 import { useSiteContent } from "../context/SiteContentContext";
@@ -17,7 +18,7 @@ export default function Gallery() {
           <p className="font-mono text-sm uppercase tracking-[0.3em] text-muted-foreground">{t.gallery.subtitle}</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 xl:gap-6">
           {siteContent.gallery.items.map((image, index) => (
             <motion.div
               key={index}
@@ -28,17 +29,29 @@ export default function Gallery() {
             >
               <Dialog>
                 <DialogTrigger asChild>
-                  <div className="panel-film border-horror group relative aspect-video cursor-pointer overflow-hidden rounded-[1.35rem]">
+                  <button
+                    type="button"
+                    aria-label={`Open ${image.title}`}
+                    className="panel-film border-horror group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 focus-visible:-translate-y-1 focus-visible:border-primary/45 focus-visible:ring-2 focus-visible:ring-primary/50"
+                  >
                     <img
                       src={image.url}
                       alt={image.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-focus-visible:scale-105"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <span className="font-mono text-sm uppercase tracking-[0.3em] text-white">{image.title}</span>
+                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04)_20%,rgba(0,0,0,0.76)_100%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
+                    <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+                      <div className="flex min-h-14 items-end justify-between gap-3 border-t border-white/16 bg-black/32 px-3 py-3 backdrop-blur-[2px]">
+                        <span className="line-clamp-2 min-w-0 font-mono text-[0.72rem] font-bold uppercase leading-5 tracking-[0.14em] text-white sm:text-[0.78rem]">
+                          {image.title}
+                        </span>
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/15 bg-white/8 text-white/80 transition-colors duration-300 group-hover:border-primary/45 group-hover:text-primary group-focus-visible:border-primary/45 group-focus-visible:text-primary">
+                          <Maximize2 className="h-4 w-4" />
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  </button>
                 </DialogTrigger>
                 <DialogContent
                   showCloseButton={false}
