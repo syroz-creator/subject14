@@ -11,6 +11,7 @@ import Download from "./components/Download";
 import Contact from "./components/Contact";
 import LegalPage from "./components/LegalPage";
 import Footer from "./components/Footer";
+import OperatorPanel from "./components/OperatorPanel";
 import { SiteContentProvider } from "./context/SiteContentContext";
 
 export type SectionId =
@@ -22,6 +23,7 @@ export type SectionId =
   | "features"
   | "download"
   | "contact"
+  | "operator"
   | "privacy"
   | "terms";
 
@@ -34,11 +36,13 @@ const validSections: SectionId[] = [
   "features",
   "download",
   "contact",
+  "operator",
   "privacy",
   "terms",
 ];
 
 let visitorEntryLogged = false;
+const VISITOR_ID_STORAGE_KEY = "subject14-visitor-id";
 
 function getSectionFromHash(): SectionId {
   if (typeof window === "undefined") {
@@ -55,12 +59,24 @@ function logVisitorEntry() {
   }
 
   visitorEntryLogged = true;
+  let visitorId = "";
+
+  try {
+    visitorId = window.localStorage.getItem(VISITOR_ID_STORAGE_KEY) || "";
+    if (!visitorId) {
+      visitorId = window.crypto.randomUUID();
+      window.localStorage.setItem(VISITOR_ID_STORAGE_KEY, visitorId);
+    }
+  } catch {
+    visitorId = "";
+  }
 
   void fetch("/api/visitor-log", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     keepalive: true,
     body: JSON.stringify({
+      visitorId,
       path: `${window.location.pathname}${window.location.hash || ""}`,
       referrer: document.referrer,
       screen: `${window.screen.width}x${window.screen.height}`,
@@ -113,6 +129,21 @@ export default function App() {
             {activeSection === "features" && <Features />}
             {activeSection === "download" && <Download />}
             {activeSection === "contact" && <Contact />}
+            {activeSection === "operator" && (
+              <section id="operator" className="relative min-h-[calc(100vh-5rem)] overflow-hidden py-24 sm:py-28">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(179,32,32,0.12),transparent_36%)]" />
+                <div className="section-frame relative z-10">
+                  <div className="mb-8 text-center">
+                    <p className="section-copy-kicker mb-4 text-primary/85">Command Access</p>
+                    <h2 className="section-heading mb-4">Operator Panel</h2>
+                    <p className="mx-auto max-w-2xl text-sm leading-6 text-muted-foreground">
+                      Edit live content and review visitor stats from a full-screen control surface.
+                    </p>
+                  </div>
+                  <OperatorPanel />
+                </div>
+              </section>
+            )}
             {activeSection === "privacy" && <LegalPage type="privacy" />}
             {activeSection === "terms" && <LegalPage type="terms" />}
           </main>

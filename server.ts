@@ -19,6 +19,7 @@ const SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
 const SITE_CONTENT_PATH = path.resolve(__dirname, "data/site-content.json");
 const CONTACT_MESSAGES_PATH = path.resolve(__dirname, "data/contact-messages.json");
 const BLOCKED_WORDS_PATH = path.resolve(__dirname, "data/blocked-words.json");
+const VISITOR_STATS_PATH = path.resolve(__dirname, "data/visitor-stats.json");
 const CONTACT_EMAIL_ENABLED =
   Boolean(process.env.SMTP_HOST) &&
   Boolean(process.env.SMTP_USER) &&
@@ -41,6 +42,13 @@ type ContactMessage = {
   sector: string;
   message: string;
   createdAt: string;
+};
+
+type VisitorStats = {
+  totalVisits: number;
+  uniqueVisitors: Record<string, true>;
+  visitsByDay: Record<string, number>;
+  lastVisitAt?: string;
 };
 
 type SmtpSettings = {
@@ -183,6 +191,71 @@ function readContactMessages(): ContactMessage[] {
 function writeContactMessages(messages: ContactMessage[]) {
   fs.mkdirSync(path.dirname(CONTACT_MESSAGES_PATH), { recursive: true });
   fs.writeFileSync(CONTACT_MESSAGES_PATH, JSON.stringify(messages, null, 2));
+}
+
+function createEmptyVisitorStats(): VisitorStats {
+  return {
+    totalVisits: 0,
+    uniqueVisitors: {},
+    visitsByDay: {},
+  };
+}
+
+function readVisitorStats(): VisitorStats {
+  try {
+    const file = fs.readFileSync(VISITOR_STATS_PATH, "utf8");
+    const stats = JSON.parse(file) as Partial<VisitorStats>;
+
+    return {
+      totalVisits: Number(stats.totalVisits || 0),
+      uniqueVisitors: stats.uniqueVisitors && typeof stats.uniqueVisitors === "object" ? stats.uniqueVisitors : {},
+      visitsByDay: stats.visitsByDay && typeof stats.visitsByDay === "object" ? stats.visitsByDay : {},
+      lastVisitAt: stats.lastVisitAt,
+    };
+  } catch {
+    return createEmptyVisitorStats();
+  }
+}
+
+function writeVisitorStats(stats: VisitorStats) {
+  fs.mkdirSync(path.dirname(VISITOR_STATS_PATH), { recursive: true });
+  fs.writeFileSync(VISITOR_STATS_PATH, JSON.stringify(stats, null, 2));
+}
+
+function getStatsDay(date = new Date()): string {
+  return date.toISOString().slice(0, 10);
+}
+
+function getVisitorKey(visitorId: string, ip: string, userAgent: string): string {
+  const source = visitorId || `${ip}|${userAgent}`;
+  return crypto.createHash("sha256").update(source).digest("hex");
+}
+
+function recordVisitorEntry(visitorId: string, ip: string, userAgent: string) {
+  const stats = readVisitorStats();
+  const now = new Date();
+  const today = getStatsDay(now);
+  const visitorKey = getVisitorKey(visitorId, ip, userAgent);
+
+  stats.totalVisits += 1;
+  stats.uniqueVisitors[visitorKey] = true;
+  stats.visitsByDay[today] = (stats.visitsByDay[today] || 0) + 1;
+  stats.lastVisitAt = now.toISOString();
+
+  writeVisitorStats(stats);
+}
+
+function getVisitorStatsSummary() {
+  const stats = readVisitorStats();
+  const today = getStatsDay();
+
+  return {
+    totalVisits: stats.totalVisits,
+    uniqueVisitors: Object.keys(stats.uniqueVisitors).length,
+    todayVisits: stats.visitsByDay[today] || 0,
+    today,
+    lastVisitAt: stats.lastVisitAt || null,
+  };
 }
 
 function readBlockedWords(): string[] {
@@ -378,13 +451,20 @@ app.post("/api/visitor-log", (req, res) => {
   const screen = normalizeContactField(req.body?.screen, 60) || "unknown";
   const viewport = normalizeContactField(req.body?.viewport, 60) || "unknown";
   const referrer = normalizeContactField(req.body?.referrer, 220) || "direct";
+  const visitorId = normalizeContactField(req.body?.visitorId, 120);
   const userAgent = normalizeContactField(req.headers["user-agent"], 220) || "unknown";
+
+  recordVisitorEntry(visitorId, ip, userAgent);
 
   console.info(
     `[visitor] ${new Date().toISOString()} ip=${ip} path=${pathName} viewport=${viewport} screen=${screen} referrer=${referrer} ua="${userAgent}"`
   );
 
   return res.status(204).send();
+});
+
+app.get("/api/visitor-stats", (_req, res) => {
+  return res.status(200).json(getVisitorStatsSummary());
 });
 
 app.get("/api/public-ip", (req, res) => {

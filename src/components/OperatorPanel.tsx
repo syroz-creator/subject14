@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
-import { AlertTriangle, LockKeyhole, LogOut, ShieldCheck, User } from "lucide-react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { Activity, AlertTriangle, LockKeyhole, LogOut, ShieldCheck, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSiteContent } from "../context/SiteContentContext";
 import type { SiteContent } from "../site-content";
@@ -8,9 +8,27 @@ type OperatorPanelProps = {
   onCloseMode?: () => void;
 };
 
+type VisitorStats = {
+  totalVisits: number;
+  uniqueVisitors: number;
+  todayVisits: number;
+  today: string;
+  lastVisitAt: string | null;
+};
+
 const OPERATOR_AUTH_STORAGE_KEY = "subject14-operator-authenticated";
-const HARDCODED_OPERATOR_ID = "Ahmad Uwaida";
-const HARDCODED_OPERATOR_PASSCODE = "AhmadApp4616!!";
+const OPERATOR_CREDENTIALS = [
+  { operatorId: "Ahmad Uwaida", passcode: "AhmadApp4616!!" },
+  { operatorId: "ahmad", passcode: "ahmad 4616 !!" },
+];
+
+function normalizeOperatorId(value: string): string {
+  return value.trim().toLowerCase();
+}
+
+function normalizePasscode(value: string): string {
+  return value.trim().replace(/\s+/g, " ").toLowerCase();
+}
 
 function cloneContent(content: SiteContent): SiteContent {
   return JSON.parse(JSON.stringify(content)) as SiteContent;
@@ -103,6 +121,15 @@ function Section({
   );
 }
 
+function StatCard({ label, value }: { label: string; value: number | string }) {
+  return (
+    <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-4">
+      <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/45">{label}</p>
+      <p className="mt-2 font-heading text-3xl uppercase tracking-[0.08em] text-white">{value}</p>
+    </div>
+  );
+}
+
 export default function OperatorPanel({ onCloseMode }: OperatorPanelProps) {
   const { siteContent, reloadSiteContent, saveSiteContent } = useSiteContent();
   const [draft, setDraft] = useState<SiteContent>(() => cloneContent(siteContent));
@@ -110,16 +137,10 @@ export default function OperatorPanel({ onCloseMode }: OperatorPanelProps) {
   const [passcode, setPasscode] = useState("");
   const [accessMessage, setAccessMessage] = useState("");
   const [status, setStatus] = useState("");
+  const [statsStatus, setStatsStatus] = useState("");
   const [saving, setSaving] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
-
-  const credentials = useMemo(
-    () => ({
-      operatorId: HARDCODED_OPERATOR_ID,
-      passcode: HARDCODED_OPERATOR_PASSCODE,
-    }),
-    []
-  );
+  const [visitorStats, setVisitorStats] = useState<VisitorStats | null>(null);
 
   useEffect(() => {
     setDraft(cloneContent(siteContent));
@@ -137,13 +158,38 @@ export default function OperatorPanel({ onCloseMode }: OperatorPanelProps) {
     setDraft((current) => updater(cloneContent(current)));
   };
 
+  const loadVisitorStats = async () => {
+    setStatsStatus("");
+
+    try {
+      const response = await fetch("/api/visitor-stats", {
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to load visitor stats.");
+      }
+
+      const data = (await response.json()) as VisitorStats;
+      setVisitorStats(data);
+    } catch {
+      setStatsStatus("Visitor stats are unavailable on this deployment.");
+    }
+  };
+
   const handleAuthenticate = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const normalizedOperator = operatorId.trim().toLowerCase();
-    const normalizedConfiguredOperator = credentials.operatorId.toLowerCase();
+    const normalizedOperator = normalizeOperatorId(operatorId);
+    const normalizedPasscode = normalizePasscode(passcode);
 
-    if (normalizedOperator === normalizedConfiguredOperator && passcode.trim() === credentials.passcode) {
+    const hasValidCredentials = OPERATOR_CREDENTIALS.some(
+      (credential) =>
+        normalizedOperator === normalizeOperatorId(credential.operatorId) &&
+        normalizedPasscode === normalizePasscode(credential.passcode)
+    );
+
+    if (hasValidCredentials) {
       setAuthenticated(true);
       setAccessMessage("");
       try {
@@ -151,6 +197,7 @@ export default function OperatorPanel({ onCloseMode }: OperatorPanelProps) {
       } catch {
         // Ignore storage failures and continue for this session.
       }
+      void loadVisitorStats();
       return;
     }
 
@@ -188,6 +235,12 @@ export default function OperatorPanel({ onCloseMode }: OperatorPanelProps) {
       setSaving(false);
     }
   };
+
+  useEffect(() => {
+    if (authenticated) {
+      void loadVisitorStats();
+    }
+  }, [authenticated]);
 
   if (!authenticated) {
     return (
@@ -253,7 +306,7 @@ export default function OperatorPanel({ onCloseMode }: OperatorPanelProps) {
         <div>
           <p className="text-sm uppercase tracking-[0.22em] text-primary">Operator Access Granted</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Update the live content here. If the site is running without the API server, changes still save in this browser.
+            Update game links and trailer settings, then review visitor stats from one focused page.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -290,105 +343,44 @@ export default function OperatorPanel({ onCloseMode }: OperatorPanelProps) {
         </div>
       </div>
 
-      <div className="max-h-[62vh] space-y-5 overflow-y-auto pe-1">
-        <Section title="Hero">
-          <Field label="Title" value={draft.hero.title} onChange={(value) => update((content) => ({ ...content, hero: { ...content.hero, title: value } }))} />
-          <Field label="Tagline" value={draft.hero.tagline} onChange={(value) => update((content) => ({ ...content, hero: { ...content.hero, tagline: value } }))} />
-          <Field label="Description" multiline value={draft.hero.description} onChange={(value) => update((content) => ({ ...content, hero: { ...content.hero, description: value } }))} />
-          <Field label="Background Image URL" value={draft.hero.backgroundUrl} onChange={(value) => update((content) => ({ ...content, hero: { ...content.hero, backgroundUrl: value } }))} />
+      <div className="space-y-5">
+        <Section title="Visitor Stats">
+          <div className="grid gap-3 sm:grid-cols-3">
+            <StatCard label="Total Visits" value={visitorStats?.totalVisits ?? "-"} />
+            <StatCard label="Unique Visitors" value={visitorStats?.uniqueVisitors ?? "-"} />
+            <StatCard label="Today" value={visitorStats?.todayVisits ?? "-"} />
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/8 bg-black/20 px-4 py-3">
+            <p className="flex items-center gap-2 text-sm text-white/55">
+              <Activity className="h-4 w-4 text-primary" />
+              {visitorStats?.lastVisitAt
+                ? `Last visit: ${new Date(visitorStats.lastVisitAt).toLocaleString()}`
+                : "No visits recorded yet."}
+            </p>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => void loadVisitorStats()}
+              className="border-white/15 text-white hover:bg-white/5"
+            >
+              Refresh Stats
+            </Button>
+          </div>
+          {statsStatus ? <p className="text-sm text-primary">{statsStatus}</p> : null}
         </Section>
 
-        <Section title="About">
-          <Field label="Title" value={draft.about.title} onChange={(value) => update((content) => ({ ...content, about: { ...content.about, title: value } }))} />
-          <Field label="Log Entry Text" multiline value={draft.about.p1} onChange={(value) => update((content) => ({ ...content, about: { ...content.about, p1: value } }))} />
-          <Field label="Paragraph Two" multiline value={draft.about.p2} onChange={(value) => update((content) => ({ ...content, about: { ...content.about, p2: value } }))} />
-          <Field label="Paragraph Three" multiline value={draft.about.p3} onChange={(value) => update((content) => ({ ...content, about: { ...content.about, p3: value } }))} />
-          <Field label="About Image URL" value={draft.about.imageUrl} onChange={(value) => update((content) => ({ ...content, about: { ...content.about, imageUrl: value } }))} />
-        </Section>
-
-        <Section title="Story">
-          <Field label="Title" value={draft.story.title} onChange={(value) => update((content) => ({ ...content, story: { ...content.story, title: value } }))} />
-          <Field label="Story Paragraph One" multiline value={draft.story.p1} onChange={(value) => update((content) => ({ ...content, story: { ...content.story, p1: value } }))} />
-          <Field label="Story Paragraph Two" multiline value={draft.story.p2} onChange={(value) => update((content) => ({ ...content, story: { ...content.story, p2: value } }))} />
-          <Field label="Story Paragraph Three" multiline value={draft.story.p3} onChange={(value) => update((content) => ({ ...content, story: { ...content.story, p3: value } }))} />
-          <Field label="Story Image URL" value={draft.story.imageUrl} onChange={(value) => update((content) => ({ ...content, story: { ...content.story, imageUrl: value } }))} />
-        </Section>
-
-        <Section title="Gallery">
-          <Field label="Gallery Title" value={draft.gallery.title} onChange={(value) => update((content) => ({ ...content, gallery: { ...content.gallery, title: value } }))} />
-          <Field label="Gallery Subtitle" value={draft.gallery.subtitle} onChange={(value) => update((content) => ({ ...content, gallery: { ...content.gallery, subtitle: value } }))} />
-          {draft.gallery.items.map((item, index) => (
-            <div key={index} className="grid gap-4 rounded-xl border border-white/8 bg-black/20 p-4">
-              <Field
-                label={`Image ${index + 1} Title`}
-                value={item.title}
-                onChange={(value) =>
-                  update((content) => {
-                    content.gallery.items[index].title = value;
-                    return content;
-                  })
-                }
-              />
-              <Field
-                label={`Image ${index + 1} URL`}
-                value={item.url}
-                onChange={(value) =>
-                  update((content) => {
-                    content.gallery.items[index].url = value;
-                    return content;
-                  })
-                }
-              />
-            </div>
-          ))}
-        </Section>
-
-        <Section title="Trailer">
-          <Field label="Trailer Title" value={draft.trailer.title} onChange={(value) => update((content) => ({ ...content, trailer: { ...content.trailer, title: value } }))} />
-          <Field label="Trailer Subtitle" value={draft.trailer.subtitle} onChange={(value) => update((content) => ({ ...content, trailer: { ...content.trailer, subtitle: value } }))} />
-          <Field label="Trailer Thumbnail URL" value={draft.trailer.thumbnailUrl} onChange={(value) => update((content) => ({ ...content, trailer: { ...content.trailer, thumbnailUrl: value } }))} />
-          <Field label="Trailer Video URL" value={draft.trailer.videoUrl} onChange={(value) => update((content) => ({ ...content, trailer: { ...content.trailer, videoUrl: value } }))} />
-        </Section>
-
-        <Section title="Features Panels">
-          <Field label="Features Title" value={draft.features.title} onChange={(value) => update((content) => ({ ...content, features: { ...content.features, title: value } }))} />
-          <Field label="Features Subtitle" value={draft.features.subtitle} onChange={(value) => update((content) => ({ ...content, features: { ...content.features, subtitle: value } }))} />
-          {draft.features.items.map((item, index) => (
-            <div key={index} className="grid gap-4 rounded-xl border border-white/8 bg-black/20 p-4">
-              <Field
-                label={`Panel ${index + 1} Title`}
-                value={item.title}
-                onChange={(value) =>
-                  update((content) => {
-                    content.features.items[index].title = value;
-                    return content;
-                  })
-                }
-              />
-              <Field
-                label={`Panel ${index + 1} Description`}
-                multiline
-                value={item.description}
-                onChange={(value) =>
-                  update((content) => {
-                    content.features.items[index].description = value;
-                    return content;
-                  })
-                }
-              />
-            </div>
-          ))}
-        </Section>
-
-        <Section title="Download">
+        <Section title="Game Links">
           <Field label="Download Title" value={draft.download.title} onChange={(value) => update((content) => ({ ...content, download: { ...content.download, title: value } }))} />
           <Field label="Download Subtitle" multiline value={draft.download.subtitle} onChange={(value) => update((content) => ({ ...content, download: { ...content.download, subtitle: value } }))} />
           <Field label="Demo Download URL" value={draft.download.demoUrl} onChange={(value) => update((content) => ({ ...content, download: { ...content.download, demoUrl: value } }))} />
           <Field label="Steam / Wishlist URL" value={draft.download.steamUrl} onChange={(value) => update((content) => ({ ...content, download: { ...content.download, steamUrl: value } }))} />
         </Section>
 
-        <Section title="Footer">
-          <Field label="Credits Text" value={draft.footer.credits} onChange={(value) => update((content) => ({ ...content, footer: { ...content.footer, credits: value } }))} />
+        <Section title="Trailer Settings">
+          <Field label="Trailer Title" value={draft.trailer.title} onChange={(value) => update((content) => ({ ...content, trailer: { ...content.trailer, title: value } }))} />
+          <Field label="Trailer Subtitle" value={draft.trailer.subtitle} onChange={(value) => update((content) => ({ ...content, trailer: { ...content.trailer, subtitle: value } }))} />
+          <Field label="Trailer Thumbnail URL" value={draft.trailer.thumbnailUrl} onChange={(value) => update((content) => ({ ...content, trailer: { ...content.trailer, thumbnailUrl: value } }))} />
+          <Field label="Trailer Video URL" value={draft.trailer.videoUrl} onChange={(value) => update((content) => ({ ...content, trailer: { ...content.trailer, videoUrl: value } }))} />
         </Section>
       </div>
 

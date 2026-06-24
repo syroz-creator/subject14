@@ -1,7 +1,5 @@
 import { Ghost } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import OperatorPanel from "./OperatorPanel";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -113,22 +111,9 @@ export default function Footer() {
 
           <div className="space-y-4">
             <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">Edit Mode</p>
-            <Dialog>
-              <DialogTrigger render={<button type="button" className={footerLinkClass} />}>
-                Local Edit Mode
-              </DialogTrigger>
-              <DialogContent className="max-w-4xl border-horror bg-background/95 p-6 backdrop-blur-md">
-                <DialogTitle className="text-sm uppercase tracking-[0.25em] text-primary">
-                  Local Edit Mode
-                </DialogTitle>
-                <div className="mt-4">
-                  <div className="mb-4 rounded-2xl border border-primary/15 bg-primary/8 px-4 py-3 text-sm text-muted-foreground">
-                    Operator access now requires the correct operator ID and passcode. When the API is available, changes save to the live site; otherwise they still work in this browser on the published page.
-                  </div>
-                  <OperatorPanel />
-                </div>
-              </DialogContent>
-            </Dialog>
+            <a href="#operator" className={footerLinkClass}>
+              Operator Panel
+            </a>
 
             <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 text-xs uppercase tracking-widest text-muted-foreground">
               <p>© 2026 SUBJECT 14. {t.footer.rights}</p>

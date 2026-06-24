@@ -121,11 +121,10 @@ export const defaultSiteContent: SiteContent = {
     ],
   },
   trailer: {
-    title: "Official Trailer",
-    subtitle: "Experience the terror in motion",
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop",
-    videoUrl: "",
+    title: "Aunt Fatima Teaser Trailer",
+    subtitle: "Watch the official teaser in-site",
+    thumbnailUrl: "/game-logo.png",
+    videoUrl: "/videos/aunt-fatima-teaser-trailer.mp4",
   },
   features: {
     title: "Engineered for Terror",
