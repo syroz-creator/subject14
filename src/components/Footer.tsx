@@ -1,4 +1,3 @@
-import { Ghost } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
 function InstagramIcon({ className }: { className?: string }) {
@@ -65,7 +64,11 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr_1fr] lg:items-start">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <Ghost className="h-6 w-6 text-primary" />
+              <img
+                src="/game-logo.png"
+                alt="Subject 14 logo"
+                className="h-9 w-9 rounded-sm object-contain"
+              />
               <div>
                 <p className="font-heading text-lg tracking-[0.08em] text-white">SUBJECT 14</p>
                 <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">
@@ -104,17 +107,13 @@ export default function Footer() {
               </a>
 
               <a href="#contact" className={footerLinkClass}>
-                Contact Command
+                Contact
               </a>
             </div>
           </div>
 
           <div className="space-y-4">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">Edit Mode</p>
-            <a href="#operator" className={footerLinkClass}>
-              Operator Panel
-            </a>
-
+            <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">Studio</p>
             <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 text-xs uppercase tracking-widest text-muted-foreground">
               <p>© 2026 SUBJECT 14. {t.footer.rights}</p>
               <p className="mt-2 text-[10px] opacity-60">{t.footer.credits}</p>

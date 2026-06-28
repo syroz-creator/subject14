@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
-import { RadioTower, Send, ShieldAlert, Signal, Terminal } from "lucide-react";
+import { Mail, RadioTower, Send, ShieldAlert } from "lucide-react";
 import { findBlockedLanguage } from "../lib/blockedLanguage";
 
 type ContactPayload = {
@@ -24,11 +24,11 @@ type ContactResponse = {
 };
 
 const sectors = [
-  "SECTOR-01: RESEARCH",
-  "SECTOR-04: CONTAINMENT",
-  "SECTOR-09: RESIDENTIAL",
-  "ANOMALY REPORT",
-  "PSYCHOLOGICAL EVALUATION",
+  "General Question",
+  "Bug Report",
+  "Demo / Download Help",
+  "Press or Creator Request",
+  "Business Contact",
 ];
 
 const inputClass =
@@ -80,7 +80,7 @@ export default function Contact() {
     };
 
     if (!payload.name || !payload.email || !payload.message) {
-      setStatus("Complete name, comm ID, and situation report before transmitting.");
+      setStatus("Add your name, email, and message before sending.");
       setSubmitting(false);
       return;
     }
@@ -165,14 +165,13 @@ export default function Contact() {
         >
           <div className="mb-3 flex items-center justify-center gap-2 text-primary">
             <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
-            <p className="font-mono text-xs uppercase tracking-[0.34em]">Secure Channel 09-B</p>
+            <p className="font-mono text-xs uppercase tracking-[0.34em]">Secure Contact Channel</p>
           </div>
           <h2 className="text-glow-red font-heading text-5xl uppercase tracking-[0.08em] text-white sm:text-6xl md:text-7xl">
-            Contact Command
+            Contact
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-white/64">
-            Report anomalies, technical failures, or psychological distress. Your transmission will be logged for
-            personnel evaluation.
+            Send questions, bug reports, creator requests, or business messages directly to the Subject 14 team.
           </p>
         </motion.div>
 
@@ -192,24 +191,24 @@ export default function Contact() {
           <form className="relative z-30 space-y-5" onSubmit={handleSubmit}>
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="space-y-2">
-                <span className={labelClass}>Survivor Name</span>
+                <span className={labelClass}>Name</span>
                 <input
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                   className={inputClass}
-                  placeholder="TYPE NAME..."
+                  placeholder="Your name"
                   type="text"
                   autoComplete="name"
                 />
               </label>
 
               <label className="space-y-2">
-                <span className={labelClass}>Comm ID</span>
+                <span className={labelClass}>Email</span>
                 <input
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   className={inputClass}
-                  placeholder="USER@FACILITY.NET"
+                  placeholder="you@example.com"
                   type="email"
                   autoComplete="email"
                 />
@@ -217,7 +216,7 @@ export default function Contact() {
             </div>
 
             <label className="space-y-2">
-              <span className={labelClass}>Sector</span>
+              <span className={labelClass}>Topic</span>
               <select value={sector} onChange={(event) => setSector(event.target.value)} className={inputClass}>
                 {sectors.map((item) => (
                   <option key={item}>{item}</option>
@@ -226,12 +225,12 @@ export default function Contact() {
             </label>
 
             <label className="space-y-2">
-              <span className={labelClass}>Situation Report</span>
+              <span className={labelClass}>Message</span>
               <textarea
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
                 className={`${inputClass} min-h-36 resize-y`}
-                placeholder="DESCRIBE THE DISTURBANCE..."
+                placeholder="Write your message..."
                 rows={5}
               />
             </label>
@@ -249,11 +248,11 @@ export default function Contact() {
             <div className="flex flex-col gap-3 border-t border-white/10 pt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-white/42 sm:flex-row sm:items-center sm:justify-between">
               <span className="flex items-center gap-2">
                 <ShieldAlert className="h-3.5 w-3.5 text-primary" />
-                Encryption: AES-256
+                Blocked language filtered
               </span>
               <span className="flex items-center gap-2">
-                <Signal className="h-3.5 w-3.5 text-primary" />
-                Uplink: 88%
+                <Mail className="h-3.5 w-3.5 text-primary" />
+                Replies use your email
               </span>
             </div>
 
@@ -271,11 +270,11 @@ export default function Contact() {
               {submitting ? (
                 <>
                   <RadioTower className="h-4 w-4 animate-pulse sm:h-5 sm:w-5" />
-                  Uploading
+                  Sending
                 </>
               ) : (
                 <>
-                  Initiate Transmission
+                  Send Message
                   <Send className="h-4 w-4 sm:h-5 sm:w-5" />
                 </>
               )}
@@ -283,11 +282,11 @@ export default function Contact() {
           </form>
         </motion.div>
 
-        <div className="mt-8 grid w-full max-w-5xl gap-4 opacity-60 md:grid-cols-3">
+        <div className="mt-8 grid w-full max-w-5xl gap-4 opacity-70 md:grid-cols-3">
           {[
-            ["Data Nodes", "All terminals are monitored. Do not disclose classified protocols over public channels."],
-            ["Response Time", "Expect delays due to facility-wide interference."],
-            ["Security Warning", "Unauthorized transmissions may terminate access privileges."],
+            ["Support", "Use this for demo download issues, broken links, or website problems."],
+            ["Creators", "Send trailer, coverage, and collaboration requests here."],
+            ["Privacy", "Do not send passwords, payment details, or private account information."],
           ].map(([title, copy]) => (
             <div key={title} className="border-l border-primary/35 px-4 py-3">
               <p className="mb-1 font-mono text-xs uppercase tracking-[0.22em] text-primary">{title}</p>
@@ -297,8 +296,8 @@ export default function Contact() {
         </div>
 
         <div className="mt-6 flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-white/35">
-          <Terminal className="h-3.5 w-3.5 text-primary" />
-          Contact channel available to all players
+          <Mail className="h-3.5 w-3.5 text-primary" />
+          Contact channel available to all visitors
         </div>
       </div>
     </section>

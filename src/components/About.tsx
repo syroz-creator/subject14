@@ -15,11 +15,10 @@ export default function About() {
         <img
           src={siteContent.about.imageUrl}
           alt="Asylum Corridor"
-          className="h-full w-full scale-105 object-cover object-center brightness-100 contrast-110 saturate-95"
+          className="h-full w-full scale-[1.02] object-cover object-center brightness-105 contrast-105 saturate-95"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.42),rgba(0,0,0,0.24)_44%,rgba(0,0,0,0.04)_78%),linear-gradient(180deg,rgba(0,0,0,0.06),rgba(0,0,0,0.44))]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(179,32,32,0.10),transparent_34%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.68),rgba(0,0,0,0.36)_54%,rgba(0,0,0,0.58)),linear-gradient(180deg,rgba(0,0,0,0.06),rgba(0,0,0,0.50))]" />
         <div className="absolute inset-0 bg-noise" />
       </div>
 
@@ -29,18 +28,27 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mx-auto max-w-3xl text-center"
+          className="max-w-4xl text-left"
         >
-          <p className="section-copy-kicker mb-4 text-primary/85">Facility Overview</p>
-          <h2 className="text-glow-red mx-auto mb-7 max-w-2xl font-heading text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl lg:text-6xl">
-            {t.about.title}
+          <p className="section-copy-kicker mb-4 text-primary/85">Gameplay Overview</p>
+          <h2 className="text-glow-red mb-7 max-w-2xl font-heading text-5xl uppercase leading-none tracking-[0.02em] text-white sm:text-6xl lg:text-7xl">
+            Survive the System
           </h2>
-          <div className="space-y-5 text-base leading-7 text-white/86 [text-shadow:0_2px_18px_rgba(0,0,0,0.85)] sm:text-lg sm:leading-8">
-            <p className="mx-auto max-w-2xl border-y border-primary/35 bg-black/20 px-5 py-4 font-mono text-sm uppercase tracking-[0.08em] text-white/95 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-[2px] sm:text-base">
-              [LOG_ENTRY_014]: {t.about.p1}
-            </p>
-            <p className="mx-auto max-w-2xl">{t.about.p2}</p>
-            <p className="mx-auto max-w-2xl text-white/78 italic">{t.about.p3}</p>
+          <div className="space-y-6 text-base leading-7 text-white/86 [text-shadow:0_2px_18px_rgba(0,0,0,0.85)] sm:text-lg sm:leading-8">
+            <p className="max-w-2xl">{t.about.p2}</p>
+            <div className="grid max-w-4xl gap-3 text-left sm:grid-cols-3">
+              {[
+                ["Explore", "Search connected rooms for keys, evidence, and routes back to safety."],
+                ["Solve", "Restore power, open locked paths, and read the environment before moving."],
+                ["Survive", "Stay ahead of the entity while the facility reacts to your choices."],
+              ].map(([title, copy]) => (
+                <div key={title} className="border-l border-primary/40 bg-black/22 px-4 py-4 backdrop-blur-[2px]">
+                  <p className="font-mono text-[0.72rem] uppercase tracking-[0.12em] text-primary">{title}</p>
+                  <p className="mt-3 text-sm leading-6 text-white/78">{copy}</p>
+                </div>
+              ))}
+            </div>
+            <p className="max-w-2xl text-white/78 italic">{t.about.p3}</p>
           </div>
         </motion.div>
       </div>

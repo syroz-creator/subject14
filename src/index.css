@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -6,8 +6,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: "Anton", sans-serif;
-    --font-mono: "Barlow Condensed", sans-serif;
+    --font-heading: "Oswald", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
     --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
@@ -50,13 +50,13 @@
 }
 
 :root {
-    --background: oklch(0.08 0 0);
-    --foreground: oklch(0.97 0 0);
-    --card: oklch(0.12 0 0);
+    --background: oklch(0.075 0.006 255);
+    --foreground: oklch(0.94 0.008 255);
+    --card: oklch(0.12 0.008 255);
     --card-foreground: oklch(0.97 0 0);
     --popover: oklch(0.12 0 0);
     --popover-foreground: oklch(0.95 0 0);
-    --primary: oklch(0.58 0.22 27);
+    --primary: oklch(0.57 0.2 24);
     --primary-foreground: oklch(0.985 0 0);
     --secondary: oklch(0.18 0 0);
     --secondary-foreground: oklch(0.95 0 0);
@@ -77,17 +77,14 @@
   }
   body {
     @apply bg-background text-[0.94rem] font-medium text-foreground selection:bg-primary/30 selection:text-primary-foreground;
-    background-image:
-      radial-gradient(circle at top left, oklch(0.18 0.04 250 / 0.28), transparent 35%),
-      radial-gradient(circle at 50% 20%, oklch(0.3 0.11 27 / 0.2), transparent 30%),
-      linear-gradient(180deg, #07080c 0%, #090909 45%, #050505 100%);
+    background-image: linear-gradient(180deg, #07090d 0%, #080808 48%, #050505 100%);
     min-height: 100vh;
   }
   html {
     @apply font-sans scroll-smooth;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading tracking-wider;
+    @apply font-heading;
   }
   button {
     @apply cursor-pointer;
@@ -96,7 +93,7 @@
 
 @layer utilities {
   .text-glow-red {
-    text-shadow: 0 0 18px oklch(0.58 0.22 27 / 0.4), 0 0 42px oklch(0.58 0.22 27 / 0.2);
+    text-shadow: 0 12px 40px oklch(0 0 0 / 0.65);
   }
   .bg-horror-gradient {
     background:
@@ -104,8 +101,8 @@
       linear-gradient(180deg, oklch(0.08 0 0) 0%, oklch(0.05 0 0) 100%);
   }
   .border-horror {
-    border: 1px solid oklch(0.58 0.22 27 / 0.18);
-    box-shadow: inset 0 0 0 1px oklch(1 0 0 / 0.03), 0 18px 42px oklch(0 0 0 / 0.45);
+    border: 1px solid oklch(1 0 0 / 0.1);
+    box-shadow: 0 18px 44px oklch(0 0 0 / 0.35);
   }
   .animate-flicker {
     animation: flicker 3s linear infinite;
@@ -127,7 +124,7 @@
   .site-shell input,
   .site-shell textarea,
   .site-shell button {
-    font-weight: 600;
+    font-weight: 500;
   }
   .site-shell .font-light {
     font-weight: 500;
@@ -144,24 +141,47 @@
     @apply relative mx-auto max-w-[92rem] px-4 sm:px-6 lg:px-10;
   }
   .section-copy-kicker {
-    @apply font-mono text-[0.68rem] font-semibold uppercase tracking-[0.42em] text-muted-foreground;
+    @apply font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground;
   }
   .section-heading {
-    @apply text-3xl font-heading uppercase tracking-[0.08em] text-white sm:text-4xl md:text-5xl;
+    @apply text-4xl font-heading uppercase tracking-[0.02em] text-white sm:text-5xl md:text-6xl;
   }
   .panel-film {
     background:
-      linear-gradient(180deg, oklch(0.12 0 0 / 0.92), oklch(0.09 0 0 / 0.88)),
-      linear-gradient(135deg, oklch(1 0 0 / 0.04), transparent 40%);
+      linear-gradient(180deg, oklch(0.13 0.006 255 / 0.9), oklch(0.09 0.004 255 / 0.86)),
+      linear-gradient(135deg, oklch(1 0 0 / 0.035), transparent 42%);
   }
   .hero-button-solid {
-    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-[0.74rem] font-bold uppercase tracking-[0.09em] text-primary-foreground transition-all duration-300 hover:translate-y-[-1px] hover:bg-primary/90;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-primary-foreground transition-all duration-300 hover:translate-y-[-1px] hover:bg-primary/90;
     flex: none;
     box-shadow: 0 10px 20px oklch(0.58 0.22 27 / 0.18);
   }
   .hero-button-ghost {
-    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-white/18 bg-black/35 px-4 py-2.5 text-[0.74rem] font-bold uppercase tracking-[0.09em] text-white transition-all duration-300 hover:translate-y-[-1px] hover:border-white/32 hover:bg-white/8;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/16 bg-white/[0.04] px-5 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-white transition-all duration-300 hover:translate-y-[-1px] hover:border-white/28 hover:bg-white/[0.08];
     flex: none;
+  }
+  #home .section-frame {
+    justify-content: center;
+  }
+  #home .section-frame > div {
+    align-items: center;
+    max-width: 58rem;
+    text-align: center;
+  }
+  #home h1 {
+    color: white;
+    letter-spacing: 0.01em;
+    line-height: 0.9;
+  }
+  #home .section-frame > div > p:first-of-type {
+    letter-spacing: 0.12em;
+  }
+  #home .section-frame > div > p:nth-of-type(2) {
+    color: oklch(1 0 0 / 0.72);
+    max-width: 48rem;
+  }
+  #home .section-frame > div > button {
+    display: none;
   }
   .hero-button-solid svg,
   .hero-button-ghost svg {

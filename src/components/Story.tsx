@@ -15,11 +15,10 @@ export default function Story() {
         <img
           src={siteContent.story.imageUrl}
           alt="Story Atmosphere"
-          className="h-full w-full scale-105 object-cover object-center brightness-100 contrast-110 saturate-95"
+          className="h-full w-full scale-[1.02] object-cover object-center brightness-105 contrast-105 saturate-95"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.42),rgba(0,0,0,0.24)_44%,rgba(0,0,0,0.04)_78%),linear-gradient(180deg,rgba(0,0,0,0.06),rgba(0,0,0,0.44))]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(179,32,32,0.10),transparent_34%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.70),rgba(0,0,0,0.34)_52%,rgba(0,0,0,0.62)),linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.50))]" />
         <div className="absolute inset-0 bg-noise" />
       </div>
 
@@ -29,18 +28,18 @@ export default function Story() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mx-auto max-w-3xl text-center"
+          className="max-w-3xl text-left"
         >
           <p className="section-copy-kicker mb-4 text-primary/85">Case File</p>
-          <h2 className="text-glow-red mx-auto mb-7 max-w-2xl font-heading text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl lg:text-6xl">
+          <h2 className="text-glow-red mb-7 max-w-2xl font-heading text-5xl uppercase leading-none tracking-[0.02em] text-white sm:text-6xl lg:text-7xl">
             {t.story.title}
           </h2>
-          <div className="space-y-5 text-base leading-7 text-white/86 [text-shadow:0_2px_18px_rgba(0,0,0,0.85)] sm:text-lg sm:leading-8">
-            <p className="mx-auto max-w-2xl border-y border-primary/35 bg-black/20 px-5 py-4 font-mono text-sm uppercase tracking-[0.08em] text-white/95 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-[2px] sm:text-base">
+          <div className="space-y-5 text-base leading-7 text-white/84 [text-shadow:0_2px_18px_rgba(0,0,0,0.85)] sm:text-lg sm:leading-8">
+            <p className="max-w-2xl border-l-2 border-primary bg-black/18 px-5 py-4 font-mono text-sm uppercase tracking-[0.04em] text-white/92 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-[2px] sm:text-base">
               {t.story.p1}
             </p>
-            <p className="mx-auto max-w-2xl">{t.story.p2}</p>
-            <p className="mx-auto max-w-2xl text-primary/82">{t.story.p3}</p>
+            <p className="max-w-2xl">{t.story.p2}</p>
+            <p className="max-w-2xl text-primary/82">{t.story.p3}</p>
           </div>
         </motion.div>
       </div>
