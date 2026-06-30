@@ -173,6 +173,9 @@
     letter-spacing: 0.01em;
     line-height: 0.9;
   }
+  #home h1 + h1 {
+    color: var(--primary);
+  }
   #home .section-frame > div > p:first-of-type {
     letter-spacing: 0.12em;
   }
