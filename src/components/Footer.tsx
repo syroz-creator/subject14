@@ -35,16 +35,24 @@ function DiscordIcon({ className }: { className?: string }) {
   );
 }
 
-function LinktreeIcon({ className }: { className?: string }) {
+function GunsIcon({ className }: { className?: string }) {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <rect x="10.7" y="2.2" width="2.6" height="8.1" rx="1.3" />
-      <rect x="5.28" y="4.33" width="2.6" height="8.1" rx="1.3" transform="rotate(-45 5.28 4.33)" />
-      <rect x="16.12" y="2.49" width="2.6" height="8.1" rx="1.3" transform="rotate(45 16.12 2.49)" />
-      <rect x="4.1" y="10.7" width="8.1" height="2.6" rx="1.3" />
-      <rect x="11.8" y="10.7" width="8.1" height="2.6" rx="1.3" />
-      <rect x="10.7" y="12.2" width="2.6" height="7.2" rx="1.3" />
-      <rect x="8.25" y="18.4" width="7.5" height="2.9" rx="1.45" />
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M4 14.5h8.2l1.7-4.5H20" />
+      <path d="M5.2 14.5v3.2" />
+      <path d="M9.2 14.5v3.2" />
+      <path d="M14.7 10h4.1l1.2 2.7" />
+      <path d="M3.8 17.7h6" />
+      <path d="M16 10l-1.2-3.2" />
     </svg>
   );
 }
@@ -67,7 +75,7 @@ export default function Footer() {
               <img
                 src="/game-logo.png"
                 alt="Subject 14 logo"
-                className="h-9 w-9 rounded-sm object-contain"
+                className="h-10 w-28 object-contain object-left"
               />
               <div>
                 <p className="font-heading text-lg tracking-[0.08em] text-white">SUBJECT 14</p>
@@ -80,8 +88,8 @@ export default function Footer() {
               Atmospheric first-person horror, haunting visuals, and a facility that remembers every visitor.
             </p>
             <div className="flex items-center gap-4">
-              <a href="https://linktr.ee/Syrozz" target="_blank" rel="noreferrer" aria-label="Linktree" className={socialLinkClass}>
-                <LinktreeIcon className="h-5 w-5" />
+              <a href="https://guns.lol/ahmad_u" target="_blank" rel="noreferrer" aria-label="Guns.lol" className={socialLinkClass}>
+                <GunsIcon className="h-5 w-5" />
               </a>
               <a href="https://www.instagram.com/ahmad_uwaida/" target="_blank" rel="noreferrer" aria-label="Instagram" className={socialLinkClass}>
                 <InstagramIcon className="h-5 w-5" />
