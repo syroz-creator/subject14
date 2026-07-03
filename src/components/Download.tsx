@@ -75,7 +75,7 @@ export default function Download() {
                   </li>
                   <li className="flex flex-col gap-1">
                     <span className="text-muted-foreground/50 uppercase text-[10px] tracking-widest">{t.download.graphics}</span>
-                    <span className="text-muted-foreground">NVIDIA GeForce RTX 3060 / AMD Radeon RX 6700 XT</span>
+                    <span className="text-muted-foreground">NVIDIA GeForce RTX 3070 / AMD Radeon RX 6800</span>
                   </li>
                   <li className="flex flex-col gap-1">
                     <span className="text-muted-foreground/50 uppercase text-[10px] tracking-widest">{t.download.directx}</span>

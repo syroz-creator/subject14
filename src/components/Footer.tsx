@@ -35,28 +35,6 @@ function DiscordIcon({ className }: { className?: string }) {
   );
 }
 
-function GunsIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.9"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M4 14.5h8.2l1.7-4.5H20" />
-      <path d="M5.2 14.5v3.2" />
-      <path d="M9.2 14.5v3.2" />
-      <path d="M14.7 10h4.1l1.2 2.7" />
-      <path d="M3.8 17.7h6" />
-      <path d="M16 10l-1.2-3.2" />
-    </svg>
-  );
-}
-
 const socialLinkClass =
   "flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary";
 
@@ -89,7 +67,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <a href="https://guns.lol/ahmad_u" target="_blank" rel="noreferrer" aria-label="Guns.lol" className={socialLinkClass}>
-                <GunsIcon className="h-5 w-5" />
+                <img src="/guns-lol-icon.png" alt="" className="h-5 w-5 object-contain" />
               </a>
               <a href="https://www.instagram.com/ahmad_uwaida/" target="_blank" rel="noreferrer" aria-label="Instagram" className={socialLinkClass}>
                 <InstagramIcon className="h-5 w-5" />
