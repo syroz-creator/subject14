@@ -84,7 +84,7 @@ export default function Footer() {
           <div className="space-y-4">
             <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">Links</p>
             <div className="flex flex-col items-start gap-3">
-              <a href="#privacy" className={footerLinkClass}>
+              <a href="/privacy.html" className={footerLinkClass}>
                 Privacy Policy
               </a>
 
