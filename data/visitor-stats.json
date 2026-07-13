@@ -1,5 +1,11 @@
 {
-  "totalVisits": 0,
-  "uniqueVisitors": {},
-  "visitsByDay": {}
+  "totalVisits": 11,
+  "uniqueVisitors": {
+    "46203c5cb7cf0375cbeed453dd6692351f13dbdc2b49aafea17985ad5082513f": true
+  },
+  "visitsByDay": {
+    "2026-07-09": 7,
+    "2026-07-10": 4
+  },
+  "lastVisitAt": "2026-07-10T16:48:19.755Z"
 }

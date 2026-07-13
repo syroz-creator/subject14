@@ -7,24 +7,20 @@ import type { GalleryItem } from "../site-content";
 
 type GalleryGroup = {
   title: string;
-  description: string;
   matches: string[];
 };
 
 const galleryGroups: GalleryGroup[] = [
   {
     title: "Laboratory Rooms",
-    description: "Research, autopsy, and storage spaces with visible evidence.",
     matches: ["Bloodied Research Lab", "Autopsy Room", "Chemical Storage Lab"],
   },
   {
     title: "Routes and Doors",
-    description: "Hallways, service paths, stair access, and blocked doors.",
     matches: ["Lab Access Corridor", "Locker Service Hall", "Restricted Door", "Stairwell Access"],
   },
   {
     title: "Containment and Monitoring",
-    description: "Cells and observation positions tied to the experiments.",
     matches: ["Containment Cell Block", "Observation Desk"],
   },
 ];
@@ -112,7 +108,7 @@ export default function Gallery() {
         <div className="space-y-12">
           {groupedGallery.map((group, groupIndex) => (
             <div key={group.title}>
-              <div className="mb-5 flex flex-col gap-2 border-l border-primary/45 pl-4 text-left sm:flex-row sm:items-end sm:justify-between">
+              <div className="mb-5 border-l border-primary/45 pl-4 text-left">
                 <div>
                   <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-primary">
                     Archive {String(groupIndex + 1).padStart(2, "0")}
@@ -121,7 +117,6 @@ export default function Gallery() {
                     {group.title}
                   </h3>
                 </div>
-                <p className="max-w-xl text-sm leading-6 text-white/56">{group.description}</p>
               </div>
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 xl:gap-6">
                 {group.items.map((image, index) => (
