@@ -12,6 +12,7 @@ import Contact from "./components/Contact";
 import LegalPage from "./components/LegalPage";
 import Footer from "./components/Footer";
 import OperatorPanel from "./components/OperatorPanel";
+import SmallFooterAd from "./components/SmallFooterAd";
 import { SiteContentProvider } from "./context/SiteContentContext";
 
 export type SectionId =
@@ -89,6 +90,7 @@ function logVisitorEntry() {
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<SectionId>(getSectionFromHash);
+  const showFooterAd = activeSection !== "operator";
 
   useEffect(() => {
     logVisitorEntry();
@@ -148,6 +150,7 @@ export default function App() {
             {activeSection === "terms" && <LegalPage type="terms" />}
           </main>
           <div className="relative z-10">
+            {showFooterAd && <SmallFooterAd />}
             <Footer />
           </div>
         </div>
