@@ -13,6 +13,7 @@ import LegalPage from "./components/LegalPage";
 import Footer from "./components/Footer";
 import OperatorPanel from "./components/OperatorPanel";
 import SmallFooterAd from "./components/SmallFooterAd";
+import CookieConsent from "./components/CookieConsent";
 import { SiteContentProvider } from "./context/SiteContentContext";
 
 export type SectionId =
@@ -153,6 +154,7 @@ export default function App() {
             {showFooterAd && <SmallFooterAd />}
             <Footer />
           </div>
+          <CookieConsent />
         </div>
       </SiteContentProvider>
     </LanguageProvider>

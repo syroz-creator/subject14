@@ -1,4 +1,5 @@
 import { useLanguage } from "../context/LanguageContext";
+import { COOKIE_SETTINGS_EVENT } from "../lib/cookieConsent";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -43,6 +44,10 @@ const footerLinkClass =
 
 export default function Footer() {
   const { t } = useLanguage();
+
+  const openCookieSettings = () => {
+    window.dispatchEvent(new Event(COOKIE_SETTINGS_EVENT));
+  };
 
   return (
     <footer className="mt-auto border-t border-white/5 bg-black/55 py-12 backdrop-blur-sm">
@@ -95,6 +100,10 @@ export default function Footer() {
               <a href="#contact" className={footerLinkClass}>
                 Contact
               </a>
+
+              <button type="button" className={footerLinkClass} onClick={openCookieSettings}>
+                Cookie Settings
+              </button>
             </div>
           </div>
 

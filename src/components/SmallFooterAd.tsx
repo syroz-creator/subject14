@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { COOKIE_CONSENT_CHANGED_EVENT, readCookieConsent } from "../lib/cookieConsent";
 
 declare global {
   interface Window {
@@ -9,11 +10,21 @@ declare global {
 export default function SmallFooterAd() {
   const adRef = useRef<HTMLElement | null>(null);
   const adPushRequested = useRef(false);
+  const [advertisingAllowed, setAdvertisingAllowed] = useState(false);
+
+  useEffect(() => {
+    setAdvertisingAllowed(readCookieConsent()?.advertising === true);
+  }, []);
 
   useEffect(() => {
     const adElement = adRef.current;
 
-    if (!adElement || adPushRequested.current || adElement.dataset.adsbygoogleInitialized === "true") {
+    if (
+      !advertisingAllowed ||
+      !adElement ||
+      adPushRequested.current ||
+      adElement.dataset.adsbygoogleInitialized === "true"
+    ) {
       return;
     }
 
@@ -27,7 +38,20 @@ export default function SmallFooterAd() {
       adPushRequested.current = false;
       delete adElement.dataset.adsbygoogleInitialized;
     }
+  }, [advertisingAllowed]);
+
+  useEffect(() => {
+    const syncConsent = () => {
+      setAdvertisingAllowed(readCookieConsent()?.advertising === true);
+    };
+
+    window.addEventListener(COOKIE_CONSENT_CHANGED_EVENT, syncConsent);
+    return () => window.removeEventListener(COOKIE_CONSENT_CHANGED_EVENT, syncConsent);
   }, []);
+
+  if (!advertisingAllowed) {
+    return null;
+  }
 
   return (
     <aside className="relative z-10 py-6" aria-label="Advertisement">
