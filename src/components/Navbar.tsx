@@ -21,7 +21,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
     { name: t.nav.story, section: "story" },
     { name: t.nav.gallery, section: "gallery" },
     { name: t.nav.trailer, section: "trailer" },
-    { name: "Requirements", section: "download" },
+    { name: t.nav.requirements, section: "download" },
     { name: t.nav.contact, section: "contact" },
   ] satisfies { name: string; section: SectionId }[];
 
@@ -81,7 +81,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
               className="hidden min-h-12 rounded-[0.85rem] bg-primary px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white hover:bg-primary/90 sm:inline-flex"
             >
               <Download className="mr-2 h-4 w-4" />
-              Play Now
+              {t.download.demo}
             </Button>
             <Dialog open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <DialogTrigger
@@ -98,7 +98,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
               </DialogTrigger>
               <DialogContent className="xl:hidden border-horror bg-black/95 p-5 backdrop-blur-md sm:p-6">
                 <DialogTitle className="text-xs uppercase tracking-[0.16em] text-primary">
-                  Navigate
+                  {t.nav.navigate}
                 </DialogTitle>
                 <div className="mt-4 flex flex-col gap-2.5 sm:gap-3">
                   {navItems.map((item) => (
@@ -116,7 +116,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                     </button>
                   ))}
                   <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-3">
-                    <div className="mb-2 text-[10px] uppercase tracking-[0.14em] text-white/45">Language</div>
+                    <div className="mb-2 text-[10px] uppercase tracking-[0.14em] text-white/45">{t.nav.language}</div>
                     <LanguageSwitcher />
                   </div>
                   <Button
@@ -125,7 +125,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                     className="mt-2 min-h-10 rounded-[0.75rem] bg-primary text-[0.7rem] uppercase tracking-[0.1em] text-white hover:bg-primary/90 sm:min-h-12 sm:rounded-[0.85rem] sm:text-xs sm:tracking-[0.12em]"
                   >
                     <Download className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    Play Now
+                    {t.download.demo}
                   </Button>
                 </div>
               </DialogContent>

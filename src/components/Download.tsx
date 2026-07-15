@@ -16,10 +16,10 @@ export default function Download() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="section-copy-kicker mb-4">System Check</p>
-            <h2 className="section-heading mb-6">System Requirements</h2>
+            <p className="section-copy-kicker mb-4">{t.download.systemCheck}</p>
+            <h2 className="section-heading mb-6">{t.download.systemRequirements}</h2>
             <p className="mb-8 max-w-2xl text-xl font-light text-white/68">
-              Recommended hardware for entering the facility when the playable build is ready.
+              {t.download.hardware}
             </p>
 
             <div className="grid grid-cols-1 overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/40 text-start md:grid-cols-2">

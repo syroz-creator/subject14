@@ -68,7 +68,7 @@ export default function Hero({ onNavigate }: HeroProps) {
               className="hero-button-ghost group w-full sm:flex-1"
             >
               <Download className="h-5 w-5 group-hover:animate-bounce" />
-              <span>Play Now</span>
+              <span>{t.download.demo}</span>
             </button>
           </div>
 

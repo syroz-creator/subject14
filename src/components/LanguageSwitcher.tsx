@@ -17,6 +17,7 @@ export default function LanguageSwitcher() {
     { code: "en", label: "English" },
     { code: "es", label: "Español" },
     { code: "fr", label: "Français" },
+    { code: "cs", label: "Čeština" },
     { code: "ar", label: "العربية" },
     { code: "he", label: "עברית" },
   ];
