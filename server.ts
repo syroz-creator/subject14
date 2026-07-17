@@ -325,6 +325,37 @@ function getSmtpSettings(): SmtpSettings | null {
   };
 }
 
+function getEmailConfigStatus() {
+  const smtpHost = Boolean(optionalEnv("SMTP_HOST"));
+  const smtpUser = Boolean(optionalEnv("SMTP_USER"));
+  const smtpPass = Boolean(optionalEnv("SMTP_PASS"));
+  const contactToEmail = Boolean(optionalEnv("CONTACT_TO_EMAIL"));
+  const contactFromEmail = Boolean(optionalEnv("CONTACT_FROM_EMAIL"));
+  const smtpPortRaw = optionalEnv("SMTP_PORT");
+  const smtpSecureRaw = optionalEnv("SMTP_SECURE");
+  const smtpPort = Number(smtpPortRaw || 587);
+  const smtpSecure = String(smtpSecureRaw || "false").toLowerCase() === "true";
+
+  return {
+    configured: smtpHost && smtpUser && smtpPass && contactToEmail,
+    required: {
+      smtpHost,
+      smtpUser,
+      smtpPass,
+      contactToEmail,
+    },
+    optional: {
+      contactFromEmail,
+      smtpPort: Boolean(smtpPortRaw),
+      smtpSecure: Boolean(smtpSecureRaw),
+    },
+    parsed: {
+      smtpPort: Number.isFinite(smtpPort) ? smtpPort : null,
+      smtpSecure,
+    },
+  };
+}
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -470,6 +501,10 @@ app.get("/api/visitor-stats", (_req, res) => {
 app.get("/api/public-ip", (req, res) => {
   const ip = normalizeRequestIp(req);
   return res.status(200).json({ ip: ip || "unknown" });
+});
+
+app.get("/api/email-config-status", (_req, res) => {
+  return res.status(200).json(getEmailConfigStatus());
 });
 
 app.post("/api/contact", async (req, res) => {
