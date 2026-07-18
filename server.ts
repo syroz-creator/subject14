@@ -301,10 +301,21 @@ function optionalEnv(name: string): string | undefined {
   return value ? value : undefined;
 }
 
+function optionalEnvAny(names: string[]): { name: string; value: string } | null {
+  for (const name of names) {
+    const value = optionalEnv(name);
+    if (value) {
+      return { name, value };
+    }
+  }
+
+  return null;
+}
+
 function getSmtpSettings(): SmtpSettings | null {
   const host = optionalEnv("SMTP_HOST");
   const user = optionalEnv("SMTP_USER");
-  const pass = optionalEnv("SMTP_PASS");
+  const pass = optionalEnvAny(["SMTP_PASS", "SMTP_PASSWORD", "MAIL_PASS", "EMAIL_PASSWORD"]);
   const to = optionalEnv("CONTACT_TO_EMAIL");
 
   if (!host || !user || !pass || !to) {
@@ -319,7 +330,7 @@ function getSmtpSettings(): SmtpSettings | null {
     port,
     secure,
     user,
-    pass,
+    pass: pass.value,
     from: optionalEnv("CONTACT_FROM_EMAIL") || user,
     to,
   };
@@ -328,21 +339,33 @@ function getSmtpSettings(): SmtpSettings | null {
 function getEmailConfigStatus() {
   const smtpHost = Boolean(optionalEnv("SMTP_HOST"));
   const smtpUser = Boolean(optionalEnv("SMTP_USER"));
-  const smtpPass = Boolean(optionalEnv("SMTP_PASS"));
+  const smtpPass = optionalEnvAny(["SMTP_PASS", "SMTP_PASSWORD", "MAIL_PASS", "EMAIL_PASSWORD"]);
   const contactToEmail = Boolean(optionalEnv("CONTACT_TO_EMAIL"));
   const contactFromEmail = Boolean(optionalEnv("CONTACT_FROM_EMAIL"));
   const smtpPortRaw = optionalEnv("SMTP_PORT");
   const smtpSecureRaw = optionalEnv("SMTP_SECURE");
   const smtpPort = Number(smtpPortRaw || 587);
   const smtpSecure = String(smtpSecureRaw || "false").toLowerCase() === "true";
+  const smtpPassDefined = Object.prototype.hasOwnProperty.call(process.env, "SMTP_PASS");
+  const smtpPassRawLength = process.env.SMTP_PASS?.length ?? null;
+  const acceptedPasswordKeys = ["SMTP_PASS", "SMTP_PASSWORD", "MAIL_PASS", "EMAIL_PASSWORD"].filter((name) =>
+    Boolean(optionalEnv(name))
+  );
 
   return {
-    configured: smtpHost && smtpUser && smtpPass && contactToEmail,
+    configured: smtpHost && smtpUser && Boolean(smtpPass) && contactToEmail,
     required: {
       smtpHost,
       smtpUser,
-      smtpPass,
+      smtpPass: Boolean(smtpPass),
       contactToEmail,
+    },
+    smtpPassDiagnostics: {
+      exactKeyDefined: smtpPassDefined,
+      exactKeyHasAnyLength: smtpPassRawLength !== null && smtpPassRawLength > 0,
+      exactKeyTrimmedNonEmpty: Boolean(optionalEnv("SMTP_PASS")),
+      acceptedPasswordKeys,
+      activePasswordKey: smtpPass?.name || null,
     },
     optional: {
       contactFromEmail,
