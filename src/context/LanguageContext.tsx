@@ -8,9 +8,32 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LANGUAGE_STORAGE_KEY = "subject14-language";
+
+function getInitialLanguage(): Language {
+  if (typeof window === "undefined") {
+    return "en";
+  }
+
+  try {
+    const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    return storedLanguage && storedLanguage in translations ? (storedLanguage as Language) : "en";
+  } catch {
+    return "en";
+  }
+}
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    try {
+      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+    } catch {
+      // Language still changes for the current session if storage is blocked.
+    }
+  };
 
   useEffect(() => {
     const rtlLanguages: Language[] = ["ar", "he"];

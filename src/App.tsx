@@ -38,7 +38,6 @@ const validSections: SectionId[] = [
   "features",
   "download",
   "contact",
-  "operator",
   "privacy",
   "terms",
 ];
@@ -52,6 +51,10 @@ function getSectionFromHash(): SectionId {
   }
 
   const hash = window.location.hash.replace("#", "");
+  if (hash === "operator") {
+    return new URLSearchParams(window.location.search).get("operator") === "1" ? "operator" : "home";
+  }
+
   return validSections.includes(hash as SectionId) ? (hash as SectionId) : "home";
 }
 

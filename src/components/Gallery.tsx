@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Maximize2 } from "lucide-react";
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useLanguage } from "../context/LanguageContext";
 import { useSiteContent } from "../context/SiteContentContext";
 import type { GalleryItem } from "../site-content";
@@ -25,7 +25,7 @@ const galleryGroups: GalleryGroup[] = [
   },
 ];
 
-function GalleryCard({ image, index }: { image: GalleryItem; index: number }) {
+function GalleryCard({ image, index, position, total }: { image: GalleryItem; index: number; position: number; total: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -63,6 +63,7 @@ function GalleryCard({ image, index }: { image: GalleryItem; index: number }) {
           showCloseButton={false}
           className="h-screen max-w-none gap-0 border-none bg-black/92 p-0 ring-0 shadow-none sm:max-w-none"
         >
+          <DialogTitle className="sr-only">{image.title}</DialogTitle>
           <DialogClose
             aria-label="Close gallery image"
             className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/55 text-2xl text-white/90 transition-colors hover:bg-black/75 sm:h-12 sm:w-12 sm:text-3xl"
@@ -76,6 +77,14 @@ function GalleryCard({ image, index }: { image: GalleryItem; index: number }) {
               className="max-h-full w-auto max-w-full object-contain shadow-2xl"
               referrerPolicy="no-referrer"
             />
+          </div>
+          <div className="absolute inset-x-0 bottom-0 z-10 border-t border-white/10 bg-black/72 px-4 py-3 backdrop-blur-sm sm:px-8 sm:py-4">
+            <div className="mx-auto flex max-w-6xl flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-white/78">{image.title}</p>
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/38">
+                {String(position).padStart(2, "0")} / {String(total).padStart(2, "0")}
+              </p>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
@@ -121,7 +130,7 @@ export default function Gallery() {
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 xl:gap-6">
                 {group.items.map((image, index) => (
                   <div key={image.title}>
-                    <GalleryCard image={image} index={index} />
+                    <GalleryCard image={image} index={index} position={index + 1} total={group.items.length} />
                   </div>
                 ))}
               </div>

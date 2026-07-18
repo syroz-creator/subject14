@@ -13,6 +13,7 @@ export default function Hero({ onNavigate }: HeroProps) {
   const { siteContent } = useSiteContent();
   const [titleTop, ...titleRest] = siteContent.hero.title.split(" ");
   const titleBottom = titleRest.join(" ") || titleTop;
+  const statusItems = [t.hero.statusDemo, t.hero.statusPlatform, t.hero.statusTrailer];
 
   return (
     <section id="home" className="relative flex min-h-screen w-full items-center overflow-hidden">
@@ -33,23 +34,27 @@ export default function Hero({ onNavigate }: HeroProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
-          className="flex w-full max-w-[58rem] flex-col items-center py-12 text-center sm:py-16 lg:py-0"
+          className="flex w-full max-w-[62rem] flex-col items-center py-12 text-center sm:py-16 lg:py-0"
         >
-          <div className="animate-flicker mb-6 w-full leading-none uppercase">
-            <h1 className="text-glow-red font-heading text-[4.5rem] tracking-[0.03em] text-white sm:text-[6.4rem] md:text-[8rem] lg:text-[8.8rem] xl:text-[9.8rem]">
+          <p className="mb-4 rounded-sm border border-primary/30 bg-primary/10 px-3 py-2 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-primary">
+            {t.hero.category}
+          </p>
+
+          <div className="animate-flicker mb-5 w-full leading-none uppercase">
+            <h1 className="text-glow-red font-heading text-[clamp(3.6rem,17vw,9.8rem)] tracking-[0.03em] text-white">
               {titleTop}
             </h1>
             {titleRest.length > 0 ? (
-              <h1 className="text-glow-red font-heading -mt-1 text-[4.5rem] tracking-[0.03em] text-primary sm:text-[6.4rem] md:text-[8rem] lg:text-[8.8rem] xl:text-[9.8rem]">
+              <h1 className="text-glow-red font-heading -mt-1 text-[clamp(3.6rem,17vw,9.8rem)] tracking-[0.03em] text-primary">
                 {titleBottom}
               </h1>
             ) : null}
           </div>
 
-          <p className="mb-4 max-w-2xl font-mono text-sm uppercase tracking-[0.32em] text-primary sm:text-base">
+          <p className="mb-4 max-w-2xl font-mono text-xs uppercase tracking-[0.22em] text-primary sm:text-sm sm:tracking-[0.32em]">
             {t.hero.tagline}
           </p>
-          <p className="mb-10 max-w-3xl text-base leading-7 text-white/66 sm:text-lg">
+          <p className="mb-8 max-w-3xl text-base leading-7 text-white/72 sm:text-lg">
             {t.hero.description}
           </p>
 
@@ -70,6 +75,20 @@ export default function Hero({ onNavigate }: HeroProps) {
               <Download className="h-5 w-5 group-hover:animate-bounce" />
               <span>{t.download.demo}</span>
             </button>
+          </div>
+
+          <div className="mt-7 w-full max-w-[44rem] border-t border-white/10 pt-4">
+            <p className="mb-2 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-white/38">
+              {t.hero.statusKicker}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[0.68rem] uppercase tracking-[0.08em] text-white/58">
+              {statusItems.map((text, index) => (
+                <span key={text} className="inline-flex items-center gap-3">
+                  {index > 0 ? <span className="h-1 w-1 rounded-full bg-primary/70" aria-hidden="true" /> : null}
+                  {text}
+                </span>
+              ))}
+            </div>
           </div>
 
           <button

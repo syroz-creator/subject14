@@ -54,7 +54,7 @@ export default function SmallFooterAd() {
   }
 
   return (
-    <aside className="relative z-10 py-6" aria-label="Advertisement">
+    <aside className="relative z-10 my-6 border-y border-white/8 bg-black/28 py-6 sm:my-8" aria-label="Advertisement">
       <div className="section-frame flex flex-col items-center">
         <p className="mb-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
           Advertisement

@@ -112,22 +112,28 @@ export default function Contact() {
       }
 
       if (result.email?.sent && result.email.autoReply?.sent) {
-        setStatus(`Transmission received. Confirmation sent to ${payload.email}.`);
+        setStatus(`Message received. Confirmation sent to ${payload.email}.`);
       } else if (result.email?.sent) {
-        setStatus("Transmission received. Command has logged your report, but confirmation email could not be sent.");
+        setStatus("Message received. We logged it successfully, but the confirmation email could not be sent.");
       } else if (result.email?.reason === "smtp_not_configured") {
-        setStatus("Transmission logged. Email delivery is not configured on the server yet.");
+        setStatus(
+          "Message saved on the server, but email notifications are not connected yet. We can still review it from the operator tools.",
+        );
       } else {
-        setStatus("Transmission logged. Email delivery failed, so check the SMTP settings.");
+        setStatus(
+          "Message saved on the server, but email delivery failed. We'll review the saved message and fix email delivery separately.",
+        );
       }
       shouldResetForm = true;
     } catch {
       try {
         saveFallbackMessage(payload);
-        setStatus("Transmission stored in this browser. Server uplink is currently offline.");
+        setStatus(
+          "Server is offline, so this message was saved only in this browser. Try again later for server delivery.",
+        );
         shouldResetForm = true;
       } catch {
-        setStatus("Unable to transmit. Try again when the uplink stabilizes.");
+        setStatus("Unable to send or save this message. Try again later.");
       }
     } finally {
       setSubmitting(false);
@@ -179,7 +185,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 34 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.7 }}
-          className="contact-panel panel-film border-horror relative w-full max-w-xl overflow-hidden rounded-[1.15rem] border border-primary/20 border-t-primary/55 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.58),0_0_46px_rgba(179,32,32,0.12)] sm:p-9"
+          className="contact-panel panel-film border-horror relative w-full max-w-xl overflow-hidden rounded-[1.15rem] border border-primary/20 border-t-primary/55 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.58),0_0_46px_rgba(179,32,32,0.12)] sm:p-9"
         >
           <div className="pointer-events-none absolute inset-3 z-10 rounded-[0.75rem] border border-white/8" />
           <div className="pointer-events-none absolute inset-x-3 top-3 z-10 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent" />
