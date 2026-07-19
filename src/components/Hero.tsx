@@ -36,9 +36,11 @@ export default function Hero({ onNavigate }: HeroProps) {
           transition={{ duration: 0.9 }}
           className="flex w-full max-w-[62rem] flex-col items-center py-12 text-center sm:py-16 lg:py-0"
         >
-          <p className="mb-4 rounded-sm border border-primary/30 bg-primary/10 px-3 py-2 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-primary">
-            {t.hero.category}
-          </p>
+          <div className="mb-5 flex items-center gap-3" aria-hidden="true">
+            <span className="h-px w-12 bg-primary/70" />
+            <span className="h-1.5 w-1.5 rotate-45 bg-primary" />
+            <span className="h-px w-12 bg-primary/70" />
+          </div>
 
           <div className="animate-flicker mb-5 w-full leading-none uppercase">
             <h1 className="text-glow-red font-heading text-[clamp(3.6rem,17vw,9.8rem)] tracking-[0.03em] text-white">
