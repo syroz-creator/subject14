@@ -1,14 +1,8 @@
 import { motion } from "motion/react";
-import { MonitorDown } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function Download() {
   const { t } = useLanguage();
-  const availabilityItems = [
-    [t.download.buildStatusLabel, t.download.buildStatusValue],
-    [t.download.platformLabel, t.download.platformValue],
-    [t.download.accessLabel, t.download.accessValue],
-  ];
 
   return (
     <section id="download" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-24 sm:py-28">
@@ -27,32 +21,6 @@ export default function Download() {
             <p className="mb-8 max-w-2xl text-xl font-light text-white/68">
               {t.download.hardware}
             </p>
-
-            <div className="mb-8 border-y border-white/10 py-5">
-              <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-                <div className="flex gap-4">
-                  <span className="mt-1 hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/25 bg-primary/8 text-primary sm:flex">
-                    <MonitorDown className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <p className="section-copy-kicker mb-2 text-primary">{t.download.availabilityTitle}</p>
-                    <p className="max-w-3xl text-sm leading-6 text-white/66 sm:text-base">
-                      {t.download.availabilityBody}
-                    </p>
-                  </div>
-                </div>
-                <dl className="grid gap-x-5 gap-y-3 border-t border-white/10 pt-4 sm:grid-cols-3 lg:border-t-0 lg:pt-0">
-                  {availabilityItems.map(([label, value]) => (
-                    <div key={label} className="min-w-0">
-                      <dt className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-white/34">{label}</dt>
-                      <dd className="mt-1 font-mono text-[0.72rem] uppercase tracking-[0.08em] text-white/74">
-                        {value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
 
             <div className="grid grid-cols-1 overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/40 text-start md:grid-cols-2">
               <div className="border-b border-white/10 p-8 md:border-b-0 md:border-e">
@@ -83,7 +51,7 @@ export default function Download() {
                   </li>
                   <li className="flex flex-col gap-1">
                     <span className="text-muted-foreground/50 uppercase text-[10px] tracking-widest">{t.download.storage}</span>
-                    <span className="text-muted-foreground">15 GB available space</span>
+                    <span className="text-muted-foreground">15 GB</span>
                   </li>
                 </ul>
               </div>
@@ -115,7 +83,7 @@ export default function Download() {
                   </li>
                   <li className="flex flex-col gap-1">
                     <span className="text-muted-foreground/50 uppercase text-[10px] tracking-widest">{t.download.storage}</span>
-                    <span className="text-muted-foreground">15 GB available space</span>
+                    <span className="text-muted-foreground">15 GB</span>
                   </li>
                 </ul>
               </div>
