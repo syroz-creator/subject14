@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import OperatorPanel from "./components/OperatorPanel";
 import SmallFooterAd from "./components/SmallFooterAd";
 import CookieConsent from "./components/CookieConsent";
+import WorkInProgressOverlay from "./components/WorkInProgressOverlay";
 import { SiteContentProvider } from "./context/SiteContentContext";
 
 export type SectionId =
@@ -158,6 +159,7 @@ export default function App() {
             <Footer />
           </div>
           <CookieConsent />
+          <WorkInProgressOverlay />
         </div>
       </SiteContentProvider>
     </LanguageProvider>
