@@ -71,7 +71,7 @@ export default function Footer() {
               Atmospheric first-person horror, haunting visuals, and a facility that remembers every visitor.
             </p>
             <div className="flex items-center gap-4">
-              <a href="https://guns.lol/ahmad_u" target="_blank" rel="noreferrer" aria-label="Guns.lol" className={socialLinkClass}>
+              <a href="https://guns.lol/syr0z" target="_blank" rel="noreferrer" aria-label="Guns.lol" className={socialLinkClass}>
                 <img src="/guns-lol-icon.png" alt="" className="h-5 w-5 object-contain" />
               </a>
               <a href="https://www.instagram.com/ahmad_uwaida/" target="_blank" rel="noreferrer" aria-label="Instagram" className={socialLinkClass}>
