@@ -1,10 +1,6 @@
-import { Construction, RadioTower } from "lucide-react";
 import { useEffect } from "react";
-import { useSiteContent } from "../context/SiteContentContext";
 
 export default function WorkInProgressOverlay() {
-  const { siteContent } = useSiteContent();
-
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -16,44 +12,62 @@ export default function WorkInProgressOverlay() {
 
   return (
     <section
-      className="fixed inset-0 z-[100] flex min-h-screen items-center justify-center overflow-hidden bg-black/86 px-4 py-8 text-white backdrop-blur-[2px] sm:px-6"
+      className="fixed inset-0 isolate z-[100] flex min-h-screen items-center justify-center overflow-hidden bg-[#020203] px-4 py-8 text-white sm:px-6"
       aria-labelledby="work-in-progress-title"
       aria-describedby="work-in-progress-description"
     >
       <img
-        src={siteContent.hero.backgroundUrl}
+        src="/site-images/01-hero.jpg"
         alt=""
-        className="absolute inset-0 h-full w-full scale-105 object-cover object-center opacity-28"
-        referrerPolicy="no-referrer"
+        className="absolute inset-0 -z-30 h-full w-full scale-105 object-cover object-center opacity-[0.42]"
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(179,32,32,0.18),transparent_28%),linear-gradient(180deg,rgba(0,0,0,0.58)_0%,rgba(0,0,0,0.92)_100%)]" />
-      <div className="absolute inset-0 bg-noise" />
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,#020203_0%,rgba(2,2,3,0.72)_28%,rgba(2,2,3,0.7)_72%,#020203_100%),linear-gradient(180deg,#020203_0%,rgba(2,2,3,0.58)_28%,#020203_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_42%,rgba(156,24,24,0.18),transparent_30%)]" />
+      <div className="absolute inset-0 -z-10 bg-noise opacity-70" />
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"
+        style={{
+          backgroundImage: "repeating-linear-gradient(180deg, #fff 0, #fff 1px, transparent 1px, transparent 6px)",
+        }}
+      />
 
-      <div className="relative z-10 flex w-full max-w-3xl flex-col items-center text-center">
-        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-md border border-primary/35 bg-primary/12 shadow-[0_0_48px_rgba(179,32,32,0.22)]">
-          <Construction className="h-8 w-8 text-primary" aria-hidden="true" />
-        </div>
+      <div className="absolute left-4 top-4 font-mono text-[0.58rem] uppercase tracking-[0.18em] text-white/38 sm:left-7 sm:top-6 sm:text-[0.65rem]">
+        Build access restricted
+      </div>
+      <div className="absolute bottom-4 right-4 font-mono text-[0.58rem] uppercase tracking-[0.18em] text-primary/70 sm:bottom-6 sm:right-7 sm:text-[0.65rem]">
+        Subject 14
+      </div>
 
-        <p className="mb-4 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-primary sm:text-xs sm:tracking-[0.32em]">
-          Transmission Interrupted
+      <div className="relative z-10 flex w-full max-w-4xl flex-col items-center text-center">
+        <img
+          src="/game-logo.png"
+          alt="Subject 14"
+          className="mb-7 w-full max-w-[22rem] object-contain drop-shadow-[0_18px_34px_rgba(0,0,0,0.75)] sm:max-w-[34rem]"
+        />
+
+        <div className="mb-7 h-px w-full max-w-xl bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
+
+        <p className="mb-4 font-mono text-[0.66rem] font-semibold uppercase tracking-[0.24em] text-primary sm:text-xs sm:tracking-[0.34em]">
+          Public access paused
         </p>
         <h1
           id="work-in-progress-title"
-          className="text-glow-red font-heading text-[clamp(3.1rem,14vw,8rem)] uppercase leading-[0.9] tracking-[0.03em]"
+          className="text-glow-red font-heading text-[clamp(2.7rem,11vw,6.8rem)] uppercase leading-[0.92] tracking-[0.03em]"
         >
-          Site Not Ready
+          Still In Development
         </h1>
         <p
           id="work-in-progress-description"
-          className="mt-6 max-w-2xl text-base leading-7 text-white/74 sm:text-lg"
+          className="mt-6 max-w-2xl text-base leading-7 text-white/70 sm:text-lg"
         >
-          Subject 14 is currently being worked on. The website is still under active development and will reopen when
-          the next build is ready.
+          We are working on the next version of the Subject 14 website. The public page is locked for now and will open
+          again when the build is ready.
         </p>
 
-        <div className="mt-8 flex items-center gap-3 border-y border-white/10 px-4 py-3 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-white/52 sm:text-xs">
-          <RadioTower className="h-4 w-4 text-primary" aria-hidden="true" />
-          <span>Containment update pending</span>
+        <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-2 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-white/44 sm:grid-cols-3 sm:text-[0.66rem]">
+          <span className="border-y border-white/10 py-3">Demo offline</span>
+          <span className="border-y border-primary/35 py-3 text-primary/75">Update pending</span>
+          <span className="border-y border-white/10 py-3">Return soon</span>
         </div>
       </div>
     </section>
