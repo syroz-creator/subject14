@@ -1,4 +1,4 @@
-import { ArrowLeft, FileText, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ExternalLink, FileText, ShieldCheck } from "lucide-react";
 
 type LegalPageProps = {
   type: "privacy" | "terms";
@@ -24,6 +24,14 @@ const privacySections: LegalSection[] = [
       "Contact form information is used to receive support requests, reply when needed, and send an automatic confirmation email.",
       "Technical logs are used to debug the website, prevent abuse, and keep the experience working across devices.",
       "We do not sell visitor data.",
+    ],
+  },
+  {
+    title: "Cookies And Google Advertising",
+    body: [
+      "Subject14.com uses required browser storage to remember site choices, including cookie consent preferences.",
+      "If you accept advertising cookies, Google and its partners may use cookies, device identifiers, IP addresses, and browsing data to provide, personalize, and measure ads.",
+      "You can reject advertising cookies or reopen cookie settings from the footer to change your choice.",
     ],
   },
   {
@@ -119,58 +127,66 @@ export default function LegalPage({ type }: LegalPageProps) {
   const Icon = content.icon;
 
   return (
-    <section className="relative min-h-[calc(100vh-5rem)] overflow-hidden px-4 pb-16 pt-28 sm:px-6 sm:pb-20 lg:px-10 lg:pt-32">
-      <div className="absolute inset-0 -z-10">
-        <img
-          src="/site-images/labpic8.png"
-          alt=""
-          className="h-full w-full scale-105 object-cover object-center opacity-18 grayscale"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(179,32,32,0.13),transparent_28%),linear-gradient(180deg,rgba(0,0,0,0.84),rgba(0,0,0,0.96))]" />
-        <div className="absolute inset-0 bg-noise" />
-      </div>
-
-      <div className="section-frame">
+    <section className="relative min-h-[calc(100vh-5rem)] bg-[#f8fafd] px-4 pb-16 pt-28 text-[#202124] sm:px-6 sm:pb-20 lg:px-10 lg:pt-32">
+      <div className="mx-auto w-full max-w-5xl">
         <a
           href="#home"
-          className="mb-8 inline-flex items-center gap-2 rounded-md border border-white/10 bg-black/35 px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-white/62 transition-colors hover:border-primary/35 hover:text-white"
+          className="mb-8 inline-flex min-h-10 items-center gap-2 rounded-full border border-[#dadce0] bg-white px-4 py-2 text-sm font-medium text-[#1a73e8] shadow-sm transition-colors hover:bg-[#f1f3f4]"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back To Site
+          Back to site
         </a>
 
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-10 flex flex-col gap-6 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="section-copy-kicker mb-4 text-primary">{content.kicker}</p>
-              <h1 className="section-heading text-4xl sm:text-5xl md:text-6xl">{content.title}</h1>
-              <p className="mt-5 max-w-3xl text-base leading-7 text-white/68 sm:text-lg">{content.intro}</p>
+        <div className="overflow-hidden rounded-[1.75rem] border border-[#dadce0] bg-white shadow-[0_1px_2px_rgba(60,64,67,0.15),0_8px_24px_rgba(60,64,67,0.08)]">
+          <div className="border-b border-[#e8eaed] px-5 py-7 sm:px-8 sm:py-9 lg:px-10">
+            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#e8f0fe] text-[#1a73e8]">
+              <Icon className="h-6 w-6" />
             </div>
-            <div className="flex items-center gap-3 rounded-lg border border-primary/20 bg-primary/10 px-4 py-3 text-primary">
-              <Icon className="h-5 w-5" />
-              <span className="font-mono text-xs uppercase tracking-[0.18em]">{content.updated}</span>
+            <p className="mb-3 text-sm font-medium text-[#5f6368]">{content.kicker}</p>
+            <h1 className="max-w-3xl text-4xl font-normal leading-tight tracking-normal text-[#202124] sm:text-5xl">
+              {content.title}
+            </h1>
+            <p className="mt-5 max-w-3xl text-base leading-7 text-[#5f6368] sm:text-lg">{content.intro}</p>
+            <p className="mt-5 text-sm text-[#5f6368]">{content.updated}</p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[#dadce0] bg-white px-4 py-2 text-sm font-medium text-[#1a73e8] transition-colors hover:bg-[#f8fafd]"
+              >
+                Google Privacy Policy
+                <ExternalLink className="h-4 w-4" />
+              </a>
+              <a
+                href="https://policies.google.com/technologies/cookies"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[#dadce0] bg-white px-4 py-2 text-sm font-medium text-[#1a73e8] transition-colors hover:bg-[#f8fafd]"
+              >
+                Google cookie information
+                <ExternalLink className="h-4 w-4" />
+              </a>
             </div>
           </div>
 
-          <div className="grid gap-5">
+          <div className="divide-y divide-[#e8eaed]">
             {content.sections.map((section, index) => (
               <article
                 key={section.title}
-                className="panel-film border-horror rounded-[1rem] p-5 sm:p-6"
+                className="grid gap-4 px-5 py-6 sm:px-8 sm:py-7 md:grid-cols-[7rem_1fr] lg:px-10"
               >
-                <div className="mb-4 flex items-center gap-3">
-                  <span className="font-mono text-xs uppercase tracking-[0.22em] text-primary">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h2 className="font-heading text-xl uppercase tracking-[0.08em] text-white sm:text-2xl">
+                <div className="text-sm font-medium text-[#1a73e8]">{String(index + 1).padStart(2, "0")}</div>
+                <div>
+                  <h2 className="text-xl font-normal leading-7 tracking-normal text-[#202124] sm:text-2xl">
                     {section.title}
                   </h2>
-                </div>
-                <div className="space-y-3 text-sm leading-7 text-white/66 sm:text-base">
-                  {section.body.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
+                  <div className="mt-3 space-y-3 text-sm leading-7 text-[#5f6368] sm:text-base">
+                    {section.body.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
               </article>
             ))}

@@ -44,30 +44,39 @@ export default function CookieConsent() {
 
   return (
     <section
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-black/90 px-4 py-4 shadow-[0_-18px_60px_rgba(0,0,0,0.52)] backdrop-blur-md sm:px-6"
+      className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 sm:px-6 sm:pb-6"
       aria-label="Cookie consent"
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div className="mx-auto flex max-w-5xl flex-col gap-5 rounded-[1.75rem] border border-[#dadce0] bg-white p-5 text-[#202124] shadow-[0_8px_30px_rgba(60,64,67,0.28)] sm:p-6 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-3xl">
-          <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-primary">
-            Cookie Settings
+          <p className="text-base font-medium tracking-normal text-[#202124]">This site uses cookies</p>
+          <p className="mt-2 text-sm leading-6 text-[#5f6368]">
+            Subject14.com uses required site storage and Google advertising cookies to show and measure ads. You can
+            accept, reject, manage, or withdraw advertising consent at any time.
           </p>
-          <p className="mt-2 text-sm leading-6 text-white/72">
-            Subject14.com uses cookies and Google AdSense to show and measure ads. You can accept, reject, manage, or
-            withdraw your advertising consent at any time.
-          </p>
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm font-medium text-[#1a73e8]">
+            <a href="#privacy" className="hover:underline">
+              Privacy Policy
+            </a>
+            <a
+              href="https://policies.google.com/technologies/cookies"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:underline"
+            >
+              Google cookie information
+            </a>
+          </div>
           {isManaging ? (
-            <label className="mt-4 flex items-start gap-3 rounded-md border border-white/10 bg-white/[0.035] p-3 text-sm text-white/72">
+            <label className="mt-5 flex items-start gap-3 rounded-xl border border-[#dadce0] bg-[#f8fafd] p-4 text-sm text-[#3c4043]">
               <input
                 type="checkbox"
-                className="mt-1 h-4 w-4 accent-primary"
+                className="mt-1 h-4 w-4 accent-[#1a73e8]"
                 checked={advertisingEnabled}
                 onChange={(event) => setAdvertisingEnabled(event.target.checked)}
               />
               <span>
-                <span className="block font-mono text-[0.68rem] uppercase tracking-[0.16em] text-white">
-                  Advertising cookies
-                </span>
+                <span className="block font-medium text-[#202124]">Advertising cookies</span>
                 Allow Google and advertising partners to use cookies, device identifiers, IP addresses, and browsing
                 data to provide and measure ads.
               </span>
@@ -79,15 +88,15 @@ export default function CookieConsent() {
           {isManaging ? (
             <button
               type="button"
-              className="inline-flex min-h-10 items-center justify-center rounded-md border border-white/14 bg-white/[0.04] px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-white/72 transition-colors hover:border-primary/35 hover:text-white"
+              className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#1a73e8] px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-[#1558b0]"
               onClick={() => saveChoice(advertisingEnabled)}
             >
-              Save Choices
+              Save choices
             </button>
           ) : (
             <button
               type="button"
-              className="inline-flex min-h-10 items-center justify-center rounded-md border border-white/14 bg-white/[0.04] px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-white/72 transition-colors hover:border-primary/35 hover:text-white"
+              className="inline-flex min-h-10 items-center justify-center rounded-full border border-[#dadce0] bg-white px-5 py-2 text-sm font-medium text-[#1a73e8] transition-colors hover:bg-[#f8fafd]"
               onClick={() => setIsManaging(true)}
             >
               Manage
@@ -95,14 +104,14 @@ export default function CookieConsent() {
           )}
           <button
             type="button"
-            className="inline-flex min-h-10 items-center justify-center rounded-md border border-white/14 bg-white/[0.04] px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-white/72 transition-colors hover:border-primary/35 hover:text-white"
+            className="inline-flex min-h-10 items-center justify-center rounded-full border border-[#dadce0] bg-white px-5 py-2 text-sm font-medium text-[#1a73e8] transition-colors hover:bg-[#f8fafd]"
             onClick={() => saveChoice(false)}
           >
             Reject
           </button>
           <button
             type="button"
-            className="inline-flex min-h-10 items-center justify-center rounded-md bg-primary px-4 py-2 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-primary/85"
+            className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#1a73e8] px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-[#1558b0]"
             onClick={() => saveChoice(true)}
           >
             Accept
