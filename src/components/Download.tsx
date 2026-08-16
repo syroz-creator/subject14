@@ -6,10 +6,10 @@ export default function Download() {
 
   return (
     <section id="download" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-24 sm:py-28">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_12%,rgba(64,118,118,0.14),transparent_27rem),linear-gradient(180deg,rgba(255,255,255,0.025),transparent_34%,rgba(0,0,0,0.30))] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent_34%,rgba(0,0,0,0.38))] pointer-events-none" />
 
       <div className="section-frame relative z-10">
-        <div className="wide-cta-panel readable-surface mx-auto max-w-6xl rounded-md p-6 text-left sm:p-8 lg:p-10">
+        <div className="wide-cta-panel panel-film border-horror mx-auto max-w-6xl rounded-lg p-6 text-left backdrop-blur-sm sm:p-8 lg:p-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -18,11 +18,11 @@ export default function Download() {
           >
             <p className="section-copy-kicker mb-4">{t.download.systemCheck}</p>
             <h2 className="section-heading mb-6">{t.download.systemRequirements}</h2>
-            <p className="mb-8 max-w-2xl text-xl font-light text-white/70">
+            <p className="mb-8 max-w-2xl text-xl font-light text-white/68">
               {t.download.hardware}
             </p>
 
-            <div className="grid grid-cols-1 overflow-hidden rounded-md border border-white/10 bg-white/[0.035] text-start md:grid-cols-2">
+            <div className="grid grid-cols-1 overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/40 text-start md:grid-cols-2">
               <div className="border-b border-white/10 p-8 md:border-b-0 md:border-e">
                 <h3 className="mb-6 flex items-center gap-2 font-heading text-sm uppercase tracking-[0.2em] text-primary">
                   <div className="h-4 w-1 bg-primary" />
@@ -55,7 +55,7 @@ export default function Download() {
                   </li>
                 </ul>
               </div>
-              <div className="bg-primary/6 p-8">
+              <div className="p-8 bg-primary/5">
                 <h3 className="mb-6 flex items-center gap-2 font-heading text-sm uppercase tracking-[0.2em] text-primary">
                   <div className="h-4 w-1 bg-primary" />
                   {t.download.recReq}

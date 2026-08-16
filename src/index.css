@@ -50,23 +50,23 @@
 }
 
 :root {
-    --background: oklch(0.105 0.014 244);
-    --foreground: oklch(0.91 0.012 84);
-    --card: oklch(0.16 0.014 244);
-    --card-foreground: oklch(0.94 0.01 84);
-    --popover: oklch(0.145 0.012 244);
-    --popover-foreground: oklch(0.92 0.01 84);
-    --primary: oklch(0.59 0.18 25);
+    --background: oklch(0.075 0.006 255);
+    --foreground: oklch(0.94 0.008 255);
+    --card: oklch(0.12 0.008 255);
+    --card-foreground: oklch(0.97 0 0);
+    --popover: oklch(0.12 0 0);
+    --popover-foreground: oklch(0.95 0 0);
+    --primary: oklch(0.57 0.2 24);
     --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.205 0.018 222);
-    --secondary-foreground: oklch(0.91 0.012 84);
-    --muted: oklch(0.2 0.014 232);
-    --muted-foreground: oklch(0.72 0.012 84);
-    --accent: oklch(0.27 0.035 177);
-    --accent-foreground: oklch(0.94 0.01 84);
+    --secondary: oklch(0.18 0 0);
+    --secondary-foreground: oklch(0.95 0 0);
+    --muted: oklch(0.16 0 0);
+    --muted-foreground: oklch(0.68 0 0);
+    --accent: oklch(0.21 0.02 25);
+    --accent-foreground: oklch(0.95 0 0);
     --destructive: oklch(0.58 0.22 27);
-    --border: oklch(0.3 0.016 244);
-    --input: oklch(0.29 0.014 244);
+    --border: oklch(0.26 0 0);
+    --input: oklch(0.26 0 0);
     --ring: oklch(0.58 0.22 27);
     --radius: 0.3rem;
 }
@@ -77,10 +77,7 @@
   }
   body {
     @apply bg-background text-[0.94rem] font-medium text-foreground selection:bg-primary/30 selection:text-primary-foreground;
-    background:
-      radial-gradient(circle at 14% 0%, oklch(0.27 0.07 186 / 0.22), transparent 28rem),
-      radial-gradient(circle at 84% 18%, oklch(0.31 0.09 28 / 0.16), transparent 30rem),
-      linear-gradient(180deg, #0d1116 0%, #0b0d10 48%, #090909 100%);
+    background-image: linear-gradient(180deg, #07090d 0%, #080808 48%, #050505 100%);
     min-height: 100vh;
   }
   html {
@@ -96,7 +93,7 @@
 
 @layer utilities {
   .text-glow-red {
-    text-shadow: 0 10px 32px oklch(0 0 0 / 0.5);
+    text-shadow: 0 12px 40px oklch(0 0 0 / 0.65);
   }
   .bg-horror-gradient {
     background:
@@ -104,8 +101,8 @@
       linear-gradient(180deg, oklch(0.08 0 0) 0%, oklch(0.05 0 0) 100%);
   }
   .border-horror {
-    border: 1px solid oklch(1 0 0 / 0.12);
-    box-shadow: 0 18px 44px oklch(0 0 0 / 0.28);
+    border: 1px solid oklch(1 0 0 / 0.1);
+    box-shadow: 0 18px 44px oklch(0 0 0 / 0.35);
   }
   .animate-flicker {
     animation: flicker 3s linear infinite;
@@ -120,18 +117,6 @@
   }
   .site-shell {
     @apply relative overflow-hidden bg-transparent;
-  }
-  .site-shell::before {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-      linear-gradient(90deg, oklch(1 0 0 / 0.035) 1px, transparent 1px),
-      linear-gradient(180deg, oklch(1 0 0 / 0.025) 1px, transparent 1px);
-    background-size: 92px 92px;
-    mask-image: linear-gradient(180deg, transparent, black 16%, black 76%, transparent);
-    opacity: 0.28;
   }
   .site-shell p,
   .site-shell li,
@@ -159,42 +144,32 @@
     @apply font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground;
   }
   .section-heading {
-    @apply text-4xl font-heading uppercase leading-[0.98] tracking-[0.02em] text-foreground sm:text-5xl md:text-6xl;
+    @apply text-4xl font-heading uppercase tracking-[0.02em] text-white sm:text-5xl md:text-6xl;
   }
   .panel-film {
     background:
-      linear-gradient(180deg, oklch(0.18 0.014 244 / 0.9), oklch(0.125 0.012 244 / 0.88)),
-      linear-gradient(135deg, oklch(1 0 0 / 0.045), transparent 42%);
-  }
-  .readable-surface {
-    background:
-      linear-gradient(180deg, oklch(0.18 0.014 244 / 0.84), oklch(0.12 0.012 244 / 0.78)),
-      radial-gradient(circle at 0% 0%, oklch(0.62 0.18 25 / 0.12), transparent 22rem);
-    border: 1px solid oklch(1 0 0 / 0.12);
-    box-shadow: 0 24px 70px oklch(0 0 0 / 0.32);
-    backdrop-filter: blur(10px);
-  }
-  .soft-divider {
-    background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.16), transparent);
-    height: 1px;
-  }
-  .case-strip {
-    background:
-      linear-gradient(90deg, oklch(0.59 0.18 25 / 0.24), transparent 68%),
-      repeating-linear-gradient(90deg, oklch(1 0 0 / 0.14) 0 1px, transparent 1px 9px);
-    border: 1px solid oklch(1 0 0 / 0.1);
+      linear-gradient(180deg, oklch(0.13 0.006 255 / 0.9), oklch(0.09 0.004 255 / 0.86)),
+      linear-gradient(135deg, oklch(1 0 0 / 0.035), transparent 42%);
   }
   .hero-button-solid {
     @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-primary-foreground transition-all duration-300 hover:translate-y-[-1px] hover:bg-primary/90;
     flex: none;
-    box-shadow: 0 10px 20px oklch(0.58 0.22 27 / 0.16);
+    box-shadow: 0 10px 20px oklch(0.58 0.22 27 / 0.18);
   }
   .hero-button-ghost {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/16 bg-white/[0.055] px-5 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-foreground transition-all duration-300 hover:translate-y-[-1px] hover:border-white/28 hover:bg-white/[0.09];
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/16 bg-white/[0.04] px-5 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-white transition-all duration-300 hover:translate-y-[-1px] hover:border-white/28 hover:bg-white/[0.08];
     flex: none;
   }
+  #home .section-frame {
+    justify-content: center;
+  }
+  #home .section-frame > div {
+    align-items: center;
+    max-width: 58rem;
+    text-align: center;
+  }
   #home h1 {
-    color: var(--foreground);
+    color: white;
     letter-spacing: 0.01em;
     line-height: 0.9;
   }
@@ -205,7 +180,7 @@
     letter-spacing: 0.12em;
   }
   #home .section-frame > div > p:nth-of-type(2) {
-    color: oklch(0.86 0.012 84 / 0.78);
+    color: oklch(1 0 0 / 0.72);
     max-width: 48rem;
   }
   #home .section-frame > div > button {
@@ -280,6 +255,14 @@
     #home .section-frame > div {
       max-width: 72rem;
     }
+    .hero-title {
+      font-size: 12.8rem;
+      line-height: 0.9;
+    }
+    #home h1 {
+      font-size: 12.8rem;
+      line-height: 0.9;
+    }
     .hero-kicker {
       max-width: 56rem;
       font-size: 1.15rem;
@@ -341,6 +324,12 @@
     }
     #home .section-frame > div {
       max-width: 82rem;
+    }
+    .hero-title {
+      font-size: 15rem;
+    }
+    #home h1 {
+      font-size: 15rem;
     }
     .hero-kicker {
       font-size: 1.25rem;

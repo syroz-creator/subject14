@@ -38,7 +38,7 @@ function GalleryCard({ image, index, position, total }: { image: GalleryItem; in
           <button
             type="button"
             aria-label={`Open ${image.title}`}
-            className="border-horror group relative aspect-video w-full cursor-pointer overflow-hidden rounded-md bg-[#0b0f13] text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/34 focus-visible:-translate-y-1 focus-visible:border-primary/40 focus-visible:ring-2 focus-visible:ring-primary/50"
+            className="border-horror group relative aspect-video w-full cursor-pointer overflow-hidden rounded-md bg-black text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 focus-visible:-translate-y-1 focus-visible:border-primary/40 focus-visible:ring-2 focus-visible:ring-primary/50"
           >
             <img
               src={image.url}
@@ -46,9 +46,9 @@ function GalleryCard({ image, index, position, total }: { image: GalleryItem; in
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-focus-visible:scale-105"
               referrerPolicy="no-referrer"
             />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.00)_0%,rgba(0,0,0,0.08)_46%,rgba(7,10,13,0.80)_100%)] transition-opacity duration-300 group-hover:opacity-95 group-focus-visible:opacity-95" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.00)_0%,rgba(0,0,0,0.12)_46%,rgba(0,0,0,0.84)_100%)] transition-opacity duration-300 group-hover:opacity-95 group-focus-visible:opacity-95" />
             <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
-              <div className="flex min-h-14 items-center justify-between gap-3 rounded-md border border-white/12 bg-[#0b0f13]/72 px-3 py-3 backdrop-blur-[5px]">
+              <div className="flex min-h-14 items-center justify-between gap-3 rounded-sm border border-white/12 bg-black/62 px-3 py-3 backdrop-blur-[3px]">
                 <span className="line-clamp-2 min-w-0 font-mono text-[0.72rem] font-semibold uppercase leading-5 tracking-[0.06em] text-white sm:text-[0.78rem]">
                   {image.title}
                 </span>
@@ -106,7 +106,7 @@ export default function Gallery() {
 
   return (
     <section id="gallery" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-24 sm:py-28">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_0%,rgba(64,118,118,0.12),transparent_26rem),linear-gradient(180deg,transparent,rgba(179,32,32,0.025),transparent)] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.04] to-transparent pointer-events-none" />
       <div className="section-frame relative z-10">
         <div className="mb-16 text-center">
           <p className="section-copy-kicker mb-4">Media Archive</p>
@@ -117,18 +117,15 @@ export default function Gallery() {
         <div className="space-y-12">
           {groupedGallery.map((group, groupIndex) => (
             <div key={group.title}>
-              <div className="mb-5 flex items-end justify-between gap-4 border-b border-white/10 pb-4 text-left">
+              <div className="mb-5 border-l border-primary/45 pl-4 text-left">
                 <div>
                   <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-primary">
                     Archive {String(groupIndex + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="mt-2 font-heading text-2xl uppercase tracking-[0.02em] text-foreground">
+                  <h3 className="mt-2 font-heading text-2xl uppercase tracking-[0.02em] text-white">
                     {group.title}
                   </h3>
                 </div>
-                <span className="hidden font-mono text-[0.62rem] uppercase tracking-[0.18em] text-white/38 sm:inline">
-                  {group.items.length} files
-                </span>
               </div>
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 xl:gap-6">
                 {group.items.map((image, index) => (

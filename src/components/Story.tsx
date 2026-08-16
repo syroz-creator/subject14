@@ -18,7 +18,7 @@ export default function Story() {
           className="h-full w-full scale-[1.02] object-cover object-center brightness-105 contrast-105 saturate-95"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,12,16,0.84),rgba(9,12,16,0.46)_52%,rgba(4,5,6,0.74)),linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.56))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.70),rgba(0,0,0,0.34)_52%,rgba(0,0,0,0.62)),linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.50))]" />
         <div className="absolute inset-0 bg-noise" />
       </div>
 
@@ -28,18 +28,18 @@ export default function Story() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="readable-surface max-w-3xl rounded-md p-5 text-left sm:p-7 lg:p-9"
+          className="max-w-3xl text-left"
         >
           <p className="section-copy-kicker mb-4 text-primary/85">Case File</p>
-          <h2 className="section-heading mb-7 max-w-2xl">
+          <h2 className="text-glow-red mb-7 max-w-2xl font-heading text-5xl uppercase leading-none tracking-[0.02em] text-white sm:text-6xl lg:text-7xl">
             {t.story.title}
           </h2>
-          <div className="space-y-5 text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
-            <p className="max-w-2xl rounded-md border border-primary/24 bg-primary/8 px-5 py-4 font-mono text-sm uppercase tracking-[0.04em] text-white/88 sm:text-base">
+          <div className="space-y-5 text-base leading-7 text-white/84 [text-shadow:0_2px_18px_rgba(0,0,0,0.85)] sm:text-lg sm:leading-8">
+            <p className="max-w-2xl border-l-2 border-primary bg-black/18 px-5 py-4 font-mono text-sm uppercase tracking-[0.04em] text-white/92 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-[2px] sm:text-base">
               {t.story.p1}
             </p>
             <p className="max-w-2xl">{t.story.p2}</p>
-            <p className="max-w-2xl border-l border-primary/45 pl-4 text-primary/84">{t.story.p3}</p>
+            <p className="max-w-2xl text-primary/82">{t.story.p3}</p>
           </div>
         </motion.div>
       </div>
