@@ -26,7 +26,7 @@ export default function Features() {
 
   return (
     <section id="features" className="relative min-h-[calc(100vh-8rem)] overflow-hidden py-20 sm:py-24">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(179,32,32,0.12),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_32%,rgba(179,32,32,0.05))]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(64,118,118,0.15),transparent_30rem),linear-gradient(180deg,rgba(255,255,255,0.025),transparent_32%,rgba(179,32,32,0.035))]" />
       <div className="pointer-events-none absolute inset-0 bg-noise" />
       <div className="section-frame relative z-10">
         <div className="mb-10 flex flex-col gap-5 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
@@ -37,7 +37,7 @@ export default function Features() {
               {siteContent.features.subtitle || t.features.subtitle}
             </p>
           </div>
-          <div className="grid grid-cols-3 border border-white/10 bg-black/28 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-white/62 backdrop-blur-sm sm:w-[26rem]">
+          <div className="grid grid-cols-3 rounded-md border border-white/10 bg-white/[0.045] font-mono text-[0.65rem] uppercase tracking-[0.16em] text-white/64 backdrop-blur-sm sm:w-[26rem]">
             <span className="border-r border-white/10 px-3 py-3 text-center">AI Hunt</span>
             <span className="border-r border-white/10 px-3 py-3 text-center">Puzzles</span>
             <span className="px-3 py-3 text-center">UE5</span>
@@ -56,28 +56,28 @@ export default function Features() {
               <Card
                 tabIndex={0}
                 aria-label={`${feature.title}: ${feature.description}`}
-                className="group/feature panel-film border-horror h-full min-h-60 overflow-hidden rounded-lg bg-card/35 transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:bg-card/55 focus-visible:-translate-y-1 focus-visible:border-primary/45 focus-visible:ring-2 focus-visible:ring-primary/50"
+                className="group/feature panel-film border-horror h-full min-h-60 overflow-hidden rounded-md bg-card/45 transition-all duration-300 hover:-translate-y-1 hover:border-primary/36 hover:bg-card/60 focus-visible:-translate-y-1 focus-visible:border-primary/45 focus-visible:ring-2 focus-visible:ring-primary/50"
               >
                 <CardHeader className="relative z-10 gap-5 pb-3">
                   <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-primary/25 bg-primary/12 transition-all duration-300 group-hover/feature:bg-primary/20 group-focus-visible/feature:bg-primary/20">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-primary/22 bg-primary/10 transition-all duration-300 group-hover/feature:bg-primary/16 group-focus-visible/feature:bg-primary/16">
                       <feature.icon className="h-6 w-6 text-primary transition-transform duration-300 group-hover/feature:scale-110 group-focus-visible/feature:scale-110" />
                     </div>
                     <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-primary/70">
                       {feature.signal}
                     </span>
                   </div>
-                  <CardTitle className="text-balance font-heading text-xl uppercase leading-tight tracking-[0.08em] text-white">
+                  <CardTitle className="text-balance font-heading text-xl uppercase leading-tight tracking-[0.06em] text-foreground">
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="relative z-10 mt-auto">
-                  <p className="border-t border-white/10 pt-4 text-sm leading-6 text-white/68 sm:text-[0.95rem]">
+                  <p className="border-t border-white/10 pt-4 text-sm leading-6 text-white/70 sm:text-[0.95rem]">
                     {feature.description}
                   </p>
                   <div className="mt-5 h-1 w-full overflow-hidden rounded-full bg-white/8">
                     <div
-                      className="h-full rounded-full bg-primary/70 transition-all duration-500 group-hover/feature:bg-primary group-focus-visible/feature:bg-primary"
+                      className="h-full rounded-full bg-[linear-gradient(90deg,var(--primary),oklch(0.62_0.08_180))] opacity-80 transition-all duration-500 group-hover/feature:opacity-100 group-focus-visible/feature:opacity-100"
                       style={{ width: `${Math.max(32, ((index + 1) / features.length) * 100)}%` }}
                     />
                   </div>

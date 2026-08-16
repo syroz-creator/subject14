@@ -7,6 +7,7 @@ import Story from "./components/Story";
 import Gallery from "./components/Gallery";
 import Trailer from "./components/Trailer";
 import Features from "./components/Features";
+import Entity from "./components/Entity";
 import Download from "./components/Download";
 import Contact from "./components/Contact";
 import LegalPage from "./components/LegalPage";
@@ -23,6 +24,7 @@ export type SectionId =
   | "gallery"
   | "trailer"
   | "features"
+  | "entity"
   | "download"
   | "contact"
   | "operator"
@@ -36,6 +38,7 @@ const validSections: SectionId[] = [
   "gallery",
   "trailer",
   "features",
+  "entity",
   "download",
   "contact",
   "privacy",
@@ -124,7 +127,7 @@ export default function App() {
       <SiteContentProvider>
         <div className="site-shell min-h-screen flex flex-col text-foreground selection:bg-primary/30 selection:text-primary-foreground">
           <div className="pointer-events-none fixed inset-0 z-0 bg-noise" />
-          <div className="pointer-events-none fixed inset-0 z-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02)_0,rgba(255,255,255,0.00)_120px)]" />
+          <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_14%_20%,rgba(60,116,116,0.12),transparent_28rem),linear-gradient(180deg,rgba(255,255,255,0.025)_0,rgba(255,255,255,0.00)_140px)]" />
           <Navbar activeSection={activeSection} onNavigate={navigateToSection} />
           <main className="relative z-10 flex-1">
             {activeSection === "home" && <Hero onNavigate={navigateToSection} />}
@@ -133,6 +136,7 @@ export default function App() {
             {activeSection === "gallery" && <Gallery />}
             {activeSection === "trailer" && <Trailer />}
             {activeSection === "features" && <Features />}
+            {activeSection === "entity" && <Entity />}
             {activeSection === "download" && <Download />}
             {activeSection === "contact" && <Contact />}
             {activeSection === "operator" && (

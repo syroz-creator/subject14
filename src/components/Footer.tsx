@@ -37,7 +37,7 @@ function DiscordIcon({ className }: { className?: string }) {
 }
 
 const socialLinkClass =
-  "flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary";
+  "flex h-11 w-11 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary";
 
 const footerLinkClass =
   "text-[11px] uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-white";
@@ -50,7 +50,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="mt-auto border-t border-white/5 bg-black/55 py-12 backdrop-blur-sm">
+    <footer className="mt-auto border-t border-white/8 bg-[#080b0e]/72 py-12 backdrop-blur-sm">
       <div className="section-frame">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr_1fr] lg:items-start">
           <div className="space-y-4">
@@ -109,7 +109,7 @@ export default function Footer() {
 
           <div className="space-y-4">
             <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground/55">Studio</p>
-            <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 text-xs uppercase tracking-widest text-muted-foreground">
+            <div className="rounded-md border border-white/8 bg-white/[0.04] p-4 text-xs uppercase tracking-widest text-muted-foreground">
               <p>© 2026 SUBJECT 14. {t.footer.rights}</p>
               <p className="mt-2 text-[10px] opacity-60">{t.footer.credits}</p>
             </div>

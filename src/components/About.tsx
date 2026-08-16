@@ -18,7 +18,7 @@ export default function About() {
           className="h-full w-full scale-[1.02] object-cover object-center brightness-105 contrast-105 saturate-95"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.68),rgba(0,0,0,0.36)_54%,rgba(0,0,0,0.58)),linear-gradient(180deg,rgba(0,0,0,0.06),rgba(0,0,0,0.50))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,12,16,0.82),rgba(9,12,16,0.48)_55%,rgba(5,6,7,0.72)),linear-gradient(180deg,rgba(0,0,0,0.10),rgba(0,0,0,0.58))]" />
         <div className="absolute inset-0 bg-noise" />
       </div>
 
@@ -28,13 +28,13 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl text-left"
+          className="readable-surface max-w-4xl rounded-md p-5 text-left sm:p-7 lg:p-9"
         >
           <p className="section-copy-kicker mb-4 text-primary/85">Gameplay Overview</p>
-          <h2 className="text-glow-red mb-7 max-w-2xl font-heading text-5xl uppercase leading-none tracking-[0.02em] text-white sm:text-6xl lg:text-7xl">
+          <h2 className="section-heading mb-7 max-w-2xl">
             Survive the System
           </h2>
-          <div className="space-y-6 text-base leading-7 text-white/86 [text-shadow:0_2px_18px_rgba(0,0,0,0.85)] sm:text-lg sm:leading-8">
+          <div className="space-y-6 text-base leading-7 text-white/82 sm:text-lg sm:leading-8">
             <p className="max-w-2xl">{t.about.p2}</p>
             <div className="grid max-w-4xl gap-3 text-left sm:grid-cols-3">
               {[
@@ -42,13 +42,13 @@ export default function About() {
                 ["Solve", "Restore power, open locked paths, and read the environment before moving."],
                 ["Survive", "Stay ahead of the entity while the facility reacts to your choices."],
               ].map(([title, copy]) => (
-                <div key={title} className="border-l border-primary/40 bg-black/22 px-4 py-4 backdrop-blur-[2px]">
+                <div key={title} className="rounded-md border border-white/10 bg-white/[0.045] px-4 py-4">
                   <p className="font-mono text-[0.72rem] uppercase tracking-[0.12em] text-primary">{title}</p>
-                  <p className="mt-3 text-sm leading-6 text-white/78">{copy}</p>
+                  <p className="mt-3 text-sm leading-6 text-white/72">{copy}</p>
                 </div>
               ))}
             </div>
-            <p className="max-w-2xl text-white/78 italic">{t.about.p3}</p>
+            <p className="max-w-2xl border-l border-primary/45 pl-4 text-white/76 italic">{t.about.p3}</p>
           </div>
         </motion.div>
       </div>

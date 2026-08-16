@@ -32,7 +32,7 @@ const sectors = [
 ];
 
 const inputClass =
-  "w-full rounded-md border border-white/10 bg-[#151515] px-4 py-3 font-mono text-sm text-white outline-none transition-all duration-300 placeholder:text-white/25 focus:border-primary/70 focus:ring-1 focus:ring-primary/50";
+  "w-full rounded-md border border-white/10 bg-[#121820] px-4 py-3 font-mono text-sm text-white/88 outline-none transition-all duration-300 placeholder:text-white/30 focus:border-primary/65 focus:ring-1 focus:ring-primary/45";
 
 const labelClass = "font-mono text-[0.7rem] font-bold uppercase tracking-[0.24em] text-primary";
 
@@ -158,7 +158,7 @@ export default function Contact() {
           className="h-full w-full scale-105 object-cover object-center opacity-30 grayscale"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_60%,rgba(179,32,32,0.18),transparent_26%),linear-gradient(180deg,rgba(0,0,0,0.78),rgba(0,0,0,0.92))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_60%,rgba(179,32,32,0.12),transparent_26%),radial-gradient(circle_at_12%_16%,rgba(64,118,118,0.14),transparent_28rem),linear-gradient(180deg,rgba(8,12,16,0.78),rgba(7,8,10,0.90))]" />
         <div className="absolute inset-0 bg-noise" />
       </div>
 
@@ -173,10 +173,10 @@ export default function Contact() {
             <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
             <p className="font-mono text-xs uppercase tracking-[0.34em]">Secure Contact Channel</p>
           </div>
-          <h2 className="text-glow-red font-heading text-5xl uppercase tracking-[0.08em] text-white sm:text-6xl md:text-7xl">
+          <h2 className="text-glow-red font-heading text-5xl uppercase tracking-[0.06em] text-foreground sm:text-6xl md:text-7xl">
             Contact
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-white/64">
+          <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-white/70">
             Send questions, bug reports, creator requests, or business messages directly to the Subject 14 team.
           </p>
         </motion.div>
@@ -185,9 +185,9 @@ export default function Contact() {
           initial={{ opacity: 0, y: 34 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.7 }}
-          className="contact-panel panel-film border-horror relative w-full max-w-xl overflow-hidden rounded-[1.15rem] border border-primary/20 border-t-primary/55 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.58),0_0_46px_rgba(179,32,32,0.12)] sm:p-9"
+          className="contact-panel readable-surface relative w-full max-w-xl overflow-hidden rounded-md border-t border-t-primary/45 p-5 sm:p-9"
         >
-          <div className="pointer-events-none absolute inset-3 z-10 rounded-[0.75rem] border border-white/8" />
+          <div className="pointer-events-none absolute inset-3 z-10 rounded-md border border-white/8" />
           <div className="pointer-events-none absolute inset-x-3 top-3 z-10 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent" />
           <CornerAccent position="top-left" />
           <CornerAccent position="top-right" />
@@ -241,11 +241,11 @@ export default function Contact() {
               />
             </label>
 
-            <div className="rounded-md border border-primary/30 bg-primary/10 px-4 py-3">
+            <div className="rounded-md border border-primary/25 bg-primary/8 px-4 py-3">
               <p className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.18em] text-primary">
                 Language Warning
               </p>
-              <p className="mt-2 text-sm leading-6 text-white/68">
+              <p className="mt-2 text-sm leading-6 text-white/70">
                 Slurs, harassment, and bad words are not allowed. Messages that contain blocked language will not be
                 sent.
               </p>
@@ -288,13 +288,13 @@ export default function Contact() {
           </form>
         </motion.div>
 
-        <div className="mt-8 grid w-full max-w-5xl gap-4 opacity-70 md:grid-cols-3">
+        <div className="mt-8 grid w-full max-w-5xl gap-4 opacity-85 md:grid-cols-3">
           {[
             ["Support", "Use this for demo download issues, broken links, or website problems."],
             ["Creators", "Send trailer, coverage, and collaboration requests here."],
             ["Privacy", "Do not send passwords, payment details, or private account information."],
           ].map(([title, copy]) => (
-            <div key={title} className="border-l border-primary/35 px-4 py-3">
+            <div key={title} className="rounded-md border border-white/10 bg-white/[0.035] px-4 py-3">
               <p className="mb-1 font-mono text-xs uppercase tracking-[0.22em] text-primary">{title}</p>
               <p className="font-mono text-xs uppercase leading-5 text-white/52">{copy}</p>
             </div>

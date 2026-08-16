@@ -21,6 +21,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
     { name: t.nav.story, section: "story" },
     { name: t.nav.gallery, section: "gallery" },
     { name: t.nav.trailer, section: "trailer" },
+    { name: "Entity", section: "entity" },
     { name: t.nav.requirements, section: "download" },
     { name: t.nav.contact, section: "contact" },
   ] satisfies { name: string; section: SectionId }[];
@@ -41,17 +42,22 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-white/8 bg-[#07080b]/82 backdrop-blur-xl"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#0b0f13]/82 backdrop-blur-xl"
     >
       <div className="nav-frame mx-auto max-w-[120rem] px-4 sm:px-6 lg:px-10">
         <div className="flex h-20 items-center justify-between gap-4 xl:grid xl:h-24 xl:grid-cols-[minmax(220px,1fr)_auto_minmax(220px,1fr)] xl:justify-normal">
           <button
             type="button"
             onClick={() => navigate("home")}
-            className="group text-left transition-colors duration-300 lg:justify-self-center"
+            className="group inline-flex items-center gap-3 text-left transition-colors duration-300 lg:justify-self-center"
             aria-label="Go to home"
           >
-            <span className="nav-brand block font-heading text-[1.55rem] uppercase tracking-[0.04em] text-white transition-opacity duration-300 group-hover:opacity-80 sm:text-[1.8rem] lg:text-[1.95rem]">
+            <img
+              src="/apple-touch-icon.png"
+              alt=""
+              className="h-10 w-10 rounded-md border border-white/10 object-cover shadow-[0_8px_22px_rgba(0,0,0,0.34)]"
+            />
+            <span className="nav-brand block font-heading text-[1.55rem] uppercase tracking-[0.04em] text-foreground transition-opacity duration-300 group-hover:opacity-80 sm:text-[1.8rem] lg:text-[1.95rem]">
               SUBJECT 14
             </span>
           </button>
@@ -78,7 +84,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
             <Button
               variant="ghost"
               onClick={() => navigate("download")}
-              className="hidden min-h-12 rounded-[0.85rem] bg-primary px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white hover:bg-primary/90 sm:inline-flex"
+              className="hidden min-h-12 rounded-md bg-primary px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white hover:bg-primary/90 sm:inline-flex"
             >
               <Download className="mr-2 h-4 w-4" />
               {t.download.demo}
@@ -96,7 +102,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
               >
                 <Menu className="w-5 h-5" />
               </DialogTrigger>
-              <DialogContent className="xl:hidden border-horror bg-black/95 p-5 backdrop-blur-md sm:p-6">
+              <DialogContent className="xl:hidden border-horror bg-[#0b0f13]/96 p-5 backdrop-blur-md sm:p-6">
                 <DialogTitle className="text-xs uppercase tracking-[0.16em] text-primary">
                   {t.nav.navigate}
                 </DialogTitle>
@@ -115,14 +121,14 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                       {item.name}
                     </button>
                   ))}
-                  <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-3">
+                  <div className="rounded-md border border-white/10 bg-white/5 px-4 py-3">
                     <div className="mb-2 text-[10px] uppercase tracking-[0.14em] text-white/45">{t.nav.language}</div>
                     <LanguageSwitcher />
                   </div>
                   <Button
                     variant="ghost"
                     onClick={() => navigate("download")}
-                    className="mt-2 min-h-10 rounded-[0.75rem] bg-primary text-[0.7rem] uppercase tracking-[0.1em] text-white hover:bg-primary/90 sm:min-h-12 sm:rounded-[0.85rem] sm:text-xs sm:tracking-[0.12em]"
+                    className="mt-2 min-h-10 rounded-md bg-primary text-[0.7rem] uppercase tracking-[0.1em] text-white hover:bg-primary/90 sm:min-h-12 sm:text-xs sm:tracking-[0.12em]"
                   >
                     <Download className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     {t.download.demo}
