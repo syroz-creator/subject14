@@ -55,7 +55,7 @@ export default function CookieConsent() {
             accept, reject, manage, or withdraw advertising consent at any time.
           </p>
           <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm font-medium text-[#1a73e8]">
-            <a href="#privacy" className="hover:underline">
+            <a href="/privacy.html" className="hover:underline">
               Privacy Policy
             </a>
             <a

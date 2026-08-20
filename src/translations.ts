@@ -42,14 +42,14 @@ export const translations = {
     },
     features: {
       title: "Engineered for Terror",
-      subtitle: "Unparalleled immersion in a world of shadows",
+      subtitle: "Systems, spaces, and sound working together",
       f1: {
         title: "Intense First-Person Horror",
-        desc: "Experience the terror through the eyes of a survivor in a hyper-realistic setting.",
+        desc: "Play from the survivor's point of view as the facility closes in around you.",
       },
       f2: {
         title: "Stalking AI Villain",
-        desc: "A major threat that can chase and catch you. It learns your patterns and hunts you relentlessly.",
+        desc: "A major threat can chase, catch, and pressure you while you search for a way out.",
       },
       f3: {
         title: "Puzzle-Solving & Exploration",
@@ -57,7 +57,7 @@ export const translations = {
       },
       f4: {
         title: "Environmental Storytelling",
-        desc: "The world itself tells the story. Hidden clues and disturbing evidence are everywhere.",
+        desc: "Rooms, locked doors, equipment, and evidence help explain what happened in the facility.",
       },
       f5: {
         title: "Immersive Sound Design",
@@ -65,7 +65,7 @@ export const translations = {
       },
       f6: {
         title: "Unreal Engine 5 Visuals",
-        desc: "Cutting-edge graphics that bring the oppressive atmosphere of the facility to life.",
+        desc: "Unreal Engine 5 is used to build the lighting, materials, and oppressive facility spaces.",
       },
     },
     gallery: {
@@ -84,7 +84,7 @@ export const translations = {
     },
     download: {
       title: "Face the Unknown",
-      subtitle: "The facility is waiting. Experience the first 60 minutes of the nightmare that everyone is talking about.",
+      subtitle: "The facility is waiting. Check the system requirements and follow updates for the playable build.",
       demo: "Play Now",
       steam: "Wishlist on Steam",
       systemCheck: "System Check",
@@ -216,7 +216,7 @@ export const translations = {
     },
     download: {
       title: "Enfréntate a lo Desconocido",
-      subtitle: "La instalación está esperando. Vive los primeros 60 minutos de la pesadilla de la que todos hablan.",
+      subtitle: "La instalación está esperando. Consulta los requisitos del sistema y sigue las novedades de la versión jugable.",
       demo: "Jugar Ahora",
       steam: "Lista de deseos en Steam",
       systemCheck: "Comprobación del Sistema",

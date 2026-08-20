@@ -10,9 +10,10 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/
 type NavbarProps = {
   activeSection: SectionId;
   onNavigate: (section: SectionId) => void;
+  onNavigateDevelopment: () => void;
 };
 
-export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
+export default function Navbar({ activeSection, onNavigate, onNavigateDevelopment }: NavbarProps) {
   const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -21,6 +22,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
     { name: t.nav.story, section: "story" },
     { name: t.nav.gallery, section: "gallery" },
     { name: t.nav.trailer, section: "trailer" },
+    { name: "Development", section: "development" },
     { name: t.nav.requirements, section: "download" },
     { name: t.nav.contact, section: "contact" },
   ] satisfies { name: string; section: SectionId }[];
@@ -34,6 +36,10 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
 
   const navigate = (section: SectionId) => {
     setMobileMenuOpen(false);
+    if (section === "development") {
+      onNavigateDevelopment();
+      return;
+    }
     onNavigate(section);
   };
 

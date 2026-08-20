@@ -69,15 +69,15 @@
   },
   "features": {
     "title": "Engineered for Terror",
-    "subtitle": "Unparalleled immersion in a world of shadows",
+    "subtitle": "Systems, spaces, and sound working together",
     "items": [
       {
         "title": "Intense First-Person Horror",
-        "description": "Experience the terror through the eyes of a survivor in a hyper-realistic setting."
+        "description": "Play from the survivor's point of view as the facility closes in around you."
       },
       {
         "title": "Stalking AI Villain",
-        "description": "A major threat that can chase and catch you. It learns your patterns and hunts you relentlessly."
+        "description": "A major threat can chase, catch, and pressure you while you search for a way out."
       },
       {
         "title": "Puzzle-Solving & Exploration",
@@ -85,7 +85,7 @@
       },
       {
         "title": "Environmental Storytelling",
-        "description": "The world itself tells the story. Hidden clues and disturbing evidence are everywhere."
+        "description": "Rooms, locked doors, equipment, and evidence help explain what happened in the facility."
       },
       {
         "title": "Immersive Sound Design",
@@ -93,13 +93,13 @@
       },
       {
         "title": "Unreal Engine 5 Visuals",
-        "description": "Cutting-edge graphics that bring the oppressive atmosphere of the facility to life."
+        "description": "Unreal Engine 5 is used to build the lighting, materials, and oppressive facility spaces."
       }
     ]
   },
   "download": {
     "title": "Face the Unknown",
-    "subtitle": "The facility is waiting. Experience the first 70 minutes of the nightmare that everyone is talking about.",
+    "subtitle": "The facility is waiting. Check the system requirements and follow updates for the playable build.",
     "demoUrl": "",
     "steamUrl": ""
   },
