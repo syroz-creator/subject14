@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { BookOpen, DoorOpen, Flashlight, Lightbulb, Route, Volume2 } from "lucide-react";
+import { Download, Play } from "lucide-react";
 import type { SectionId } from "../App";
 import { developmentArticles, type DevelopmentArticleSlug } from "../development-content";
 
@@ -8,237 +8,216 @@ type HomeContentProps = {
   onNavigateDevelopment: (slug?: DevelopmentArticleSlug) => void;
 };
 
-const gameplayNotes = [
+const featureItems = [
   {
-    title: "Explore Connected Sections",
-    copy:
-      "The facility is built around rooms that relate to one another: labs, corridors, storage spaces, observation areas, and locked routes. Learning how they connect is part of surviving them.",
-    icon: Route,
+    title: "Exploration",
+    copy: "Move through connected labs, corridors, storage rooms, and locked sections while learning how the facility fits together.",
   },
   {
-    title: "Restore and Unlock",
-    copy:
-      "Progress depends on practical tasks such as restoring power, working with generators, reading clues, and opening sealed paths through the building.",
-    icon: Lightbulb,
+    title: "Puzzles",
+    copy: "Restore power, work with generators, read clues, and open routes that were sealed before you arrived.",
   },
   {
-    title: "Stay Ahead of the Entity",
-    copy:
-      "The threat is not only there for a single scare. It can chase, catch, and pressure the player while they are trying to solve problems inside the facility.",
-    icon: Flashlight,
+    title: "Atmosphere",
+    copy: "Lighting, sound, and environmental details carry much of the horror. The rooms should feel wrong before anything moves.",
   },
+  {
+    title: "Enemy Encounters",
+    copy: "The entity can chase and catch the player, turning navigation and objective work into risky decisions.",
+  },
+];
+
+const screenshots = [
+  { title: "Containment Cell Block", url: "/site-images/labpic8.png" },
+  { title: "Lab Access Corridor", url: "/site-images/labpic7.png" },
+  { title: "Observation Desk", url: "/site-images/labpic11.png" },
 ];
 
 const faqItems = [
   {
-    question: "What kind of game is Subject 14?",
+    question: "What is Subject 14?",
     answer:
-      "Subject 14 is a first-person psychological horror game set inside a decaying experimental facility. The site describes a story-driven experience with exploration, puzzles, power restoration, locked sections, and an entity that hunts the player.",
+      "A first-person psychological horror game set inside a decaying experimental facility, with exploration, puzzles, and an entity hunting the player.",
   },
   {
-    question: "Is there a playable build?",
+    question: "Is the demo available?",
     answer:
-      "The project status on the site says a playable demo is in preparation for Windows PC. The current website includes screenshots, system requirements, contact tools, and an in-site teaser trailer.",
+      "The site currently lists a playable demo as being in preparation for Windows PC. The teaser and screenshots are available now.",
   },
   {
-    question: "What does the player do in the facility?",
+    question: "What does the player do?",
     answer:
-      "The player searches connected rooms, follows environmental clues, restores power, opens blocked routes, and tries to escape while avoiding the threat inside the building.",
+      "Search connected rooms, restore power, unlock blocked paths, read environmental clues, and escape the facility.",
   },
   {
-    question: "Is the horror based only on jump scares?",
+    question: "Is there more development information?",
     answer:
-      "The focus shown on the site is atmosphere, sound, lighting, environmental storytelling, and being stalked while solving objectives. Jump scares may happen, but the core tension comes from moving through the facility under pressure.",
+      "Yes. The development notes explain the facility design, puzzle flow, and horror atmosphere in more detail.",
   },
 ];
 
 export default function HomeContent({ onNavigate, onNavigateDevelopment }: HomeContentProps) {
   return (
     <div className="relative overflow-hidden">
-      <section className="relative py-20 sm:py-24" aria-labelledby="subject14-overview">
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(179,32,32,0.04),transparent_32%,rgba(255,255,255,0.015))]" />
-        <div className="section-frame relative z-10">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="max-w-3xl"
-            >
-              <p className="section-copy-kicker mb-4 text-primary/85">About Subject 14</p>
-              <h2 id="subject14-overview" className="section-heading mb-6">
-                A Horror Game Built Around a Place You Have to Understand
+      <section className="relative py-16 sm:py-20" aria-labelledby="home-about">
+        <div className="section-frame max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65 }}
+            className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-end"
+          >
+            <div>
+              <p className="section-copy-kicker mb-4 text-primary/85">About</p>
+              <h2 id="home-about" className="section-heading mb-5 max-w-2xl">
+                A Research Facility That Has Gone Quiet
               </h2>
-              <div className="space-y-5 text-base leading-7 text-white/76 sm:text-lg sm:leading-8">
-                <p>
-                  Subject 14 is a first-person psychological horror game about waking inside a failing research
-                  facility and trying to understand what happened there before it finishes happening to you.
-                </p>
-                <p>
-                  The game is centered on exploration instead of a straight hallway of scares. The facility has
-                  connected rooms, locked sections, generators, evidence, and routes that become more important as the
-                  player learns how the building fits together.
-                </p>
-                <p>
-                  The horror comes from being asked to think while under pressure. You may know which room needs power,
-                  but getting back to it safely is another problem. You may find the next door, but the sound you made
-                  getting there can change the situation.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.08 }}
-              className="panel-film border-horror grid gap-4 rounded-lg p-5 sm:p-6"
-            >
-              <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                <DoorOpen className="h-6 w-6 text-primary" />
-                <div>
-                  <p className="font-heading text-2xl uppercase tracking-[0.06em] text-white">Setting</p>
-                  <p className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/42">
-                    Experimental facility
-                  </p>
-                </div>
-              </div>
-              <p className="text-sm leading-7 text-white/68 sm:text-base">
-                The rooms shown across the site point to a working facility that has broken down: research labs,
-                chemical storage, containment, corridors, service halls, and observation spaces. The story is told
-                through what is left behind as much as through direct text.
+            </div>
+            <div className="space-y-4 text-base leading-7 text-white/74 sm:text-lg sm:leading-8">
+              <p>
+                Subject 14 is a first-person psychological horror game about waking inside a failing experimental
+                facility and finding a way out before the place closes around you.
               </p>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {["UE5 visuals", "Windows PC target", "Teaser available"].map((item) => (
-                  <div key={item} className="border border-white/10 bg-black/24 px-3 py-3">
-                    <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-white/62">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+              <p>
+                The game focuses on connected rooms, locked sections, power systems, environmental clues, and an entity
+                that pressures the player while they are trying to solve practical problems.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="relative py-20 sm:py-24" aria-labelledby="homepage-gameplay">
-        <div className="section-frame">
-          <div className="mb-10 max-w-3xl">
+      <section className="relative py-16 sm:py-20" aria-labelledby="home-gameplay">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(179,32,32,0.08),transparent_34%)]" />
+        <div className="section-frame relative z-10 max-w-6xl">
+          <div className="mb-8 max-w-2xl">
             <p className="section-copy-kicker mb-4 text-primary/85">Gameplay</p>
-            <h2 id="homepage-gameplay" className="section-heading mb-5">
-              What You Do Inside the Facility
+            <h2 id="home-gameplay" className="section-heading mb-4">
+              Explore, Solve, Stay Quiet
             </h2>
-            <p className="max-w-2xl text-base leading-7 text-muted-foreground">
-              Subject 14 is being presented as a horror game where the player has to keep moving, investigate rooms,
-              and solve grounded objectives while the entity makes every return trip feel less safe.
+            <p className="text-base leading-7 text-muted-foreground">
+              The loop is simple: understand the facility, open the next route, and avoid making the wrong kind of
+              noise.
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
-            {gameplayNotes.map((item, index) => (
-              <motion.article
-                key={item.title}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: index * 0.08 }}
-                className="panel-film border-horror min-h-64 rounded-lg p-5 sm:p-6"
-              >
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-md border border-primary/25 bg-primary/12">
-                  <item.icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="font-heading text-xl uppercase tracking-[0.06em] text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/66">{item.copy}</p>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative py-20 sm:py-24" aria-labelledby="homepage-development">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(179,32,32,0.10),transparent_34%)]" />
-        <div className="section-frame relative z-10">
-          <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <p className="section-copy-kicker mb-4 text-primary/85">Behind the Game</p>
-              <h2 id="homepage-development" className="section-heading mb-5">
-                Development Notes
-              </h2>
-              <p className="max-w-2xl text-base leading-7 text-muted-foreground">
-                Short development articles explain how the current game direction is being shaped: the facility, the
-                puzzle flow, and the way sound and lighting support the encounters.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => onNavigateDevelopment()}
-              className="hero-button-ghost w-full sm:w-auto"
-            >
-              <BookOpen className="h-4 w-4" />
-              Read Devlog
-            </button>
-          </div>
-
-          <div className="grid gap-5 lg:grid-cols-3">
-            {developmentArticles.map((article) => (
-              <article key={article.slug} className="border-horror overflow-hidden rounded-lg bg-black/45">
-                <img
-                  src={article.imageUrl}
-                  alt=""
-                  className="aspect-video w-full object-cover opacity-80"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="p-5">
-                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-primary/80">
-                    {article.readingLabel}
-                  </p>
-                  <h3 className="mt-3 font-heading text-2xl uppercase leading-tight tracking-[0.04em] text-white">
-                    {article.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-white/64">{article.deck}</p>
-                  <button
-                    type="button"
-                    onClick={() => onNavigateDevelopment(article.slug)}
-                    className="mt-5 inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-primary transition-colors hover:text-white"
-                  >
-                    Read more
-                  </button>
-                </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {featureItems.map((item) => (
+              <article key={item.title} className="border-l border-primary/35 bg-black/20 px-4 py-4">
+                <h3 className="font-heading text-xl uppercase tracking-[0.05em] text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/64">{item.copy}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative py-20 sm:py-24" aria-labelledby="homepage-faq">
-        <div className="section-frame">
-          <div className="grid gap-8 lg:grid-cols-[0.72fr_1fr]">
+      <section className="relative py-16 sm:py-20" aria-labelledby="home-media">
+        <div className="section-frame max-w-6xl">
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="section-copy-kicker mb-4 text-primary/85">Media</p>
+              <h2 id="home-media" className="section-heading">Screenshots</h2>
+            </div>
+            <button
+              type="button"
+              onClick={() => onNavigate("gallery")}
+              className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-primary transition-colors hover:text-white"
+            >
+              Open full gallery
+            </button>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
+            <button
+              type="button"
+              onClick={() => onNavigate("gallery")}
+              className="border-horror group relative aspect-video overflow-hidden rounded-md bg-black text-left"
+            >
+              <img
+                src={screenshots[0].url}
+                alt={screenshots[0].title}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+              <p className="absolute bottom-4 left-4 font-mono text-xs uppercase tracking-[0.16em] text-white/72">
+                {screenshots[0].title}
+              </p>
+            </button>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+              {screenshots.slice(1).map((image) => (
+                <button
+                  key={image.title}
+                  type="button"
+                  onClick={() => onNavigate("gallery")}
+                  className="border-horror group relative aspect-video overflow-hidden rounded-md bg-black text-left"
+                >
+                  <img
+                    src={image.url}
+                    alt={image.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-transparent to-transparent" />
+                  <p className="absolute bottom-3 left-3 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-white/68">
+                    {image.title}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative py-16 sm:py-20" aria-labelledby="home-development">
+        <div className="section-frame max-w-6xl">
+          <div className="mb-8 max-w-2xl">
+            <p className="section-copy-kicker mb-4 text-primary/85">Development Notes</p>
+            <h2 id="home-development" className="section-heading mb-4">
+              Behind the Game
+            </h2>
+            <p className="text-base leading-7 text-muted-foreground">
+              Longer notes stay on their own pages so the homepage can stay focused on the game.
+            </p>
+          </div>
+
+          <div className="divide-y divide-white/10 border-y border-white/10">
+            {developmentArticles.map((article) => (
+              <article key={article.slug} className="grid gap-3 py-5 md:grid-cols-[1fr_auto] md:items-center">
+                <div>
+                  <h3 className="font-heading text-2xl uppercase tracking-[0.04em] text-white">{article.title}</h3>
+                  <p className="mt-2 max-w-3xl text-sm leading-6 text-white/60">{article.deck}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onNavigateDevelopment(article.slug)}
+                  className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-primary transition-colors hover:text-white"
+                >
+                  Read
+                </button>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative py-16 sm:py-20" aria-labelledby="home-faq">
+        <div className="section-frame max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-[0.36fr_0.64fr]">
             <div>
               <p className="section-copy-kicker mb-4 text-primary/85">FAQ</p>
-              <h2 id="homepage-faq" className="section-heading mb-5">
-                Useful Details
-              </h2>
-              <p className="max-w-xl text-base leading-7 text-muted-foreground">
-                These answers are based on the current site information and avoid guessing about release dates,
-                pricing, or store pages that are not confirmed here.
-              </p>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <button type="button" onClick={() => onNavigate("gallery")} className="hero-button-ghost">
-                  View Screenshots
-                </button>
-                <button type="button" onClick={() => onNavigate("contact")} className="hero-button-solid">
-                  Contact Team
-                </button>
-              </div>
+              <h2 id="home-faq" className="section-heading">Quick Answers</h2>
             </div>
-
-            <div className="space-y-3">
+            <div className="space-y-2">
               {faqItems.map((item) => (
-                <details key={item.question} className="group border-horror rounded-lg bg-black/34 p-5">
+                <details key={item.question} className="border-b border-white/10 py-4">
                   <summary className="cursor-pointer list-none font-heading text-xl uppercase tracking-[0.04em] text-white">
                     {item.question}
                   </summary>
-                  <p className="mt-4 text-sm leading-7 text-white/66">{item.answer}</p>
+                  <p className="mt-3 max-w-2xl text-sm leading-6 text-white/62">{item.answer}</p>
                 </details>
               ))}
             </div>
@@ -246,21 +225,33 @@ export default function HomeContent({ onNavigate, onNavigateDevelopment }: HomeC
         </div>
       </section>
 
-      <section className="relative py-20 sm:py-24" aria-labelledby="homepage-sound">
-        <div className="section-frame">
-          <div className="panel-film border-horror grid gap-6 rounded-lg p-5 sm:p-7 lg:grid-cols-[auto_1fr] lg:items-center">
-            <div className="flex h-14 w-14 items-center justify-center rounded-md border border-primary/25 bg-primary/12">
-              <Volume2 className="h-7 w-7 text-primary" />
-            </div>
-            <div>
-              <h2 id="homepage-sound" className="font-heading text-3xl uppercase tracking-[0.04em] text-white">
-                Why the Facility Stays Quiet
+      <section className="relative py-16 sm:py-20" aria-labelledby="home-final-cta">
+        <div className="section-frame max-w-6xl">
+          <div className="border-horror relative overflow-hidden rounded-lg bg-black px-5 py-10 text-center sm:px-8 sm:py-12">
+            <img
+              src="/site-images/03-story.jpg"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover opacity-24"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-black/72" />
+            <div className="relative z-10 mx-auto max-w-2xl">
+              <h2 id="home-final-cta" className="font-heading text-4xl uppercase tracking-[0.04em] text-white sm:text-5xl">
+                Enter the Facility
               </h2>
-              <p className="mt-3 max-w-4xl text-sm leading-7 text-white/66 sm:text-base">
-                Subject 14 uses sound as part of the warning system. A generator, a distant hallway, a whisper, or a
-                door can matter because the player is already listening for the entity. The atmosphere works best when
-                the quiet has a purpose.
+              <p className="mt-4 text-base leading-7 text-white/68">
+                Watch the teaser or check the current system requirements for the playable build.
               </p>
+              <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+                <button type="button" onClick={() => onNavigate("trailer")} className="hero-button-solid">
+                  <Play className="h-4 w-4 fill-current" />
+                  Watch Trailer
+                </button>
+                <button type="button" onClick={() => onNavigate("download")} className="hero-button-ghost">
+                  <Download className="h-4 w-4" />
+                  Requirements
+                </button>
+              </div>
             </div>
           </div>
         </div>

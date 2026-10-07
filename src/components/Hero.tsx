@@ -16,17 +16,25 @@ export default function Hero({ onNavigate }: HeroProps) {
   const statusItems = [t.hero.statusDemo, t.hero.statusPlatform, t.hero.statusTrailer];
 
   return (
-    <section id="home" className="relative flex min-h-screen w-full items-center overflow-hidden">
+    <section id="home" className="hero-stage relative flex min-h-screen w-full items-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
           src={siteContent.hero.backgroundUrl}
           alt="Horror Background"
-          className="h-full w-full object-cover object-center opacity-62 scale-105"
+          className="h-full w-full object-cover object-center opacity-72 scale-105"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_48%,rgba(179,32,32,0.18),transparent_22%),linear-gradient(90deg,rgba(2,4,8,0.76)_0%,rgba(2,4,8,0.56)_42%,rgba(0,0,0,0.68)_100%)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/72" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_44%,rgba(214,38,38,0.20),transparent_22%),radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.08),transparent_14%),linear-gradient(90deg,rgba(1,3,7,0.82)_0%,rgba(6,2,3,0.48)_45%,rgba(0,0,0,0.72)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/80" />
+        <div className="absolute inset-0 hero-vignette" />
+        <div className="absolute inset-0 hero-scanlines pointer-events-none" />
         <div className="absolute inset-0 bg-noise pointer-events-none" />
+      </div>
+
+      <div className="hero-alert-strip pointer-events-none absolute left-0 right-0 top-20 z-10 hidden h-8 items-center overflow-hidden border-y border-primary/25 bg-black/45 font-mono text-[0.58rem] uppercase tracking-[0.22em] text-primary/80 backdrop-blur-sm md:flex xl:top-24">
+        <div className="hero-alert-marquee whitespace-nowrap">
+          case file s-14 // unauthorized personnel detected // containment breach // lights out protocol
+        </div>
       </div>
 
       <div className="section-frame relative z-10 flex w-full items-center justify-center pt-24 lg:min-h-screen lg:pt-0">
@@ -34,14 +42,18 @@ export default function Hero({ onNavigate }: HeroProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
-          className="flex w-full max-w-[62rem] flex-col items-center py-12 text-center sm:py-16 lg:py-0"
+          className="hero-content flex w-full max-w-[62rem] flex-col items-center py-12 text-center sm:py-16 lg:py-0"
         >
-          <div className="animate-flicker mb-5 w-full leading-none uppercase">
-            <h1 className="text-glow-red font-heading text-[clamp(3.6rem,17vw,9.8rem)] tracking-[0.03em] text-white">
+          <div className="hero-case-label mb-4 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-white/70 sm:text-xs">
+            playable nightmare // case reopened
+          </div>
+
+          <div className="hero-title-stack animate-flicker mb-5 w-full leading-none uppercase">
+            <h1 className="text-glow-red hero-title-word font-heading text-[clamp(3.8rem,17vw,10.8rem)] tracking-[0.03em] text-white">
               {titleTop}
             </h1>
             {titleRest.length > 0 ? (
-              <h1 className="text-glow-red font-heading -mt-1 text-[clamp(3.6rem,17vw,9.8rem)] tracking-[0.03em] text-primary">
+              <h1 className="text-glow-red hero-title-word hero-title-word-danger font-heading -mt-1 text-[clamp(3.8rem,17vw,10.8rem)] tracking-[0.03em] text-primary">
                 {titleBottom}
               </h1>
             ) : null}

@@ -47,7 +47,7 @@ export default function Navbar({ activeSection, onNavigate, onNavigateDevelopmen
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-white/8 bg-[#07080b]/82 backdrop-blur-xl"
+      className="site-nav fixed left-0 right-0 top-0 z-50"
     >
       <div className="nav-frame mx-auto max-w-[120rem] px-4 sm:px-6 lg:px-10">
         <div className="flex h-20 items-center justify-between gap-4 xl:grid xl:h-24 xl:grid-cols-[minmax(220px,1fr)_auto_minmax(220px,1fr)] xl:justify-normal">
@@ -57,13 +57,13 @@ export default function Navbar({ activeSection, onNavigate, onNavigateDevelopmen
             className="group text-left transition-colors duration-300 lg:justify-self-center"
             aria-label="Go to home"
           >
-            <span className="nav-brand block font-heading text-[1.55rem] uppercase tracking-[0.04em] text-white transition-opacity duration-300 group-hover:opacity-80 sm:text-[1.8rem] lg:text-[1.95rem]">
+            <span className="nav-brand animate-flicker block font-heading text-[1.55rem] uppercase tracking-[0.04em] text-white transition-opacity duration-300 group-hover:opacity-80 sm:text-[1.8rem] lg:text-[1.95rem]">
               SUBJECT 14
             </span>
           </button>
 
           <div className="hidden justify-self-center xl:block">
-            <div className="flex items-center gap-5 2xl:gap-7">
+            <div className="nav-link-strip flex items-center gap-2 2xl:gap-3">
               {navItems.map((item) => (
                 <button
                   key={item.name}
