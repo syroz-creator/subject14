@@ -1,11 +1,9 @@
 import { motion } from "motion/react";
 import { Download, Play } from "lucide-react";
 import type { SectionId } from "../App";
-import { developmentArticles, type DevelopmentArticleSlug } from "../development-content";
 
 type HomeContentProps = {
   onNavigate: (section: SectionId) => void;
-  onNavigateDevelopment: (slug?: DevelopmentArticleSlug) => void;
 };
 
 const featureItems = [
@@ -49,14 +47,9 @@ const faqItems = [
     answer:
       "Search connected rooms, restore power, unlock blocked paths, read environmental clues, and escape the facility.",
   },
-  {
-    question: "Is there more development information?",
-    answer:
-      "Yes. The development notes explain the facility design, puzzle flow, and horror atmosphere in more detail.",
-  },
 ];
 
-export default function HomeContent({ onNavigate, onNavigateDevelopment }: HomeContentProps) {
+export default function HomeContent({ onNavigate }: HomeContentProps) {
   return (
     <div className="relative overflow-hidden">
       <section className="relative py-16 sm:py-20" aria-labelledby="home-about">
@@ -168,38 +161,6 @@ export default function HomeContent({ onNavigate, onNavigateDevelopment }: HomeC
                 </button>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative py-16 sm:py-20" aria-labelledby="home-development">
-        <div className="section-frame max-w-6xl">
-          <div className="mb-8 max-w-2xl">
-            <p className="section-copy-kicker mb-4 text-primary/85">Development Notes</p>
-            <h2 id="home-development" className="section-heading mb-4">
-              Behind the Game
-            </h2>
-            <p className="text-base leading-7 text-muted-foreground">
-              Longer notes stay on their own pages so the homepage can stay focused on the game.
-            </p>
-          </div>
-
-          <div className="divide-y divide-white/10 border-y border-white/10">
-            {developmentArticles.map((article) => (
-              <article key={article.slug} className="grid gap-3 py-5 md:grid-cols-[1fr_auto] md:items-center">
-                <div>
-                  <h3 className="font-heading text-2xl uppercase tracking-[0.04em] text-white">{article.title}</h3>
-                  <p className="mt-2 max-w-3xl text-sm leading-6 text-white/60">{article.deck}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => onNavigateDevelopment(article.slug)}
-                  className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-primary transition-colors hover:text-white"
-                >
-                  Read
-                </button>
-              </article>
-            ))}
           </div>
         </div>
       </section>

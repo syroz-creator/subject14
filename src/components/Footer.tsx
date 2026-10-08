@@ -97,10 +97,6 @@ export default function Footer() {
                 Terms of Service
               </a>
 
-              <a href="/development" className={footerLinkClass}>
-                Development Notes
-              </a>
-
               <a href="#contact" className={footerLinkClass}>
                 Contact
               </a>

@@ -8,7 +8,6 @@ import Gallery from "./components/Gallery";
 import Trailer from "./components/Trailer";
 import Features from "./components/Features";
 import HomeContent from "./components/HomeContent";
-import Development from "./components/Development";
 import Download from "./components/Download";
 import Contact from "./components/Contact";
 import LegalPage from "./components/LegalPage";
@@ -17,10 +16,6 @@ import OperatorPanel from "./components/OperatorPanel";
 import SmallFooterAd from "./components/SmallFooterAd";
 import CookieConsent from "./components/CookieConsent";
 import { SiteContentProvider } from "./context/SiteContentContext";
-import {
-  findDevelopmentArticle,
-  type DevelopmentArticleSlug,
-} from "./development-content";
 
 export type SectionId =
   | "home"
@@ -29,7 +24,6 @@ export type SectionId =
   | "gallery"
   | "trailer"
   | "features"
-  | "development"
   | "download"
   | "contact"
   | "operator"
@@ -44,7 +38,6 @@ const validSections: SectionId[] = [
   "gallery",
   "trailer",
   "features",
-  "development",
   "download",
   "contact",
   "privacy",
@@ -53,7 +46,6 @@ const validSections: SectionId[] = [
 
 type RouteState = {
   section: SectionId;
-  articleSlug?: DevelopmentArticleSlug;
 };
 
 let visitorEntryLogged = false;
@@ -65,16 +57,6 @@ function getRouteFromLocation(): RouteState {
   }
 
   const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
-
-  if (pathname === "/development") {
-    return { section: "development" };
-  }
-
-  if (pathname.startsWith("/development/")) {
-    const slug = pathname.split("/").filter(Boolean)[1] || "";
-    const article = findDevelopmentArticle(slug);
-    return article ? { section: "development", articleSlug: article.slug } : { section: "not-found" };
-  }
 
   if (pathname !== "/" && pathname !== "/index.html") {
     return { section: "not-found" };
@@ -153,21 +135,12 @@ export default function App() {
       return;
     }
 
-    const article = route.articleSlug ? findDevelopmentArticle(route.articleSlug) : undefined;
-    const title = article
-      ? `${article.title} | Subject 14 Development`
-      : activeSection === "development"
-        ? "Development Notes | Subject 14"
-        : activeSection === "not-found"
-          ? "Page Not Found | Subject 14"
-          : "Subject 14 | Psychological Horror Game";
-    const description = article
-      ? article.metaDescription
-      : activeSection === "development"
-        ? "Development notes for Subject 14 covering the facility, puzzle exploration, horror atmosphere, and enemy encounters."
-        : activeSection === "not-found"
-          ? "The requested Subject 14 page could not be found."
-          : "Subject 14 is a first-person psychological horror game set in a decaying experimental facility with exploration, puzzles, and an entity that hunts you.";
+    const title = activeSection === "not-found"
+      ? "Page Not Found | Subject 14"
+      : "Subject 14 | Psychological Horror Game";
+    const description = activeSection === "not-found"
+      ? "The requested Subject 14 page could not be found."
+      : "Subject 14 is a first-person psychological horror game set in a decaying experimental facility with exploration, puzzles, and an entity that hunts you.";
 
     document.title = title;
     const metaDescription = document.querySelector<HTMLMetaElement>('meta[name="description"]');
@@ -182,7 +155,7 @@ export default function App() {
     document
       .querySelector<HTMLMetaElement>('meta[property="og:url"]')
       ?.setAttribute("content", `https://subject14.com${window.location.pathname}${window.location.hash || ""}`);
-  }, [activeSection, route.articleSlug]);
+  }, [activeSection]);
 
   const navigateToSection = (section: SectionId) => {
     if (typeof window !== "undefined") {
@@ -191,14 +164,6 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     setRoute({ section });
-  };
-
-  const navigateToDevelopment = (slug?: DevelopmentArticleSlug) => {
-    if (typeof window !== "undefined") {
-      window.history.pushState({}, "", slug ? `/development/${slug}` : "/development");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    setRoute({ section: "development", articleSlug: slug });
   };
 
   return (
@@ -210,13 +175,12 @@ export default function App() {
           <Navbar
             activeSection={activeSection}
             onNavigate={navigateToSection}
-            onNavigateDevelopment={navigateToDevelopment}
           />
           <main className="relative z-10 flex-1">
             {activeSection === "home" && (
               <>
                 <Hero onNavigate={navigateToSection} />
-                <HomeContent onNavigate={navigateToSection} onNavigateDevelopment={navigateToDevelopment} />
+                <HomeContent onNavigate={navigateToSection} />
               </>
             )}
             {activeSection === "about" && <About />}
@@ -224,13 +188,6 @@ export default function App() {
             {activeSection === "gallery" && <Gallery />}
             {activeSection === "trailer" && <Trailer />}
             {activeSection === "features" && <Features />}
-            {activeSection === "development" && (
-              <Development
-                articleSlug={route.articleSlug}
-                onNavigate={navigateToSection}
-                onNavigateDevelopment={navigateToDevelopment}
-              />
-            )}
             {activeSection === "download" && <Download />}
             {activeSection === "contact" && <Contact />}
             {activeSection === "operator" && (
@@ -258,14 +215,11 @@ export default function App() {
                     <p className="section-copy-kicker mb-4 text-primary/85">Signal Lost</p>
                     <h1 className="section-heading mb-5">Page Not Found</h1>
                     <p className="mx-auto max-w-xl text-sm leading-7 text-muted-foreground">
-                      This Subject 14 page does not exist. Return to the main site or open the development notes.
+                      This Subject 14 page does not exist. Return to the main site.
                     </p>
                     <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
                       <button type="button" onClick={() => navigateToSection("home")} className="hero-button-solid">
                         Back Home
-                      </button>
-                      <button type="button" onClick={() => navigateToDevelopment()} className="hero-button-ghost">
-                        Development Notes
                       </button>
                     </div>
                   </div>
