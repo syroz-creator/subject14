@@ -13,7 +13,6 @@ export default function Hero({ onNavigate }: HeroProps) {
   const { siteContent } = useSiteContent();
   const [titleTop, ...titleRest] = siteContent.hero.title.split(" ");
   const titleBottom = titleRest.join(" ") || titleTop;
-  const statusItems = [t.hero.statusDemo, t.hero.statusPlatform, t.hero.statusTrailer];
 
   return (
     <section id="home" className="hero-stage relative flex min-h-screen w-full items-center overflow-hidden">
@@ -24,7 +23,7 @@ export default function Hero({ onNavigate }: HeroProps) {
           className="h-full w-full object-cover object-center opacity-72 scale-105"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_44%,rgba(214,38,38,0.20),transparent_22%),radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.08),transparent_14%),linear-gradient(90deg,rgba(1,3,7,0.82)_0%,rgba(6,2,3,0.48)_45%,rgba(0,0,0,0.72)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.82)_0%,rgba(0,0,0,0.48)_45%,rgba(0,0,0,0.72)_100%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/80" />
         <div className="absolute inset-0 hero-vignette" />
         <div className="absolute inset-0 hero-scanlines pointer-events-none" />
@@ -56,11 +55,11 @@ export default function Hero({ onNavigate }: HeroProps) {
             {t.hero.description}
           </p>
 
-          <div className="flex w-full max-w-[44rem] flex-col items-stretch justify-center gap-4 sm:flex-row">
+          <div className="flex w-full max-w-[28rem] flex-col items-stretch justify-center gap-3 sm:flex-row">
             <button
               type="button"
               onClick={() => onNavigate("trailer")}
-              className="hero-button-solid group w-full sm:flex-1"
+              className="hero-button-solid w-full sm:flex-1"
             >
               <Play className="h-5 w-5 fill-current" />
               <span>{t.hero.trailer}</span>
@@ -68,25 +67,11 @@ export default function Hero({ onNavigate }: HeroProps) {
             <button
               type="button"
               onClick={() => onNavigate("download")}
-              className="hero-button-ghost group w-full sm:flex-1"
+              className="hero-button-ghost w-full sm:flex-1"
             >
-              <Download className="h-5 w-5 group-hover:animate-bounce" />
+              <Download className="h-5 w-5" />
               <span>{t.download.demo}</span>
             </button>
-          </div>
-
-          <div className="mt-7 w-full max-w-[44rem] border-t border-white/10 pt-4">
-            <p className="mb-2 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-white/38">
-              {t.hero.statusKicker}
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[0.68rem] uppercase tracking-[0.08em] text-white/58">
-              {statusItems.map((text, index) => (
-                <span key={text} className="inline-flex items-center gap-3">
-                  {index > 0 ? <span className="h-1 w-1 rounded-full bg-primary/70" aria-hidden="true" /> : null}
-                  {text}
-                </span>
-              ))}
-            </div>
           </div>
 
           <button
