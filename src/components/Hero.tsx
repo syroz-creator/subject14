@@ -31,12 +31,6 @@ export default function Hero({ onNavigate }: HeroProps) {
         <div className="absolute inset-0 bg-noise pointer-events-none" />
       </div>
 
-      <div className="hero-alert-strip pointer-events-none absolute left-0 right-0 top-20 z-10 hidden h-8 items-center overflow-hidden border-y border-primary/25 bg-black/45 font-mono text-[0.58rem] uppercase tracking-[0.22em] text-primary/80 backdrop-blur-sm md:flex xl:top-24">
-        <div className="hero-alert-marquee whitespace-nowrap">
-          case file s-14 // unauthorized personnel detected // containment breach // lights out protocol
-        </div>
-      </div>
-
       <div className="section-frame relative z-10 flex w-full items-center justify-center pt-24 lg:min-h-screen lg:pt-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -44,10 +38,6 @@ export default function Hero({ onNavigate }: HeroProps) {
           transition={{ duration: 0.9 }}
           className="hero-content flex w-full max-w-[62rem] flex-col items-center py-12 text-center sm:py-16 lg:py-0"
         >
-          <div className="hero-case-label mb-4 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-white/70 sm:text-xs">
-            playable nightmare // case reopened
-          </div>
-
           <div className="hero-title-stack animate-flicker mb-5 w-full leading-none uppercase">
             <h1 className="text-glow-red hero-title-word font-heading text-[clamp(3.8rem,17vw,10.8rem)] tracking-[0.03em] text-white">
               {titleTop}
